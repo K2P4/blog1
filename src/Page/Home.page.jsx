@@ -50,9 +50,9 @@ const HomePage = () => {
 
 									<div
 										className={` absolute  
-											 animate__fadeInUp animate__animated
+											 animate__fadeInUp animate__animated  opacity-95
 										   duration-1000  z-30 top-[38%]  text-center  left-40  w-[80%]   text-white`}>
-										<div className="flex    items-center text-center justify-center   m-auto gap-5 ">
+										<div className="flex animate__zoomIn  animate__animated  duration-1000  items-center text-center justify-center   m-auto gap-5 ">
 											<p className="h-px w-[4%] bg-gray-200 "></p>
 											<h1 className="  tracking-[2px] font-medium  text-center font-serif text-sm ">
 												{item?.type}
@@ -62,7 +62,7 @@ const HomePage = () => {
 										<h1 className="  text-5xl my-4    text-center ">
 											{item?.name}
 										</h1>
-										<h1 className="  font-medium font-serif text-sm tracking-widest text-gray-200   text-center   ">
+										<h1 className="  font-medium font-serif text-sm tracking-widest text-gray-300   text-center   ">
 											{item?.date} | {item?.writer}
 										</h1>
 									</div>

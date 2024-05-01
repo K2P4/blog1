@@ -1,27 +1,50 @@
 /** @format */
 
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { motion } from "framer-motion";
 import {
 	HoverCard,
 	HoverCardContent,
 	HoverCardTrigger,
 } from "@/components/ui/hover-card";
-import {
-	Popover,
-	PopoverContent,
-	PopoverTrigger,
-} from "@/components/ui/popover";
+
+import { Input } from "@/components/ui/input";
 
 import ContainerComponent from "./Container.component";
 import { NavLink, useNavigate } from "react-router-dom";
 
 const NavComponent = () => {
+	const [toggleHome, setHome] = useState(false);
+	const searchRef = useRef();
+
 	const nav = useNavigate();
+	const [toggleSearch, setToggleSearch] = useState(false);
+
+	const handleSearch = () => {
+		setToggleSearch(true);
+	};
+
+	// const handleNavigate = () => {
+	// 	setOp
+	// }
+
+	useEffect(() => {
+		const handleMouse = (e) => {
+			if (!searchRef.current.contains(e.target)) {
+				setToggleSearch(false);
+			}
+		};
+
+		window.addEventListener("mousedown", handleMouse);
+		return () => {
+			window.addEventListener("mousedown", handleMouse);
+		};
+	}, []);
 
 	return (
 		<div className="    bg-[#fcfcfc]">
 			<ContainerComponent>
-				<div className="flex items-center justify-between">
+				<div className="flex items-center relative justify-between">
 					<div className="flex items-center  space-x-12 ">
 						<img
 							onClick={() => nav("/")}
@@ -31,21 +54,23 @@ const NavComponent = () => {
 						/>
 
 						<div className=" flex items-center  space-x-12   h-24  ">
+							{/*HOME */}
+
 							<div
-								className={
-									"hover:border-b     transition-transform  hover:py-8 duration-500 hover:border-b-black"
-								}>
-								<Popover>
-									<PopoverTrigger className="  font-serif     text-gray-700    tracking-[3px] text-[14px] ">
-										HOME
-									</PopoverTrigger>
-									<PopoverContent className="w-[200px] h-[230px] animate__animated duration-1000 animate__fadeIn ">
+								onMouseLeave={() => setHome(false)}
+								onMouseEnter={() => setHome(true)}
+								className="hover:border-b     py-9  relative   transition-transform   hover:border-b-black">
+								<h1 className="  font-serif select-none  text-[13px]    text-gray-700    tracking-[3px]  ">
+									HOME
+								</h1>
+
+								{toggleHome && (
+									<div className=" w-[250px]   z-50   duration-500   top-[100%]  -left-[90px] border border-slate-200 bg-white p-4 text-slate-950 absolute   h-[240px] animate__animated     animate__fadeIn  ">
 										<ul className="  text-gray-700 space-y-5 p-5 ">
 											<li className="    group     ">
 												<span className=" group-hover:border-s-[#ED9455]  duration-500 group-hover:ms-3   group-hover:me-2 group-hover:border-s "></span>
 												Main Home
 											</li>
-
 											<li className="    group     ">
 												<span className=" group-hover:border-s-[#ED9455]  duration-500 group-hover:ms-3   group-hover:me-2 group-hover:border-s "></span>
 												Travel Blog
@@ -59,50 +84,71 @@ const NavComponent = () => {
 												Fashion Blog
 											</li>
 										</ul>
-									</PopoverContent>
-								</Popover>
+									</div>
+								)}
+
+								{/* <div className=" w-[250px]   z-50     top-[99%]  -left-[90px] border border-slate-200 bg-white p-4 text-slate-950 absolute   h-[240px] animate__animated     animate__fadeIn  ">
+									<ul className="  text-gray-700 space-y-5 p-5 ">
+										<li onMouseEnter={() => setIsOpen(true)} className="         ">
+											<span className=" group-hover:border-s-[#ED9455]  border-s-0  group-hover:ms-3   group-hover:me-2 group-hover:border-s "></span>
+											Main Home
+										</li>
+
+										<li className="    group     ">
+											<span className=" group-hover:border-s-[#ED9455]  duration-500 group-hover:ms-3   group-hover:me-2 group-hover:border-s "></span>
+											Travel Blog
+										</li>
+										<li className="    group      ">
+											<span className=" group-hover:border-s-[#ED9455] duration-500 group-hover:ms-3  group-hover:me-2 group-hover:border-s "></span>
+											Lifestyle Blog
+										</li>
+										<li className="    group      ">
+											<span className=" group-hover:border-s-[#ED9455] duration-500 group-hover:ms-3   group-hover:me-2 group-hover:border-s "></span>
+											Fashion Blog
+										</li>
+									</ul>
+								</div> */}
 							</div>
 
-							<div
-								className={
-									"hover:border-b    transition-transform  hover:py-8 duration-500 hover:border-b-black"
-								}>
-								<Popover>
-									<PopoverTrigger className="  font-serif     text-gray-700    tracking-[3px] text-[14px] ">
+							{/* PAGES */}
+							<HoverCard>
+								<HoverCardTrigger className=" hover:border-b    py-9    transition-transform   hover:border-b-black ">
+									<h1 className="  font-serif select-none  text-[13px]    text-gray-700    tracking-[3px]  ">
 										PAGES
-									</PopoverTrigger>
-									<PopoverContent className=" w-[200px] h-[180px] animate__animated  animate__animated duration-1000 animate__fadeIn  ">
-										<ul className="  text-gray-700 space-y-5 p-5 ">
-											<li className="    group     ">
-												<span className=" group-hover:border-s-[#ED9455]  duration-500 group-hover:ms-3   group-hover:me-2 group-hover:border-s "></span>
-												About
-											</li>
+									</h1>
+								</HoverCardTrigger>
+								<HoverCardContent className=" w-[200px] h-[200px] animate__animated     animate__fadeInDown ">
+									<ul className="  text-gray-700 space-y-5 p-5 ">
+										<li className="    group     ">
+											<span className=" group-hover:border-s-[#ED9455]  duration-500 group-hover:ms-3   group-hover:me-2 group-hover:border-s "></span>
+											About
+										</li>
 
-											<li className="    group     ">
-												<span className=" group-hover:border-s-[#ED9455]  duration-500 group-hover:ms-3   group-hover:me-2 group-hover:border-s "></span>
-												Contact
-											</li>
-											<li className="    group      ">
-												<span className=" group-hover:border-s-[#ED9455] duration-500 group-hover:ms-3  group-hover:me-2 group-hover:border-s "></span>
-												Contact Me
-											</li>
-										</ul>
-									</PopoverContent>
-								</Popover>
-							</div>
+										<li className="    group     ">
+											<span className=" group-hover:border-s-[#ED9455]  duration-500 group-hover:ms-3   group-hover:me-2 group-hover:border-s "></span>
+											Contact
+										</li>
+										<li className="    group      ">
+											<span className=" group-hover:border-s-[#ED9455] duration-500 group-hover:ms-3  group-hover:me-2 group-hover:border-s "></span>
+											Contact Me
+										</li>
+									</ul>
+								</HoverCardContent>
+							</HoverCard>
 
 							{/* BLOG */}
-							<div
-								className={
-									"hover:border-b    transition-transform  hover:py-8 duration-500 hover:border-b-black"
-								}>
-								<Popover>
-									<PopoverTrigger className="  font-serif     text-gray-700    tracking-[3px] text-[14px] ">
+
+							<HoverCard>
+								<HoverCardTrigger className="    hover:border-b    py-9    transition-transform   hover:border-b-black ">
+									<h1 className="  font-serif select-none  text-[13px]    text-gray-700    tracking-[3px]  ">
 										BLOG
-									</PopoverTrigger>
-									<PopoverContent className="  flex  items-start    px-32 py-10  justify-between w-screen h-[450px] animate__animated  animate__animated duration-1000 animate__fadeIn  ">
-										<div className=" w-[25%] flex flex-col items-start space-y-6 ">
-											<h1 className=" tracking-[3px] font-medium text-gray-800 text-md font-serif">
+									</h1>
+								</HoverCardTrigger>
+
+								<HoverCardContent className=" w-[3000px]  select-none absolute -top-1   px-36 py-10  -left-[540px]    animate__animated animate__fadeInDown  ">
+									<div className=" flex items-start ">
+										<div className="  flex flex-col w-[10%] items-start space-y-6 ">
+											<h1 className=" tracking-[3px] font-medium text-gray-700 text-sm font-serif">
 												LIST TYPES
 											</h1>
 											<ul className="  text-gray-700 space-y-4 ">
@@ -142,8 +188,8 @@ const NavComponent = () => {
 												</li>
 											</ul>
 										</div>
-										<div className=" w-[25%] flex flex-col items-start space-y-6 ">
-											<h1 className=" font-medium eas tracking-[3px] text-gray-800 text-md font-serif">
+										<div className="  flex flex-col w-[10%] items-start space-y-6 ">
+											<h1 className=" font-medium eas tracking-[3px] text-gray-700 text-sm font-serif">
 												LAYOUT TYPES
 											</h1>
 											<ul className="  text-gray-700 space-y-4 ">
@@ -183,8 +229,8 @@ const NavComponent = () => {
 												</li>
 											</ul>
 										</div>
-										<div className=" w-[25%] flex flex-col items-start space-y-6 ">
-											<h1 className=" tracking-[3px] font-medium text-gray-800 text-md font-serif">
+										<div className="  flex flex-col w-[10%] items-start space-y-6 ">
+											<h1 className=" tracking-[3px] font-medium text-gray-700 text-sm font-serif">
 												POST TYPES
 											</h1>
 											<ul className="  text-gray-700 space-y-4 ">
@@ -216,8 +262,8 @@ const NavComponent = () => {
 												</li>
 											</ul>
 										</div>
-										<div className=" w-[25%] flex flex-col items-start space-y-6 ">
-											<h1 className=" tracking-[3px] font-medium text-gray-800 text-md font-serif">
+										<div className="  flex flex-col w-[10%] items-start space-y-6 ">
+											<h1 className=" tracking-[3px] font-medium text-gray-700 text-sm font-serif">
 												ARCHIVE PAGES
 											</h1>
 											<ul className="  text-gray-700 space-y-4 ">
@@ -249,208 +295,102 @@ const NavComponent = () => {
 												</li>
 											</ul>
 										</div>
-									</PopoverContent>
-								</Popover>
-							</div>
+									</div>
+								</HoverCardContent>
+							</HoverCard>
 
 							{/* SHOP */}
-							<div
-								className={
-									"hover:border-b    transition-transform  hover:py-8 duration-500 hover:border-b-black"
-								}>
-								<Popover>
-									<PopoverTrigger className="  font-serif     text-gray-700    tracking-[3px] text-[14px] ">
+
+							<HoverCard>
+								<HoverCardTrigger className="    hover:border-b    py-9    transition-transform   hover:border-b-black ">
+									<h1 className="  font-serif select-none  text-[13px]    text-gray-700    tracking-[3px]  ">
 										SHOP
-									</PopoverTrigger>
-									<PopoverContent className=" w-[230px] h-[180px] animate__animated  duration-1000 animate__fadeIn  ">
-										<ul className="  relative text-gray-700 space-y-5 p-5 w-full">
-											<li className="    group     ">
-												<span className=" group-hover:border-s-[#ED9455]  duration-500 group-hover:ms-3   group-hover:me-2 group-hover:border-s "></span>
-												Shop List
-											</li>
+									</h1>
+								</HoverCardTrigger>
+								<HoverCardContent className=" w-[230px] h-[180px] animate__animated  duration-1000 animate__fadeInDown  ">
+									<ul className="  relative text-gray-700 space-y-5 p-5 w-full">
+										<li className="    group     ">
+											<span className=" group-hover:border-s-[#ED9455]  duration-500 group-hover:ms-3   group-hover:me-2 group-hover:border-s "></span>
+											Shop List
+										</li>
 
-											<li className="    group     ">
-												<span className=" group-hover:border-s-[#ED9455]  duration-500 group-hover:ms-3   group-hover:me-2 group-hover:border-s "></span>
-												Shop Single
-											</li>
+										<li className="    group     ">
+											<span className=" group-hover:border-s-[#ED9455]  duration-500 group-hover:ms-3   group-hover:me-2 group-hover:border-s "></span>
+											Shop Single
+										</li>
 
-											<HoverCard>
-												<HoverCardTrigger className="flex items-center justify-between  w-full">
+										<HoverCard>
+											<HoverCardTrigger className="flex items-center justify-between  w-full">
+												<li className="    group     ">
+													<span className=" group-hover:border-s-[#ED9455] duration-500 group-hover:ms-3  group-hover:me-2 group-hover:border-s "></span>
+													Shop Pages
+												</li>
+												<svg
+													xmlns="http://www.w3.org/2000/svg"
+													fill="none"
+													viewBox="0 0 24 24"
+													strokeWidth={1.5}
+													stroke="currentColor"
+													className="w-4 h-4">
+													<path
+														strokeLinecap="round"
+														strokeLinejoin="round"
+														d="m8.25 4.5 7.5 7.5-7.5 7.5"
+													/>
+												</svg>
+											</HoverCardTrigger>
+
+											<HoverCardContent className="h-[150px]    absolute   -top-20   animate__fadeIn duration-500  animate__animated     left-28 w-[230px]">
+												<ul className="   text-gray-700 space-y-5 p-3 ">
 													<li className="    group     ">
-														<span className=" group-hover:border-s-[#ED9455] duration-500 group-hover:ms-3  group-hover:me-2 group-hover:border-s "></span>
-														Shop Pages
+														<span className=" group-hover:border-s-[#ED9455]  duration-500 group-hover:ms-3   group-hover:me-2 group-hover:border-s "></span>
+														My Account
 													</li>
-													<svg
-														xmlns="http://www.w3.org/2000/svg"
-														fill="none"
-														viewBox="0 0 24 24"
-														strokeWidth={1.5}
-														stroke="currentColor"
-														className="w-4 h-4">
-														<path
-															strokeLinecap="round"
-															strokeLinejoin="round"
-															d="m8.25 4.5 7.5 7.5-7.5 7.5"
-														/>
-													</svg>
-												</HoverCardTrigger>
+													<li className="    group     ">
+														<span className=" group-hover:border-s-[#ED9455]  duration-500 group-hover:ms-3   group-hover:me-2 group-hover:border-s "></span>
+														Cart
+													</li>
+													<li className="    group     ">
+														<span className=" group-hover:border-s-[#ED9455]  duration-500 group-hover:ms-3   group-hover:me-2 group-hover:border-s "></span>
+														Check Out
+													</li>
+												</ul>
+											</HoverCardContent>
+										</HoverCard>
+									</ul>
+								</HoverCardContent>
+							</HoverCard>
 
-												<HoverCardContent className="h-[150px]    absolute   -top-20   animate__fadeIn   animate__animated     left-28 w-[230px]">
-													<ul className="   text-gray-700 space-y-5 p-3 ">
-														<li className="    group     ">
-															<span className=" group-hover:border-s-[#ED9455]  duration-500 group-hover:ms-3   group-hover:me-2 group-hover:border-s "></span>
-															My Account
-														</li>
-														<li className="    group     ">
-															<span className=" group-hover:border-s-[#ED9455]  duration-500 group-hover:ms-3   group-hover:me-2 group-hover:border-s "></span>
-															Cart
-														</li>
-														<li className="    group     ">
-															<span className=" group-hover:border-s-[#ED9455]  duration-500 group-hover:ms-3   group-hover:me-2 group-hover:border-s "></span>
-															Check Out
-														</li>
-													</ul>
-												</HoverCardContent>
-											</HoverCard>
-										</ul>
-									</PopoverContent>
-								</Popover>
-							</div>
-
-							<div
-								className={
-									"hover:border-b    transition-transform  hover:py-8 duration-500 hover:border-b-black"
-								}>
-								<Popover>
-									<PopoverTrigger className="  font-serif     text-gray-700    tracking-[3px] text-[14px] ">
+							<HoverCard>
+								<HoverCardTrigger className="    hover:border-b    py-9    transition-transform   hover:border-b-black ">
+									<h1 className="  font-serif select-none  text-[13px]    text-gray-700    tracking-[3px]  ">
 										LANDING
-									</PopoverTrigger>
-									<PopoverContent className=" w-[200px] h-[180px] animate__animated  animate__animated duration-1000 animate__fadeIn  ">
-										<ul className="  text-gray-700 space-y-5 p-5 ">
-											<li className="    group     ">
-												<span className=" group-hover:border-s-[#ED9455]  duration-500 group-hover:ms-3   group-hover:me-2 group-hover:border-s "></span>
-												Shop List
-											</li>
-
-											<li className="    group     ">
-												<span className=" group-hover:border-s-[#ED9455]  duration-500 group-hover:ms-3   group-hover:me-2 group-hover:border-s "></span>
-												Shop Single
-											</li>
-											<li className="    group      ">
-												<span className=" group-hover:border-s-[#ED9455] duration-500 group-hover:ms-3  group-hover:me-2 group-hover:border-s "></span>
-												Shop Pages
-											</li>
-										</ul>
-									</PopoverContent>
-								</Popover>
-							</div>
+									</h1>
+								</HoverCardTrigger>
+							</HoverCard>
 						</div>
-
-						{/* <NavigationMenu className=" h-24 ">
-							<NavigationMenuList>
-								<NavigationMenuItem className="hover:border-b  duration-1000  transition-transform  hover:border-b-black  ">
-									<NavigationMenuTrigger className="  font-serif   font-medium  text-gray-700    tracking-[3px] text-xs  ">
-										HOME{" "}
-									</NavigationMenuTrigger>
-
-									<NavigationMenuContent className="w-full duration-1000">
-										<ul className="w-[250px] text-gray-700 space-y-5 h-[200px] p-5 ">
-											<li className="    group     ">
-												<span className=" group-hover:border-s-[#ED9455] text-sm  duration-500 group-hover:ms-3   group-hover:me-2 group-hover:border-s "></span>
-												Main Home
-											</li>
-
-											<li className="    group     ">
-												<span className=" group-hover:border-s-[#ED9455]  duration-500 group-hover:ms-3   group-hover:me-2 group-hover:border-s "></span>
-												Travel Blog
-											</li>
-											<li className="    group      ">
-												<span className=" group-hover:border-s-[#ED9455] duration-500 group-hover:ms-3  group-hover:me-2 group-hover:border-s "></span>
-												Lifestyle Blog
-											</li>
-											<li className="    group      ">
-												<span className=" group-hover:border-s-[#ED9455] duration-500 group-hover:ms-3   group-hover:me-2 group-hover:border-s "></span>
-												Fashion Blog
-											</li>
-										</ul>
-									</NavigationMenuContent>
-								</NavigationMenuItem>
-
-								<NavigationMenuItem className="hover:border-b  duration-1000 hover:border-b-black ">
-									<NavigationMenuTrigger className="font-serif   font-medium    text-gray-700    tracking-[3px] text-xs  ">
-										PAGES{" "}
-									</NavigationMenuTrigger>
-
-									<NavigationMenuContent>
-										<ul className="w-[200px]  m-auto text-gray-700 space-y-5 h-[150px] p-5 ">
-											<li className="    group     ">
-												<span className=" group-hover:border-s-[#ED9455]  duration-500 group-hover:ms-3   group-hover:me-2 group-hover:border-s "></span>
-												About
-											</li>
-
-											<li className="    group     ">
-												<span className=" group-hover:border-s-[#ED9455]  duration-500 group-hover:ms-3   group-hover:me-2 group-hover:border-s "></span>
-												About Me
-											</li>
-											<li className="    group      ">
-												<span className=" group-hover:border-s-[#ED9455] duration-500 group-hover:ms-3  group-hover:me-2 group-hover:border-s "></span>
-												Contact
-											</li>
-										</ul>
-									</NavigationMenuContent>
-								</NavigationMenuItem>
-
-								<NavigationMenuItem className="hover:border-b  duration-1000 hover:border-b-black ">
-									<NavigationMenuTrigger className="font-serif   font-medium    text-gray-700    tracking-[3px] text-xs   ">
-										BLOG{" "}
-									</NavigationMenuTrigger>
-
-									<NavigationMenuContent>
-										<ul className=" w-[4000px] h-[500px]   m-auto text-gray-700 space-y-5  p-5 ">
-											<li className="    group     ">
-												<span className=" group-hover:border-s-[#ED9455]  duration-500 group-hover:ms-3   group-hover:me-2 group-hover:border-s "></span>
-												About
-											</li>
-
-											<li className="    group     ">
-												<span className=" group-hover:border-s-[#ED9455]  duration-500 group-hover:ms-3   group-hover:me-2 group-hover:border-s "></span>
-												About Me
-											</li>
-											<li className="    group      ">
-												<span className=" group-hover:border-s-[#ED9455] duration-500 group-hover:ms-3  group-hover:me-2 group-hover:border-s "></span>
-												Contact
-											</li>
-										</ul>
-									</NavigationMenuContent>
-								</NavigationMenuItem>
-
-								<NavigationMenuItem className="hover:border-b  duration-1000 hover:border-b-black ">
-									<NavigationMenuTrigger className="font-serif   font-medium    text-gray-700    tracking-[3px] text-xs  ">
-										SHOP{" "}
-									</NavigationMenuTrigger>
-
-									<NavigationMenuContent>
-										<NavigationMenuLink>JPASdas</NavigationMenuLink>
-									</NavigationMenuContent>
-								</NavigationMenuItem>
-
-								<NavigationMenuItem className="hover:border-b  duration-1000 hover:border-b-black ">
-									<NavigationMenuTrigger className="font-serif   font-medium    text-gray-700    tracking-[3px] text-xs  ">
-										LANDING{" "}
-									</NavigationMenuTrigger>
-
-									<NavigationMenuContent>
-										<NavigationMenuLink>Link</NavigationMenuLink>
-									</NavigationMenuContent>
-								</NavigationMenuItem>
-							</NavigationMenuList>
-						</NavigationMenu> */}
 					</div>
 
-					<div className=" font-serif flex items-center gap-2">
-						<p className="font-serif font-normal   text-gray-700 tracking-[3px] text-sm  ">
-							SEARCH
-						</p>
+					{/* search bar  */}
+					<div
+						ref={searchRef}
+						onClick={handleSearch}
+						className={` font-serif  flex items-center  select-none gap-2`}>
+						{!toggleSearch && (
+							<div className="w-[180px] mt-5 me-7 border-b animate__fadeOutRight border-b-black animate__animated  duration-1000 ">
+								{" "}
+							</div>
+						)}
+						{toggleSearch ? (
+							<Input
+								className={` mb-4   w-[180px]  focus:outline-0  animate__animated   outline-0 border-0 border-b border-b-black rounded-none  text-sm text-left  animate__slideInRight duration-1000 `}
+							/>
+						) : (
+							<p
+								className={`font-serif font-normal duration-700     text-gray-700 tracking-[3px] text-sm  `}>
+								SEARCH
+							</p>
+						)}
 
 						<svg
 							xmlns="http://www.w3.org/2000/svg"

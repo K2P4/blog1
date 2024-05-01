@@ -10,7 +10,14 @@ const BlogApi = ApiService.injectEndpoints({
 				method: "GET",
 			}),
 		}),
+
+		getLatest: builder.query({
+			query: () => ({
+				url: "LatestPosts",
+				method: "GET",
+			}),
+		}),
 	}),
 });
 
-export const { useGetBlogQuery } = BlogApi;
+export const { useGetBlogQuery, useGetLatestQuery } = BlogApi;

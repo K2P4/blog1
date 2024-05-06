@@ -1,6 +1,20 @@
 /** @format */
 
 import React, { useEffect, useRef, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { ContainerComponent, DetailHeaderComponent } from "../components";
+import { SlBag } from "react-icons/sl";
+import {
+	FaLinkedinIn,
+	FaTwitter,
+	FaFacebookF,
+	FaBehance,
+	FaVimeoV,
+	FaSnapchatGhost,
+} from "react-icons/fa";
+import { FaPinterestP } from "react-icons/fa";
+
+import { FaInstagram } from "react-icons/fa6";
 
 import {
 	HoverCard,
@@ -10,10 +24,7 @@ import {
 import { motion } from "framer-motion";
 import { Input } from "@/components/ui/input";
 
-import ContainerComponent from "./Container.component";
-import { NavLink, useNavigate } from "react-router-dom";
-
-const NavComponent = () => {
+const DetailPage = () => {
 	const [toggleHome, setHome] = useState(false);
 	const [togglePage, setPage] = useState(false);
 	const [toggleBlog, setBlog] = useState(false);
@@ -56,32 +67,26 @@ const NavComponent = () => {
 			window.addEventListener("mousedown", handleMouse);
 		};
 	}, []);
+	const { id } = useParams();
 
 	return (
-		<div className="    bg-[#fcfcfc]">
-			<ContainerComponent>
-				<div className="flex items-center relative justify-between">
-					<div className="flex items-center  space-x-12 ">
-						<img
-							onClick={() => nav("/")}
-							className="  h-8 object-center   w-20 "
-							src="https://zoya.qodeinteractive.com/wp-content/uploads/2021/04/h5-logo-img-01.png"
-							alt=""
-						/>
-
-						<div className=" flex items-center  space-x-12   h-24  ">
+		<div className="  h-[5000px] bg-white ">
+			<div className="border-b-[#d1d1d1] border-b  bg-[#fcfcfc]">
+				<ContainerComponent>
+					<div className="flex items-center  mx-auto justify-center space-x-12 ">
+						<div className=" flex items-center  space-x-12   h-20  ">
 							{/*HOME */}
 
 							<div
 								onMouseLeave={() => setHome(false)}
 								onMouseEnter={() => setHome(true)}
-								className="hover:border-b     py-9  relative   transition-transform   hover:border-b-black">
+								className="hover:border-b     py-8 relative   transition-transform   hover:border-b-black">
 								<h1 className="  font-serif select-none  text-[13px]    text-gray-700    tracking-[3px]  ">
 									HOME
 								</h1>
 
 								{toggleHome && (
-									<div className=" w-[250px]   z-50   duration-500   top-[100%]  -left-[90px] border border-slate-200 bg-white p-4 text-slate-950 absolute   h-[240px] animate__animated     animate__fadeIn  ">
+									<div className=" w-[250px]   z-50   duration-1000   top-[100%]  -left-[90px] border border-slate-200 bg-white p-4 text-slate-950 absolute   h-[240px] animate__animated     animate__fadeIn  ">
 										<ul className="  text-gray-700 space-y-5 p-5 ">
 											<li className="    group     ">
 												<span className=" group-hover:border-s-[#ED9455]  duration-500 group-hover:ms-3   group-hover:me-2 group-hover:border-s "></span>
@@ -102,41 +107,19 @@ const NavComponent = () => {
 										</ul>
 									</div>
 								)}
-
-								{/* <div className=" w-[250px]   z-50     top-[99%]  -left-[90px] border border-slate-200 bg-white p-4 text-slate-950 absolute   h-[240px] animate__animated     animate__fadeIn  ">
-									<ul className="  text-gray-700 space-y-5 p-5 ">
-										<li onMouseEnter={() => setIsOpen(true)} className="         ">
-											<span className=" group-hover:border-s-[#ED9455]  border-s-0  group-hover:ms-3   group-hover:me-2 group-hover:border-s "></span>
-											Main Home
-										</li>
-
-										<li className="    group     ">
-											<span className=" group-hover:border-s-[#ED9455]  duration-500 group-hover:ms-3   group-hover:me-2 group-hover:border-s "></span>
-											Travel Blog
-										</li>
-										<li className="    group      ">
-											<span className=" group-hover:border-s-[#ED9455] duration-500 group-hover:ms-3  group-hover:me-2 group-hover:border-s "></span>
-											Lifestyle Blog
-										</li>
-										<li className="    group      ">
-											<span className=" group-hover:border-s-[#ED9455] duration-500 group-hover:ms-3   group-hover:me-2 group-hover:border-s "></span>
-											Fashion Blog
-										</li>
-									</ul>
-								</div> */}
 							</div>
 
 							{/* PAGES */}
 							<div
 								onMouseLeave={() => setPage(false)}
 								onMouseEnter={() => setPage(true)}
-								className="hover:border-b     py-9  relative   transition-transform   hover:border-b-black">
+								className="hover:border-b     py-8 relative   transition-transform   hover:border-b-black">
 								<h1 className="  font-serif select-none  text-[13px]    text-gray-700    tracking-[3px]  ">
 									PAGES
 								</h1>
 
 								{togglePage && (
-									<div className=" w-[230px]   z-50   duration-500   top-[100%]  -left-[90px] border border-slate-200 bg-white p-4 text-slate-950 absolute   h-[200px] animate__animated     animate__fadeIn  ">
+									<div className=" w-[230px]   z-50   duration-1000    top-[100%]  -left-[90px] border border-slate-200 bg-white p-4 text-slate-950 absolute   h-[200px] animate__animated     animate__fadeIn  ">
 										<ul className="  text-gray-700 space-y-5 p-5 ">
 											<li className="    group     ">
 												<span className=" group-hover:border-s-[#ED9455]  duration-500 group-hover:ms-3   group-hover:me-2 group-hover:border-s "></span>
@@ -161,13 +144,13 @@ const NavComponent = () => {
 							<div
 								onMouseLeave={() => setBlog(false)}
 								onMouseEnter={() => setBlog(true)}
-								className="hover:border-b     py-9  relative   transition-transform   hover:border-b-black">
+								className="hover:border-b     py-8 relative   transition-transform   hover:border-b-black">
 								<h1 className="  font-serif select-none  text-[13px]    text-gray-700    tracking-[3px]  ">
 									BLOG
 								</h1>
 
 								{toggleBlog && (
-									<div className=" w-[5000px]   z-50   duration-500  -left-[470px]  top-[100%]  border border-slate-200 bg-white  px-40 py-10 text-slate-950 absolute   h-[450px] animate__animated     animate__fadeIn  ">
+									<div className=" w-[5000px]   z-50   duration-1000   -left-[630px]  top-[100%]  border border-slate-200 bg-white  px-40 py-10 text-slate-950 absolute   h-[450px] animate__animated     animate__fadeIn  ">
 										<div className=" flex items-start ">
 											<div className="  flex flex-col w-[6%] items-start space-y-6 ">
 												<h1 className=" tracking-[3px] font-medium text-gray-700 text-sm font-serif">
@@ -253,39 +236,6 @@ const NavComponent = () => {
 											</div>
 											<div className="  flex flex-col w-[6%] items-start space-y-6 ">
 												<h1 className=" tracking-[3px] font-medium text-gray-700 text-sm font-serif">
-													ARCHIVE PAGES
-												</h1>
-												<ul className="  text-gray-700 space-y-4 ">
-													<li className="    group     ">
-														<span className=" group-hover:border-s-[#ED9455] text-sm  duration-500 group-hover:ms-3   group-hover:me-2 group-hover:border-s "></span>
-														Author Page
-													</li>
-
-													<li className="    group     ">
-														<span className=" group-hover:border-s-[#ED9455] text-sm  duration-500 group-hover:ms-3   group-hover:me-2 group-hover:border-s "></span>
-														Filter By Category
-													</li>
-													<li className="    group      ">
-														<span className=" group-hover:border-s-[#ED9455] text-sm duration-500 group-hover:ms-3  group-hover:me-2 group-hover:border-s "></span>
-														Filter By Date
-													</li>
-													<li className="    group      ">
-														<span className=" group-hover:border-s-[#ED9455] text-sm duration-500 group-hover:ms-3  group-hover:me-2 group-hover:border-s "></span>
-														Filter By Tag
-													</li>
-
-													<li className="    group      ">
-														<span className=" group-hover:border-s-[#ED9455] text-sm duration-500 group-hover:ms-3  group-hover:me-2 group-hover:border-s "></span>
-														View All Posts
-													</li>
-													<li className="    group      ">
-														<span className=" group-hover:border-s-[#ED9455] text-sm duration-500 group-hover:ms-3  group-hover:me-2 group-hover:border-s "></span>
-														Search Results
-													</li>
-												</ul>
-											</div>
-											<div className="  flex flex-col w-[6%] items-start space-y-6 ">
-												<h1 className=" tracking-[3px] font-medium text-gray-700 text-sm font-serif">
 													POST TYPES
 												</h1>
 												<ul className="  text-gray-700 space-y-4 ">
@@ -317,6 +267,39 @@ const NavComponent = () => {
 													</li>
 												</ul>
 											</div>
+											<div className="  flex flex-col w-[6%] items-start space-y-6 ">
+												<h1 className=" tracking-[3px] font-medium text-gray-700 text-sm font-serif">
+													ARCHIVE PAGES
+												</h1>
+												<ul className="  text-gray-700 space-y-4 ">
+													<li className="    group     ">
+														<span className=" group-hover:border-s-[#ED9455] text-sm  duration-500 group-hover:ms-3   group-hover:me-2 group-hover:border-s "></span>
+														Author Page
+													</li>
+
+													<li className="    group     ">
+														<span className=" group-hover:border-s-[#ED9455] text-sm  duration-500 group-hover:ms-3   group-hover:me-2 group-hover:border-s "></span>
+														Filter By Category
+													</li>
+													<li className="    group      ">
+														<span className=" group-hover:border-s-[#ED9455] text-sm duration-500 group-hover:ms-3  group-hover:me-2 group-hover:border-s "></span>
+														Filter By Date
+													</li>
+													<li className="    group      ">
+														<span className=" group-hover:border-s-[#ED9455] text-sm duration-500 group-hover:ms-3  group-hover:me-2 group-hover:border-s "></span>
+														Filter By Tag
+													</li>
+
+													<li className="    group      ">
+														<span className=" group-hover:border-s-[#ED9455] text-sm duration-500 group-hover:ms-3  group-hover:me-2 group-hover:border-s "></span>
+														View All Posts
+													</li>
+													<li className="    group      ">
+														<span className=" group-hover:border-s-[#ED9455] text-sm duration-500 group-hover:ms-3  group-hover:me-2 group-hover:border-s "></span>
+														Search Results
+													</li>
+												</ul>
+											</div>
 										</div>
 									</div>
 								)}
@@ -327,13 +310,13 @@ const NavComponent = () => {
 							<div
 								onMouseLeave={() => setShop(false)}
 								onMouseEnter={() => setShop(true)}
-								className="hover:border-b     py-9  relative   transition-transform   hover:border-b-black">
+								className="hover:border-b     py-8 relative   transition-transform   hover:border-b-black">
 								<h1 className="  font-serif select-none  text-[13px]    text-gray-700    tracking-[3px]  ">
 									SHOP
 								</h1>
 
 								{toggleShop && (
-									<div className=" w-[230px]   z-50   duration-500   top-[100%]  -left-[90px] border border-slate-200 bg-white p-4 text-slate-950 absolute   h-[200px] animate__animated     animate__fadeIn  ">
+									<div className=" w-[230px]   z-50  duration-1000    top-[100%]  -left-[90px] border border-slate-200 bg-white p-4 text-slate-950 absolute   h-[200px] animate__animated     animate__fadeIn  ">
 										<ul className="  relative text-gray-700 space-y-5 p-5 w-full">
 											<li className="    group     ">
 												<span className=" group-hover:border-s-[#ED9455]  duration-500 group-hover:ms-3   group-hover:me-2 group-hover:border-s "></span>
@@ -389,51 +372,86 @@ const NavComponent = () => {
 							</div>
 
 							<HoverCard>
-								<HoverCardTrigger className="    hover:border-b    py-9    transition-transform   hover:border-b-black ">
+								<HoverCardTrigger className="    hover:border-b    py-8   transition-transform   hover:border-b-black ">
 									<h1 className="  font-serif select-none  text-[13px]    text-gray-700    tracking-[3px]  ">
 										LANDING
 									</h1>
 								</HoverCardTrigger>
 							</HoverCard>
+
+							<div className="flex items-end gap-1">
+								<SlBag className=" w-5 h-5" />
+								<p className=" font-serif text-xs duration-700  cursor-pointer hover:text-[#ffd4d4] ">
+									{" "}
+									(0)
+								</p>
+							</div>
 						</div>
 					</div>
-					{/* search bar  */}
-					<div
-						ref={searchRef}
-						onClick={handleSearch}
-						className={` font-serif cursor-pointer  flex items-center  select-none gap-2`}>
-						{!toggleSearch && (
-							<div className="w-[180px] mt-5 me-7 border-b animate__fadeOutRight border-b-black animate__animated  duration-1000 ">
-								{" "}
-							</div>
-						)}
-						{toggleSearch ? (
-							<Input
-								className={` mb-4   w-[180px]  focus:outline-0  animate__animated   outline-0 border-0 border-b border-b-black rounded-none  text-sm text-left  animate__slideInRight duration-1000 `}
-							/>
-						) : (
-							<p
-								className={`font-serif font-normal duration-700     text-gray-700 tracking-[3px] text-sm  `}>
-								SEARCH
-							</p>
-						)}
+				</ContainerComponent>
+			</div>
 
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							fill="none"
-							viewBox="0 0 24 24"
-							strokeWidth={1.5}
-							stroke="currentColor"
-							className="w-6 text-gray-700 h-6">
-							<path
-								strokeLinecap="round"
-								strokeLinejoin="round"
-								d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
+			<div className="border-b-[#d1d1d1] border-b  bg-[#fcfcfc]">
+				<ContainerComponent>
+					<div className="flex items-center gap-56  ">
+						{/* search bar  */}
+						<div
+							ref={searchRef}
+							onClick={handleSearch}
+							className={` font-serif cursor-pointer  w-[25%]  flex items-center  select-none gap-1`}>
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								fill="none"
+								viewBox="0 0 24 24"
+								strokeWidth={1.5}
+								stroke="currentColor"
+								className="w-6 text-gray-700 mt-0 h-6">
+								<path
+									strokeLinecap="round"
+									strokeLinejoin="round"
+									d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
+								/>
+							</svg>
+
+							{!toggleSearch && (
+								<div className="    border-b animate__fadeOutLeft border-b-gray-800 animate__animated  duration-1000 "></div>
+							)}
+							{toggleSearch ? (
+								<Input
+									className={` mt-0 p-0 w-[180px]  focus:outline-0  animate__animated   outline-0 border-0 border-b border-b-black rounded-none  text-sm text-left  animate__slideInLeft duration-1000 `}
+								/>
+							) : (
+								<p
+									className={`font-serif font-normal duration-700     text-gray-700 tracking-[3px] text-sm  `}>
+									SEARCH
+								</p>
+							)}
+						</div>
+
+						<div className="w-[45%] mx-auto">
+							<img
+								className=" w-[300px] mx-auto h-[210px] object-contain"
+								src="https://zoya.qodeinteractive.com/wp-content/uploads/2021/04/logo-main-img-01.png"
+								alt=""
 							/>
-						</svg>
+						</div>
+
+						<div className="flex  w-[25%] items-center gap-2 ">
+							<FaLinkedinIn className=" hover:text-gray-600 duration-500 " />
+							<FaTwitter className=" hover:text-gray-600 duration-500 " />
+							<FaFacebookF className=" hover:text-gray-600 duration-500 " />
+							<FaInstagram className=" hover:text-gray-600 duration-500 " />
+							<FaBehance className=" hover:text-gray-600 duration-500 " />
+							<FaVimeoV className=" hover:text-gray-600 duration-500 " />
+							<FaPinterestP className=" hover:text-gray-600 duration-500 " />
+							<FaSnapchatGhost />
+						</div>
 					</div>
-					
-				</div>
+				</ContainerComponent>
+			</div>
+
+			<ContainerComponent>
+				<DetailHeaderComponent />
 			</ContainerComponent>
 
 			{isFixed && (
@@ -459,4 +477,4 @@ const NavComponent = () => {
 	);
 };
 
-export default NavComponent;
+export default DetailPage;

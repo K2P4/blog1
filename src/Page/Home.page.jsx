@@ -5,7 +5,17 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { useGetBlogQuery } from "../service/endpoints/BlogEndpints";
 import { Autoplay } from "swiper/modules";
 import { EffectFade } from "swiper/modules";
-import { LatestPostComponent } from "../components";
+import {
+	HiroSectionLoading,
+	LatestPostComponent,
+	PopularPostComponent,
+	ProductsComponent,
+	Slide1Component,
+	Slide2Component,
+	FooterComponent,
+	NavComponent,
+} from "../components";
+import InstagramComponent from "../components/Instagram.component";
 
 const HomePage = () => {
 	const { data, isLoading } = useGetBlogQuery();
@@ -22,7 +32,8 @@ const HomePage = () => {
 
 	return (
 		<>
-			<div className="w-full pb-32 ">
+			<NavComponent />
+			<div id="home" className="w-full mb-32 ">
 				<Swiper
 					effect={"fade"}
 					slidesPerView={1}
@@ -37,9 +48,9 @@ const HomePage = () => {
 					}}
 					modules={[EffectFade, Autoplay]}
 					className="mySwiper">
-					<div className=" relative  duration-1000">
+					<div className=" relative w-full  duration-1000">
 						{isLoading ? (
-							<h1>Loading</h1>
+							<HiroSectionLoading />
 						) : (
 							<>
 								{data?.map((item) => (
@@ -80,6 +91,12 @@ const HomePage = () => {
 			</div>
 
 			<LatestPostComponent />
+			<Slide1Component />
+			<PopularPostComponent />
+			<Slide2Component />
+			<ProductsComponent />
+			<InstagramComponent />
+			<FooterComponent />
 		</>
 	);
 };

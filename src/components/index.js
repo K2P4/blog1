@@ -11,3 +11,5 @@ export { default as ProductsComponent } from "./Products.component";
 export { default as LoadingProductsComponent } from "./LoadingProducts.component";
 export { default as FooterComponent } from "./Footer.component";
 export { default as DetailHeaderComponent } from "./DetailHeader.Component";
+export { default as BlogLoadingComponent } from "./BlogLoading.component";
+export { default as DetailPostComponent } from "./DetailPost.component";

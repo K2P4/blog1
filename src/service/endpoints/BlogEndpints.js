@@ -57,17 +57,25 @@ const BlogApi = ApiService.injectEndpoints({
 				method: "GET",
 			}),
 		}),
+
+		getDetailPost: builder.query({
+			query: () => ({
+				url: "DetailPost",
+				method: "GET",
+			}),
+		}),
 	}),
 });
 
 export const {
 	useGetBlogQuery,
 	useGetLatestQuery,
-	
+
 	useGetLoadingProductsQuery,
 	useGetSlider1Query,
 	useGetPopularQuery,
 	useGetDetailQuery,
 	useGetInstagramQuery,
+	useGetDetailPostQuery,
 	useGetProductsQuery,
 } = BlogApi;

@@ -31,8 +31,11 @@ const DetailPage = () => {
 	const [toggleShop, setShop] = useState(false);
 	const [isFixed, setIsFixed] = useState(false);
 	const [toggleSearch, setToggleSearch] = useState(false);
+	const { id } = useParams();
 	const searchRef = useRef();
 	const nav = useNavigate();
+
+	console.log("Detail");
 
 	const handleSearch = () => {
 		setToggleSearch(true);
@@ -67,10 +70,10 @@ const DetailPage = () => {
 			window.addEventListener("mousedown", handleMouse);
 		};
 	}, []);
-	const { id } = useParams();
+	
 
 	return (
-		<div className="  h-[5000px] bg-white ">
+		<div className="  h-[5000px] ">
 			<div className="border-b-[#d1d1d1] border-b  bg-[#fcfcfc]">
 				<ContainerComponent>
 					<div className="flex items-center  mx-auto justify-center space-x-12 ">

@@ -8,7 +8,7 @@ import { useGetSlider1Query } from "../service/endpoints/BlogEndpints";
 
 const Slide1Component = () => {
 	const { data, isLoading } = useGetSlider1Query();
-	console.log(data);
+
 
 	return (
 		<div className=" w-full mb-32">
@@ -18,7 +18,7 @@ const Slide1Component = () => {
 				) : (
 					<div className="flex items-center gap-10  ">
 						{data?.map((item) => (
-							<div className="   w-[50%] h-auto">
+							<div key={item?.id} className="   w-[50%] h-auto">
 								<div className="relative  overflow-hidden">
 									<motion.img
 										src={item?.image}

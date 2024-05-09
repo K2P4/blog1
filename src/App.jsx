@@ -9,8 +9,10 @@ const App = () => {
 	return (
 		<div className="bg-[#FEFAF6]">
 			<Routes>
-				<Route path="/" element={<HomePage />} />
-				<Route path="/detail/:id" element={<DetailPage />} />
+				<Route path="/" element={<HomePage />}>
+					<Route index element={<HomePage />} />
+				</Route>
+				<Route path="detail/:id" element={<DetailPage />} />
 			</Routes>
 		</div>
 	);

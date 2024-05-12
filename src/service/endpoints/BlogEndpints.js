@@ -64,12 +64,28 @@ const BlogApi = ApiService.injectEndpoints({
 				method: "GET",
 			}),
 		}),
+
+		getTags: builder.query({
+			query: () => ({
+				url: "Tags",
+				method: "GET",
+			}),
+		}),
+
+		getDateCollections: builder.query({
+			query: () => ({
+				url: "DateCollection",
+				method: "GET",
+			}),
+		}),
 	}),
 });
 
 export const {
 	useGetBlogQuery,
+	useGetTagsQuery,
 	useGetLatestQuery,
+	useGetDateCollectionsQuery,
 
 	useGetLoadingProductsQuery,
 	useGetSlider1Query,

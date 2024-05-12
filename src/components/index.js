@@ -13,3 +13,8 @@ export { default as FooterComponent } from "./Footer.component";
 export { default as DetailHeaderComponent } from "./DetailHeader.Component";
 export { default as BlogLoadingComponent } from "./BlogLoading.component";
 export { default as DetailPostComponent } from "./DetailPost.component";
+export { default as TagsComponent } from "./Tags.component";
+export { default as SlideLoadingComponent } from "./SlideLoading.component";
+export { default as ArchiveComponent } from "./Archive.component";
+export { default as CarouselPostComponent } from "./CarouselPost.component";
+export { default as NextPostComponent } from "./NextPost.component";

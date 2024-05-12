@@ -29,13 +29,13 @@ const DetailPage = () => {
 	const [togglePage, setPage] = useState(false);
 	const [toggleBlog, setBlog] = useState(false);
 	const [toggleShop, setShop] = useState(false);
+	const [toggleCart, setCart] = useState(false);
+
 	const [isFixed, setIsFixed] = useState(false);
 	const [toggleSearch, setToggleSearch] = useState(false);
 	const { id } = useParams();
 	const searchRef = useRef();
 	const nav = useNavigate();
-
-	console.log("Detail");
 
 	const handleSearch = () => {
 		setToggleSearch(true);
@@ -70,21 +70,20 @@ const DetailPage = () => {
 			window.addEventListener("mousedown", handleMouse);
 		};
 	}, []);
-	
 
 	return (
-		<div className="  h-[5000px] ">
-			<div className="border-b-[#d1d1d1] border-b  bg-[#fcfcfc]">
+		<div className=" bg-white  h-[100000px] ">
+			<div className="border-b-[#d1d1d1] border-b  ">
 				<ContainerComponent>
-					<div className="flex items-center  mx-auto justify-center space-x-12 ">
+					<div className="flex items-center  w-full mx-auto justify-center space-x-12 ">
 						<div className=" flex items-center  space-x-12   h-20  ">
 							{/*HOME */}
 
 							<div
 								onMouseLeave={() => setHome(false)}
 								onMouseEnter={() => setHome(true)}
-								className="hover:border-b     py-8 relative   transition-transform   hover:border-b-black">
-								<h1 className="  font-serif select-none  text-[13px]    text-gray-700    tracking-[3px]  ">
+								className="hover:border-b   py-[30px] relative   transition-transform   hover:border-b-black">
+								<h1 className="   font-serif select-none  text-[13px]    text-gray-700    tracking-[3px]  ">
 									HOME
 								</h1>
 
@@ -116,7 +115,7 @@ const DetailPage = () => {
 							<div
 								onMouseLeave={() => setPage(false)}
 								onMouseEnter={() => setPage(true)}
-								className="hover:border-b     py-8 relative   transition-transform   hover:border-b-black">
+								className="hover:border-b   py-[30px] relative   transition-transform   hover:border-b-black">
 								<h1 className="  font-serif select-none  text-[13px]    text-gray-700    tracking-[3px]  ">
 									PAGES
 								</h1>
@@ -147,7 +146,7 @@ const DetailPage = () => {
 							<div
 								onMouseLeave={() => setBlog(false)}
 								onMouseEnter={() => setBlog(true)}
-								className="hover:border-b     py-8 relative   transition-transform   hover:border-b-black">
+								className="hover:border-b   py-[30px] relative   transition-transform   hover:border-b-black">
 								<h1 className="  font-serif select-none  text-[13px]    text-gray-700    tracking-[3px]  ">
 									BLOG
 								</h1>
@@ -313,7 +312,7 @@ const DetailPage = () => {
 							<div
 								onMouseLeave={() => setShop(false)}
 								onMouseEnter={() => setShop(true)}
-								className="hover:border-b     py-8 relative   transition-transform   hover:border-b-black">
+								className="hover:border-b   py-[30px] relative   transition-transform   hover:border-b-black">
 								<h1 className="  font-serif select-none  text-[13px]    text-gray-700    tracking-[3px]  ">
 									SHOP
 								</h1>
@@ -375,33 +374,44 @@ const DetailPage = () => {
 							</div>
 
 							<HoverCard>
-								<HoverCardTrigger className="    hover:border-b    py-8   transition-transform   hover:border-b-black ">
+								<HoverCardTrigger className="    hover:border-b  py-[30px]   transition-transform   hover:border-b-black ">
 									<h1 className="  font-serif select-none  text-[13px]    text-gray-700    tracking-[3px]  ">
 										LANDING
 									</h1>
 								</HoverCardTrigger>
 							</HoverCard>
 
-							<div className="flex items-end gap-1">
+							{/* Cart */}
+
+							<div
+								onMouseLeave={() => setCart(false)}
+								onMouseEnter={() => setCart(true)}
+								className="flex hover:border-b    py-[30px]  relative   transition-transform   hover:border-b-black group items-end gap-1">
 								<SlBag className=" w-5 h-5" />
-								<p className=" font-serif text-xs duration-700  cursor-pointer hover:text-[#ffd4d4] ">
+								<p className=" font-serif text-xs duration-700  cursor-pointer group-hover:text-[#e2bfbf] ">
 									{" "}
 									(0)
 								</p>
+
+								{toggleCart && (
+									<div className=" w-[350px]   text-gray-500 z-50   duration-1000   top-[100%]  -left-[90px] border border-slate-200 bg-white p-4  absolute   h-[100px] animate__animated     animate__fadeIn  ">
+										No Products in the cart.
+									</div>
+								)}
 							</div>
 						</div>
 					</div>
 				</ContainerComponent>
 			</div>
 
-			<div className="border-b-[#d1d1d1] border-b  bg-[#fcfcfc]">
+			<div className="border-b-[#d1d1d1] border-b  ">
 				<ContainerComponent>
 					<div className="flex items-center gap-56  ">
 						{/* search bar  */}
 						<div
 							ref={searchRef}
 							onClick={handleSearch}
-							className={` font-serif cursor-pointer  w-[25%]  flex items-center  select-none gap-1`}>
+							className={` font-serif cursor-pointer   flex items-center  select-none gap-1`}>
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
 								fill="none"
@@ -439,7 +449,7 @@ const DetailPage = () => {
 							/>
 						</div>
 
-						<div className="flex  w-[25%] items-center gap-2 ">
+						<div className="flex  items-center gap-2 ">
 							<FaLinkedinIn className=" hover:text-gray-600 duration-500 " />
 							<FaTwitter className=" hover:text-gray-600 duration-500 " />
 							<FaFacebookF className=" hover:text-gray-600 duration-500 " />

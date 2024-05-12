@@ -5,16 +5,16 @@ import ContainerComponent from "./Container.component";
 import { motion } from "framer-motion";
 
 import { useGetSlider1Query } from "../service/endpoints/BlogEndpints";
+import SlideLoadingComponent from "./SlideLoading.component";
 
 const Slide1Component = () => {
 	const { data, isLoading } = useGetSlider1Query();
-
 
 	return (
 		<div className=" w-full mb-32">
 			<ContainerComponent>
 				{isLoading ? (
-					<h1>Loading</h1>
+					<SlideLoadingComponent />
 				) : (
 					<div className="flex items-center gap-10  ">
 						{data?.map((item) => (

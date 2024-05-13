@@ -22,7 +22,7 @@ const NextPostComponent = ({ handleNext }) => {
 							NEXT POST
 						</h1>
 
-						<p className=" cursor-pointer select-none text-right text-xl   text-gray-700 font-medium tracking-wide">
+						<p className=" cursor-pointer select-none text-right text-xl   text-gray-800  tracking-wide">
 							{data?.name}
 						</p>
 					</div>

@@ -4,6 +4,7 @@ import React from "react";
 import { useGetInstagramQuery } from "../service/endpoints/BlogEndpints";
 import { FaInstagram } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
+import InstagramLoadingComponent from "./InstagramLoading.component";
 
 const InstagramComponent = () => {
 	const { data, isLoading } = useGetInstagramQuery();
@@ -11,7 +12,7 @@ const InstagramComponent = () => {
 	return (
 		<div className="mb-2">
 			{isLoading ? (
-				<>Loading</>
+				<InstagramLoadingComponent />
 			) : (
 				<div className="flex items-center relative justify-center px-3 gap-2">
 					{data?.map((item) => (

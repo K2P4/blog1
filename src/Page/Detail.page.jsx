@@ -2,7 +2,11 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { ContainerComponent, DetailHeaderComponent } from "../components";
+import {
+	ContainerComponent,
+	DetailHeaderComponent,
+	FooterComponent,
+} from "../components";
 import { SlBag } from "react-icons/sl";
 import {
 	FaLinkedinIn,
@@ -23,6 +27,7 @@ import {
 } from "@/components/ui/hover-card";
 import { motion } from "framer-motion";
 import { Input } from "@/components/ui/input";
+import InstagramComponent from "../components/Instagram.component";
 
 const DetailPage = () => {
 	const [toggleHome, setHome] = useState(false);
@@ -72,11 +77,25 @@ const DetailPage = () => {
 	}, []);
 
 	return (
-		<div className=" bg-white  h-[100000px] ">
-			<div className="border-b-[#d1d1d1] border-b  ">
+		<div className=" bg-white  h-auto ">
+			<div
+				className={`border-b-[#d1d1d1] ${
+					isFixed &&
+					"fixed bg-white flex items-center   justify-center gap-auto  w-full z-50 duration-1000 animate_animated animate_fadeIn "
+				} border-b  `}>
 				<ContainerComponent>
-					<div className="flex items-center  w-full mx-auto justify-center space-x-12 ">
-						<div className=" flex items-center  space-x-12   h-20  ">
+					<div className="flex items-center  mx-auto ">
+						{/*LOGO */}
+						{isFixed && (
+							<img
+								className="  h-16 w-auto  me-auto object-contain "
+								src="https://zoya.qodeinteractive.com/wp-content/uploads/2021/06/logo-sticky-img-04.png"
+								alt=""
+							/>
+						)}
+
+						<div
+							className={` w-auto  flex items-center justify-center mx-auto  space-x-12   h-20  `}>
 							{/*HOME */}
 
 							<div
@@ -383,23 +402,57 @@ const DetailPage = () => {
 
 							{/* Cart */}
 
-							<div
-								onMouseLeave={() => setCart(false)}
-								onMouseEnter={() => setCart(true)}
-								className="flex hover:border-b    py-[30px]  relative   transition-transform   hover:border-b-black group items-end gap-1">
-								<SlBag className=" w-5 h-5" />
-								<p className=" font-serif text-xs duration-700  cursor-pointer group-hover:text-[#e2bfbf] ">
-									{" "}
-									(0)
-								</p>
+							{!isFixed && (
+								<div
+									onMouseLeave={() => setCart(false)}
+									onMouseEnter={() => setCart(true)}
+									className="flex hover:border-b    py-[30px]  relative   transition-transform   hover:border-b-black group items-end gap-1">
+									<SlBag className=" w-5 h-5" />
+									<p className=" font-serif text-xs duration-700  cursor-pointer group-hover:text-[#e2bfbf] ">
+										{" "}
+										(0)
+									</p>
 
-								{toggleCart && (
-									<div className=" w-[350px]   text-gray-500 z-50   duration-1000   top-[100%]  -left-[90px] border border-slate-200 bg-white p-4  absolute   h-[100px] animate__animated     animate__fadeIn  ">
-										No Products in the cart.
-									</div>
-								)}
-							</div>
+									{toggleCart && (
+										<div className=" w-[350px]   text-gray-500 z-50   duration-1000   top-[100%]  -left-[90px] border border-slate-200 bg-white p-4  absolute   h-[100px] animate__animated     animate__fadeIn  ">
+											No Products in the cart.
+										</div>
+									)}
+								</div>
+							)}
 						</div>
+
+						{isFixed && (
+							<div
+								ref={searchRef}
+								onClick={handleSearch}
+								className={` font-serif cursor-pointer  w-28 ms-auto flex items-center  select-none gap-1`}>
+								{toggleSearch ? (
+									<Input
+										className={` mt-0 p-0 w-[150px]  focus:outline-0  animate__animated   outline-0 border-0 border-b border-b-black rounded-none  text-sm text-left  animate__fadeInRight duration-1000 `}
+									/>
+								) : (
+									<p
+										className={`font-serif font-normal duration-700     text-gray-700 tracking-[3px] text-sm  `}>
+										SEARCH
+									</p>
+								)}
+
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									fill="none"
+									viewBox="0 0 24 24"
+									strokeWidth={1.5}
+									stroke="currentColor"
+									className={`w-6 text-gray-700  mt-0 h-6`}>
+									<path
+										strokeLinecap="round"
+										strokeLinejoin="round"
+										d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
+									/>
+								</svg>
+							</div>
+						)}
 					</div>
 				</ContainerComponent>
 			</div>
@@ -466,6 +519,9 @@ const DetailPage = () => {
 			<ContainerComponent>
 				<DetailHeaderComponent />
 			</ContainerComponent>
+
+			<InstagramComponent />
+			<FooterComponent />
 
 			{isFixed && (
 				<motion.div className=" cursor-pointer z-50  fixed  right-8 bottom-20 border border-[#FFD0D0]">

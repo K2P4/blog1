@@ -60,7 +60,7 @@ const CarouselPostComponent = () => {
 						PREVIOUS POST
 					</h1>
 
-					<p className=" cursor-pointer select-none text-left text-xl  w-[90%] text-gray-700 font-medium tracking-wide">
+					<p className=" cursor-pointer select-none text-left text-xl  w-[90%] text-gray-800 tracking-wide">
 						{data?.name}
 					</p>
 				</div>

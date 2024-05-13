@@ -18,3 +18,4 @@ export { default as SlideLoadingComponent } from "./SlideLoading.component";
 export { default as ArchiveComponent } from "./Archive.component";
 export { default as CarouselPostComponent } from "./CarouselPost.component";
 export { default as NextPostComponent } from "./NextPost.component";
+export { default as InstgramLoadingComponent } from "./InstagramLoading.component";

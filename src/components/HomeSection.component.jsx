@@ -2,11 +2,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import {
-	ContainerComponent,
-	DetailHeaderComponent,
-	FooterComponent,
-} from "../components";
+import { ContainerComponent } from "../components";
 import { SlBag } from "react-icons/sl";
 import {
 	FaLinkedinIn,
@@ -19,6 +15,10 @@ import {
 import { FaPinterestP } from "react-icons/fa";
 
 import { FaInstagram } from "react-icons/fa6";
+import Slider from "react-slick";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Scrollbar } from "swiper/modules";
+import SwiperCore from "swiper";
 
 import {
 	HoverCard,
@@ -27,17 +27,25 @@ import {
 } from "@/components/ui/hover-card";
 import { motion } from "framer-motion";
 import { Input } from "@/components/ui/input";
-import InstagramComponent from "../components/Instagram.component";
+import { useGetHomeSlideQuery } from "../service/endpoints/BlogEndpints";
 
-const DetailPage = () => {
+const HomeSectionComponent = () => {
 	const [toggleHome, setHome] = useState(false);
 	const [togglePage, setPage] = useState(false);
 	const [toggleBlog, setBlog] = useState(false);
 	const [toggleShop, setShop] = useState(false);
 	const [toggleCart, setCart] = useState(false);
-
 	const [isFixed, setIsFixed] = useState(false);
 	const [toggleSearch, setToggleSearch] = useState(false);
+	const [activeIndex, setActiveIndex] = useState(0);
+	const totalSlides = 3;
+
+	const handleSlideChange = (swiper) => {
+		setActiveIndex(swiper.activeIndex);
+	};
+
+	const { data, isloading } = useGetHomeSlideQuery();
+
 	const { id } = useParams();
 	const searchRef = useRef();
 	const nav = useNavigate();
@@ -75,9 +83,8 @@ const DetailPage = () => {
 			window.addEventListener("mousedown", handleMouse);
 		};
 	}, []);
-
 	return (
-		<div id="logo" className=" bg-white  h-auto ">
+		<div id="logo" className=" bg-white  h-[20000px] ">
 			<div
 				className={`border-b-[#d1d1d1] ${
 					isFixed &&
@@ -454,10 +461,9 @@ const DetailPage = () => {
 							</div>
 						)}
 					</div>
-				</ContainerComponent>
+				</ContainerComponent>{" "}
 			</div>
-
-			<div className="border-b-[#d1d1d1] border-b  ">
+			<div className=" ">
 				<ContainerComponent>
 					<div className="flex items-center gap-56  ">
 						{/* search bar  */}
@@ -515,13 +521,44 @@ const DetailPage = () => {
 					</div>
 				</ContainerComponent>
 			</div>
+			{isloading && <BlogLoadingComponent />}
 
-			<ContainerComponent>
-				<DetailHeaderComponent />
-			</ContainerComponent>
+			<div className="w-full m-auto">
+				<Swiper
+					slidesPerView={3}
+					loop={true}
+					spaceBetween={10}
+					scrollbar={{
+						hide: false,
+					}}
+					modules={[Scrollbar]}
+					className="mySwiper h-[440px] animate__slideInLeft animate__animated  duration-1000 w-full mx-auto  ">
+					{data?.map((item) => (
+						<SwiperSlide className="relative cursor-grab ">
+							<img
+								className=" opacity-95 object-cover h-[400px] m-auto w-auto "
+								src={item?.image}
+								alt="Slide 1"
+							/>
+							{/* <div className="caption w-full left-1  absolute   bottom-40 ">
+							<div className="flex  animate__zoomIn  animate__animated  duration-1000  items-center text-center justify-center   m-auto gap-5 ">
+								<h1 className="  tracking-[2px] font-medium  text-center font-serif text-sm ">
+									{item?.type}
+								</h1>
+							</div>
 
-			<InstagramComponent />
-			<FooterComponent />
+							<h1 className="  text-3xl my-3   w-full   text-center ">
+								Roadtrip with closest friends
+							</h1>
+
+							<h1 className="  font-medium font-serif text-[14px] tracking-[2px]  text-stone-50  text-center   ">
+								{item?.date}| {item?.writer}
+							</h1>
+						</div> */}
+						</SwiperSlide>
+					))}
+				</Swiper>
+			</div>
 
 			{isFixed && (
 				<motion.div className=" cursor-pointer z-50  fixed  right-8 bottom-20 border border-[#FFD0D0]">
@@ -546,4 +583,4 @@ const DetailPage = () => {
 	);
 };
 
-export default DetailPage;
+export default HomeSectionComponent;

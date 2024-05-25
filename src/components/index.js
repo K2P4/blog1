@@ -19,3 +19,5 @@ export { default as ArchiveComponent } from "./Archive.component";
 export { default as CarouselPostComponent } from "./CarouselPost.component";
 export { default as NextPostComponent } from "./NextPost.component";
 export { default as InstgramLoadingComponent } from "./InstagramLoading.component";
+export { default as HomeSectionComponent } from "./HomeSection.component";
+

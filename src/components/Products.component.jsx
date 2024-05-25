@@ -8,10 +8,17 @@ import { useGetProductsQuery } from "../service/endpoints/BlogEndpints";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { DotLoader } from "react-spinners";
+import { useNavigate } from "react-router-dom";
 
 const ProductsComponent = () => {
 	const { data, isLoading } = useGetProductsQuery();
 	const [loading, setLoading] = useState(false);
+
+	const nav = useNavigate();
+
+	const handleDetail = (id) => {
+		nav(`detail/${id}`);
+	};
 
 	const handleLoading = () => {
 		setLoading(true);
@@ -23,7 +30,10 @@ const ProductsComponent = () => {
 				<div className="flex items-center flex-col gap-5">
 					<div className="flex items-center gap-12 flex-wrap  ">
 						{data?.map((item) => (
-							<div key={item?.id} className="   w-[30%] h-auto">
+							<div
+								onClick={() => handleDetail(item?.id)}
+								key={item?.id}
+								className="   w-[30%] h-auto">
 								<div className="relative  overflow-hidden">
 									<motion.img
 										src={item?.image}

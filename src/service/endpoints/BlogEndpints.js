@@ -53,7 +53,7 @@ const BlogApi = ApiService.injectEndpoints({
 
 		getDetail: builder.query({
 			query: (id) => ({
-				url: `LatestPosts/${id}`,
+				url: `ZoyaAllProducts/${id}`,
 				method: "GET",
 			}),
 		}),
@@ -78,11 +78,19 @@ const BlogApi = ApiService.injectEndpoints({
 				method: "GET",
 			}),
 		}),
+
+		getHomeSlide: builder.query({
+			query: () => ({
+				url: "HomeSlide",
+				method: "GET",
+			}),
+		}),
 	}),
 });
 
 export const {
 	useGetBlogQuery,
+	 useGetHomeSlideQuery,
 	useGetTagsQuery,
 	useGetLatestQuery,
 	useGetDateCollectionsQuery,

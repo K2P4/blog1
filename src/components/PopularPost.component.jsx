@@ -5,9 +5,15 @@ import { useGetPopularQuery } from "../service/endpoints/BlogEndpints";
 import { motion } from "framer-motion";
 import ContainerComponent from "./Container.component";
 import BlogLoadingComponent from "./BlogLoading.component";
+import { useNavigate } from "react-router-dom";
 
 const PopularPostComponent = () => {
 	const { data, isLoading } = useGetPopularQuery();
+	const nav = useNavigate();
+
+	const handleDetail = (id) => {
+		nav(`detail/${id}`);
+	};
 
 	return (
 		<div className=" mb-32 ">
@@ -27,7 +33,10 @@ const PopularPostComponent = () => {
 						</div>
 						<div className="flex items-center justify-center gap-12 flex-wrap  mt-10">
 							{data?.map((item) => (
-								<div key={item?.id} className="   w-[30%] h-auto">
+								<div
+									onClick={() => handleDetail(item?.id)}
+									key={item?.id}
+									className="   w-[30%] h-auto">
 									<div className="relative  overflow-hidden">
 										<motion.img
 											src={item?.image}

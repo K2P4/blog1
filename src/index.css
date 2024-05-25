@@ -10,3 +10,37 @@
 .DetailParaFont {
 	font-family: "Cormorant Garamond", serif;
 }
+
+.slick-slide {
+	padding: 0 5px;
+}
+
+.slick-list {
+	margin: 0 -5px;
+}
+
+.slick-dots {
+	display: flex !important;
+	justify-content: center;
+	margin: auto;
+	padding: 0;
+	list-style: none;
+}
+
+.slick-dots li {
+	margin-bottom: 70px;
+}
+
+.slick-dots li .custom-dot {
+	width: 250px;
+	height: 1px;
+	
+
+	margin-left: -70px;
+
+	background-color: transparent;
+}
+
+.slick-dots li.slick-active .custom-dot {
+	background-color: #000; /* Set the color of the active border line */
+}

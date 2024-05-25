@@ -7,9 +7,9 @@ import { useGetInstagramQuery } from "../service/endpoints/BlogEndpints";
 const InstagramLoadingComponent = () => {
 	const { data } = useGetInstagramQuery();
 	return (
-		<div className="flex items-center w-full px-3  mx-auto gap-auto">
+		<div className="  ">
       
-			<Skeleton className="h-[125px] w-[250px] rounded-xl" />
+			<Skeleton className="h-[200px] w-[220px] rounded-sm" />
 		</div>
 	);
 };

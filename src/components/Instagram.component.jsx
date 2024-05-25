@@ -8,11 +8,16 @@ import InstagramLoadingComponent from "./InstagramLoading.component";
 
 const InstagramComponent = () => {
 	const { data, isLoading } = useGetInstagramQuery();
+	const List = Array.from({ length: 7 }, (_, index) => index);
 
 	return (
 		<div className="mb-2">
 			{isLoading ? (
-				<InstagramLoadingComponent />
+				<div className="flex items-center gap-2 px-3">
+					{List.map((item) => (
+						<InstagramLoadingComponent key={item} />
+					))}
+				</div>
 			) : (
 				<div className="flex items-center relative justify-center px-3 gap-2">
 					{data?.map((item) => (

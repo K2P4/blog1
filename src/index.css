@@ -34,7 +34,6 @@
 .slick-dots li .custom-dot {
 	width: 250px;
 	height: 1px;
-	
 
 	margin-left: -70px;
 
@@ -43,4 +42,17 @@
 
 .slick-dots li.slick-active .custom-dot {
 	background-color: #000; /* Set the color of the active border line */
+}
+
+.swiper-scrollbar {
+	background-color: rgb(255, 255, 255);
+
+}
+
+.swiper-scrollbar-drag {
+	background: #000000;
+	height: 1px;
+	
+
+	border-radius: 5px;
 }

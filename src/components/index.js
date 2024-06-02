@@ -20,4 +20,9 @@ export { default as CarouselPostComponent } from "./CarouselPost.component";
 export { default as NextPostComponent } from "./NextPost.component";
 export { default as InstgramLoadingComponent } from "./InstagramLoading.component";
 export { default as HomeSectionComponent } from "./HomeSection.component";
+export { default as HomePage2Component } from "./HomePage2.component";
+export { default as Section2Component } from "./Section2.component";
+export { default as SlideCarouselCompnent } from "./SlideCarousel.component";
+export { default as NavigationHomeSectionComponent } from "./NavigationHomeSection.component";
+export { default as SlidePhotoGraphComponent } from "./SlidePhotoGraph.component";
 

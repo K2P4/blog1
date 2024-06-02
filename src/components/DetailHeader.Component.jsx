@@ -3,34 +3,28 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { useGetDetailQuery } from "../service/endpoints/BlogEndpints";
-import DetailPostComponent from "./DetailPost.component";
 import { Checkbox } from "@/components/ui/checkbox";
-import { FaTelegramPlane } from "react-icons/fa";
-import TagsComponent from "./Tags.component";
-import ArchiveComponent from "./Archive.component";
-
 import { FiShare } from "react-icons/fi";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-
 import {
 	FaLinkedinIn,
 	FaTwitter,
 	FaFacebookF,
-	FaSnapchatGhost,
+	
 } from "react-icons/fa";
 import { FaPinterestP } from "react-icons/fa";
-
 import { FaInstagram } from "react-icons/fa6";
 import CarouselPostComponent from "./CarouselPost.component";
-import InstagramComponent from "./Instagram.component";
+import Section2Component from "./Section2.component";
+
 
 const DetailHeaderComponent = () => {
 	const { id } = useParams();
 	const { data } = useGetDetailQuery(id);
 
 	return (
-		<div className="flex gap-12 ">
+	<div className="flex gap-12 ">
 			{/* section one */}
 			<div className="w-[70%] ">
 				<div className="flex flex-col items-start space-y-4 ">
@@ -41,7 +35,7 @@ const DetailHeaderComponent = () => {
 						</h1>
 						<p className="h-px w-[30px]  duration-500 group-hover:bg-pink-100 bg-pink-200 "></p>
 					</div>
-					<h1 className=" h-auto   text-5xl  leading-snug text-wrap  tracking-[2px] text-gray-950 text-center ">
+					<h1 className=" h-auto   text-5xl  mx-auto leading-snug text-wrap  tracking-[2px] text-gray-950 text-center ">
 						{data?.name}
 					</h1>
 
@@ -423,123 +417,7 @@ const DetailHeaderComponent = () => {
 				</div>
 			</div>
 
-			{/*seciont 2*/}
-			<div className="w-[25%] relative   mx-auto ">
-				<div className="flex items-center flex-col mx-auto gap-14">
-					{/* Blogger */}
-					<div className="w-full relative">
-						<p className="h-[65px] z-50  top-20 left-[50%] w-[1px] absolute  duration-500   bg-[#fde7e7] "></p>
-						<div className="bg-[#faf7f9] w-[90%] mx-auto  mt-32  p-9">
-							<img
-								className=" object-cover  h-36 w-36 mx-auto  "
-								src="https://zoya.qodeinteractive.com/wp-content/uploads/2021/04/user-img-1.png"
-								alt=""
-							/>
-
-							<h1 className="text-[#cfac9f] cursor-pointer hover:text-[#f0b6a2] my-4 text-center text-[12px] tracking-[3px] font-serif ">
-								BLOGGER
-							</h1>
-
-							<p className="text-[#727272]   text-center mx-auto tracking-wide leading-[28px] ">
-								Welcome to my blog where I share my lifestyle tips, healthy
-								snack ideas…
-							</p>
-						</div>
-					</div>
-
-					{/* Categories */}
-					<div className=" w-full  mx-auto ">
-						<h1 className="  text-center mb-4  text-2xl tracking-[2px] ">
-							Categories
-						</h1>
-
-						<ul className="flex flex-col items-center align-middle space-y-4">
-							<li className="   text-[#cfac9f] cursor-pointer hover:text-[#f0b6a2] text-center text-[12px] tracking-[3px] font-serif ">
-								BEAUTY
-							</li>
-							<li className="   text-[#cfac9f] cursor-pointer hover:text-[#f0b6a2] text-center text-[12px] tracking-[3px] font-serif ">
-								ENTERTAINMENT
-							</li>
-							<li className="   text-[#cfac9f] cursor-pointer hover:text-[#f0b6a2] text-center text-[12px] tracking-[3px] font-serif ">
-								HOME DECOR
-							</li>
-							<li className="   text-[#cfac9f] cursor-pointer hover:text-[#f0b6a2]text-center text-[12px] tracking-[3px] font-serif ">
-								INSPIRATION
-							</li>
-							<li className="   text-[#cfac9f] cursor-pointer hover:text-[#f0b6a2]text-center text-[12px] tracking-[3px] font-serif ">
-								INTERIOR
-							</li>
-							<li className="   text-[#cfac9f] cursor-pointer hover:text-[#f0b6a2] text-center text-[12px] tracking-[3px] font-serif ">
-								LIFESTYLE
-							</li>
-							<li className="   text-[#cfac9f] cursor-pointer hover:text-[#f0b6a2] text-center text-[12px] tracking-[3px] font-serif ">
-								TRAVEL
-							</li>
-						</ul>
-					</div>
-
-					{/* Popular Post */}
-					<DetailPostComponent />
-
-					{/* Subcribe*/}
-					<div className="relative mt-5">
-						<p className="h-[65px] z-50  -top-12  left-[50%]  w-[1px] absolute  duration-500   bg-[#fde7e7] "></p>
-						<div className="bg-[#faf7f9] w-full py-7 px-6">
-							<h1 className=" text-center text-3xl   text-gray-800  font-medium tracking-wider  ">
-								Subscribe to Newsletter
-							</h1>
-
-							<p className="text-center text-md my-4  tracking-wide text-gray-600 ">
-								Receive news via email
-							</p>
-
-							<div className="bg-white py-3 px-6    w-full flex items-center justify-between">
-								<input
-									type="text"
-									placeholder="Subscribe..."
-									className=" focus:border-0 p-0 text-[#8f8f8f] bg-transparent focus:outline-none focus:ring-0   w-full border-0"
-								/>
-								<FaTelegramPlane className="text-[#8f8f8f] hover:text-white duration-500 h-5 w-5" />
-							</div>
-						</div>
-					</div>
-
-					{/* Tag*/}
-					<TagsComponent />
-
-					<img
-						className="mx-auto w-[90%]"
-						src="https://zoya.qodeinteractive.com/wp-content/uploads/2021/04/sb-img-2.jpg"
-						alt=""
-					/>
-
-					{/* Archive*/}
-					<ArchiveComponent />
-
-					{/* Follow Us*/}
-					<div className="relative mt-5">
-						<p className="h-[65px] z-50  -top-12  left-[50%]  w-[1px] absolute  duration-500   bg-[#fde7e7] "></p>
-						<div className="bg-[#faf7f9] space-y-6 w-full py-7 px-6">
-							<h1 className=" text-center text-3xl    text-gray-800  font-medium tracking-wider  ">
-								Follow Us
-							</h1>
-
-							<p className="text-center text-md   tracking-wide text-gray-600 ">
-								Follow us on Social Network
-							</p>
-
-							<div className="flex  w-full items-center justify-center gap-6">
-								<FaFacebookF className=" text-gray-800 h-3.5 w-3.5  hover:text-gray-600 duration-500 " />
-								<FaTwitter className="text-gray-800 h-3.5 w-3.5  hover:text-gray-600 duration-500 " />
-								<FaPinterestP className="text-gray-800 h-3.5 w-3.5  hover:text-gray-600 duration-500 " />
-								<FaInstagram className="text-gray-800 h-3.5 w-3.5  hover:text-gray-600 duration-500 " />
-
-								<FaLinkedinIn className="text-gray-800 h-3.5 w-3.5  hover:text-gray-600 duration-500 " />
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+			<Section2Component/>
 		</div>
 	);
 };

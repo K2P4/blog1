@@ -11,7 +11,7 @@ const InstagramComponent = () => {
 	const List = Array.from({ length: 7 }, (_, index) => index);
 
 	return (
-		<div className="mb-2">
+		<div className="mb-2 ">
 			{isLoading ? (
 				<div className="flex items-center gap-2 px-3">
 					{List.map((item) => (
@@ -19,14 +19,14 @@ const InstagramComponent = () => {
 					))}
 				</div>
 			) : (
-				<div className="flex items-center relative justify-center px-3 gap-2">
+				<div className="flex items-center relative justify-center px-3  gap-2">
 					{data?.map((item) => (
 						<div key={item?.id} className=" relative group">
 							<FaInstagram className=" hidden group-hover:flex h-6 w-6 text-white   absolute top-4 left-5  animate__animated  animate__slideInUp duration-1000  " />
 
 							<img
 								src={item?.image}
-								className=" h-[154px] object-cover  opacity-90  hover:opacity-100  "
+								className=" h-[154px] object-cover  opacity-90   duration-300 hover:opacity-100  "
 								alt=""
 							/>
 						</div>

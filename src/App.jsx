@@ -3,7 +3,12 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom/dist";
 import { DetailPage, HomePage } from "./Page";
-import { HomeSectionComponent, NavComponent } from "./components";
+import {
+	HomePage2Component,
+	HomeSectionComponent,
+	
+	NavigationHomeSectionComponent,
+} from "./components";
 
 const App = () => {
 	return (
@@ -13,7 +18,13 @@ const App = () => {
 					<Route index element={<HomePage />} />
 				</Route>
 				<Route path="detail/:id" element={<DetailPage />} />
-				<Route path="HomeSection" element={<HomeSectionComponent />} />
+			</Routes>
+
+			<Routes>
+				<Route path="/HomeSection" element={<NavigationHomeSectionComponent />}>
+					<Route index element={<HomeSectionComponent />} />
+					<Route path="HomePage2" element={<HomePage2Component />} />
+				</Route>
 			</Routes>
 		</div>
 	);

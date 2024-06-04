@@ -110,12 +110,14 @@ const NavigationHomeSectionComponent = () => {
 									<div className=" w-[250px]   z-50   duration-1000   top-[100%]  -left-[90px] border border-slate-200 bg-white p-4 text-slate-950 absolute   h-[240px] animate__animated     animate__fadeIn  ">
 										<ul className="  text-gray-700 space-y-5 p-5 ">
 											<li
-												onClick={navRoute("/HomeSection")}
+												onClick={() => navRoute("/HomeSection")}
 												className="    group     ">
 												<span className=" group-hover:border-s-[#ED9455]  duration-500 group-hover:ms-3   group-hover:me-2 group-hover:border-s "></span>
 												Main Home
 											</li>
-											<li className="    group     ">
+											<li
+												onClick={() => navRoute("/")}
+												className="    group     ">
 												<span className=" group-hover:border-s-[#ED9455]  duration-500 group-hover:ms-3   group-hover:me-2 group-hover:border-s "></span>
 												Travel Blog
 											</li>

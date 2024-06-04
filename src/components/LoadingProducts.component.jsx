@@ -12,7 +12,7 @@ const LoadingProductsComponent = () => {
 	const nav = useNavigate();
 
 	const handleDetail = (id) => {
-		nav(`detail/${id}`);
+		nav(`/detail/${id}`);
 	};
 	
 

@@ -6,7 +6,7 @@ import { DetailPage, HomePage } from "./Page";
 import {
 	HomePage2Component,
 	HomeSectionComponent,
-	
+	LifeStyleComponent,
 	NavigationHomeSectionComponent,
 } from "./components";
 
@@ -18,6 +18,7 @@ const App = () => {
 					<Route index element={<HomePage />} />
 				</Route>
 				<Route path="detail/:id" element={<DetailPage />} />
+				<Route path="lifestyle" element={<LifeStyleComponent />} />
 			</Routes>
 
 			<Routes>

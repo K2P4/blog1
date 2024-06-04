@@ -85,16 +85,39 @@ const BlogApi = ApiService.injectEndpoints({
 				method: "GET",
 			}),
 		}),
+
+		getLatestStyle: builder.query({
+			query: () => ({
+				url: "LatestStyle",
+				method: "GET",
+			}),
+		}),
+
+		getLatestStyle2: builder.query({
+			query: () => ({
+				url: "LatestStyle2",
+				method: "GET",
+			}),
+		}),
+
+		getLatestStyle3: builder.query({
+			query: () => ({
+				url: "LatestStyle3",
+				method: "GET",
+			}),
+		}),
 	}),
 });
 
 export const {
 	useGetBlogQuery,
-	 useGetHomeSlideQuery,
+	useGetHomeSlideQuery,
+	useGetLatestStyle3Query,
 	useGetTagsQuery,
 	useGetLatestQuery,
 	useGetDateCollectionsQuery,
-
+	useGetLatestStyleQuery,
+	useGetLatestStyle2Query,
 	useGetLoadingProductsQuery,
 	useGetSlider1Query,
 	useGetPopularQuery,

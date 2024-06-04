@@ -3,6 +3,9 @@
 export { default as ContainerComponent } from "./Container.component";
 export { default as NavComponent } from "./Nav.component";
 export { default as LatestPostComponent } from "./LatestPost.component";
+export { default as LatestStyleComponent } from "./LatestStyle.component";
+export { default as LatestStyle2Component } from "./LatestStyle2.component";
+export { default as LatestStyle3Component } from "./LatestStyle3.component";
 export { default as Slide1Component } from "./Slide1.component";
 export { default as HiroSectionLoading } from "./HiroSectionLoading.component";
 export { default as PopularPostComponent } from "./PopularPost.component";
@@ -25,4 +28,6 @@ export { default as Section2Component } from "./Section2.component";
 export { default as SlideCarouselCompnent } from "./SlideCarousel.component";
 export { default as NavigationHomeSectionComponent } from "./NavigationHomeSection.component";
 export { default as SlidePhotoGraphComponent } from "./SlidePhotoGraph.component";
+export { default as LifeStyleComponent } from "./LifeStyle.component";
 
+export { default as NavLifeStyleComponent } from "./NavLifeStyle.component";

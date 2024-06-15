@@ -16,7 +16,7 @@ const ArchiveComponent = () => {
 				{data?.map((item) => (
 					<h1
 						key={item?.id}
-						className="  text-[#cea79a] mx-auto cursor-pointer hover:text-[#ebbcac] text-center text-[12px] tracking-[3px] font-serif ">
+						className="  text-[#dfb8aa]  font-medium mx-auto cursor-pointer hover:text-[#ebbcac] text-center text-[12px] tracking-[3px] font-serif ">
 						{item?.date}
 					</h1>
 				))}

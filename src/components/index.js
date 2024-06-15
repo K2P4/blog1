@@ -34,4 +34,5 @@ export { default as FashionContentComponent } from "./FashionContent.component";
 export { default as SlideFashionComponent } from "./SlideFashion.component";
 export { default as NavLifeStyleComponent } from "./NavLifeStyle.component";
 export { default as AboutOneComponent } from "./AboutOne.component";
+export { default as AssistantComponent } from "./Assistant.component";
 export { default as AboutTwoComponent } from "./AboutTwo.component";

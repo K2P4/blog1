@@ -121,11 +121,15 @@ const NavigationHomeSectionComponent = () => {
 												<span className=" group-hover:border-s-[#ED9455]  duration-500 group-hover:ms-3   group-hover:me-2 group-hover:border-s "></span>
 												Travel Blog
 											</li>
-											<li className="    group      ">
+											<li
+												onClick={() => navRoute("/lifestyle")}
+												className="    group      ">
 												<span className=" group-hover:border-s-[#ED9455] duration-500 group-hover:ms-3  group-hover:me-2 group-hover:border-s "></span>
 												Lifestyle Blog
 											</li>
-											<li className="    group      ">
+											<li
+												onClick={() => navRoute("/fashion")}
+												className="    group      ">
 												<span className=" group-hover:border-s-[#ED9455] duration-500 group-hover:ms-3   group-hover:me-2 group-hover:border-s "></span>
 												Fashion Blog
 											</li>

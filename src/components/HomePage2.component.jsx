@@ -33,7 +33,7 @@ const HomePage2Component = () => {
 
 	const handleEnded = () => {
 		setCurrentVideoIndex((prevIndex) => (prevIndex + 1) % videos.length);
-	};p
+	};
 
 	const nav = useNavigate();
 

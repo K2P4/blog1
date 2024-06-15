@@ -106,12 +106,20 @@ const BlogApi = ApiService.injectEndpoints({
 				method: "GET",
 			}),
 		}),
+
+		getFashionItem: builder.query({
+			query: () => ({
+				url: "FashionItem",
+				method: "GET",
+			}),
+		}),
 	}),
 });
 
 export const {
 	useGetBlogQuery,
 	useGetHomeSlideQuery,
+	useGetFashionItemQuery,
 	useGetLatestStyle3Query,
 	useGetTagsQuery,
 	useGetLatestQuery,

@@ -29,5 +29,9 @@ export { default as SlideCarouselCompnent } from "./SlideCarousel.component";
 export { default as NavigationHomeSectionComponent } from "./NavigationHomeSection.component";
 export { default as SlidePhotoGraphComponent } from "./SlidePhotoGraph.component";
 export { default as LifeStyleComponent } from "./LifeStyle.component";
-
+export { default as FashionNavComponent } from "./FashionNav.component";
+export { default as FashionContentComponent } from "./FashionContent.component";
+export { default as SlideFashionComponent } from "./SlideFashion.component";
 export { default as NavLifeStyleComponent } from "./NavLifeStyle.component";
+export { default as AboutOneComponent } from "./AboutOne.component";
+export { default as AboutTwoComponent } from "./AboutTwo.component";

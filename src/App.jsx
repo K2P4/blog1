@@ -2,7 +2,7 @@
 
 import React from "react";
 import { Route, Routes } from "react-router-dom/dist";
-import { DetailPage, HomePage } from "./Page";
+import { AboutPage, DetailMediaPage, DetailPage, FashionPage, HomePage } from "./Page";
 import {
 	HomePage2Component,
 	HomeSectionComponent,
@@ -18,7 +18,10 @@ const App = () => {
 					<Route index element={<HomePage />} />
 				</Route>
 				<Route path="detail/:id" element={<DetailPage />} />
+				<Route path="detailmedia/:id" element={<DetailMediaPage />} />
 				<Route path="lifestyle" element={<LifeStyleComponent />} />
+				<Route path="fashion" element={<FashionPage />} />
+				<Route path="about" element={<AboutPage />} />
 			</Routes>
 
 			<Routes>

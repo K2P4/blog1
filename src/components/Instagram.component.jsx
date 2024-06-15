@@ -4,10 +4,16 @@ import React from "react";
 import { useGetInstagramQuery } from "../service/endpoints/BlogEndpints";
 import { FaInstagram } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
+
 import InstagramLoadingComponent from "./InstagramLoading.component";
 
 const InstagramComponent = () => {
 	const { data, isLoading } = useGetInstagramQuery();
+
+	const openInNewTab = (url) => {
+		window.open(url, "_blank", "noopener,noreferrer");
+	};
+
 	const List = Array.from({ length: 7 }, (_, index) => index);
 
 	return (
@@ -21,7 +27,10 @@ const InstagramComponent = () => {
 			) : (
 				<div className="flex items-center relative justify-center px-3  gap-2">
 					{data?.map((item) => (
-						<div key={item?.id} className=" relative group">
+						<div
+							onClick={() => openInNewTab(item?.url)}
+							key={item?.id}
+							className=" relative group">
 							<FaInstagram className=" hidden group-hover:flex h-6 w-6 text-white   absolute top-4 left-5  animate__animated  animate__slideInUp duration-1000  " />
 
 							<img

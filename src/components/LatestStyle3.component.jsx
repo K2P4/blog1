@@ -15,7 +15,7 @@ const LatestStyle3Component = () => {
 		nav(`/detail/${id}`);
 	};
 	return (
-		<div>
+		<div className="pb-20">
 			{isLoading ? (
 				<div className=" flex  justify-center  flex-wrap items-center ">
 					<BlogLoadingComponent />

@@ -62,7 +62,7 @@ const NavComponent = () => {
 	}, []);
 
 	return (
-		<div className="    bg-[#fcfcfc]">
+		<div id="logo" className="    bg-[#fcfcfc]">
 			<ContainerComponent>
 				<div className="flex items-center relative justify-between">
 					<div className="flex items-center  space-x-12 ">
@@ -105,7 +105,9 @@ const NavComponent = () => {
 												<span className=" group-hover:border-s-[#ED9455] duration-500 group-hover:ms-3  group-hover:me-2 group-hover:border-s "></span>
 												Lifestyle Blog
 											</li>
-											<li className="    group      ">
+											<li
+												onClick={() => navRoute("/fashion")}
+												className="    group      ">
 												<span className=" group-hover:border-s-[#ED9455] duration-500 group-hover:ms-3   group-hover:me-2 group-hover:border-s "></span>
 												Fashion Blog
 											</li>
@@ -148,7 +150,9 @@ const NavComponent = () => {
 								{togglePage && (
 									<div className=" w-[230px]  cursor-pointer  z-50   duration-500   top-[100%]  -left-[90px] border border-slate-200 bg-white p-4 text-slate-950 absolute   h-[200px] animate__animated     animate__fadeIn  ">
 										<ul className="  text-gray-700 space-y-5 p-5 ">
-											<li className="    group     ">
+											<li
+												onClick={() => navRoute("/about")}
+												className="    group     ">
 												<span className=" group-hover:border-s-[#ED9455]  duration-500 group-hover:ms-3   group-hover:me-2 group-hover:border-s "></span>
 												About
 											</li>
@@ -454,7 +458,7 @@ const NavComponent = () => {
 						viewBox="0 0 24 24"
 						strokeWidth={1.5}
 						stroke="currentColor"
-						onClick={() => scrollToSection("home")}
+						onClick={() => scrollToSection("logo")}
 						className="w-12 p-3 text-[#FFD0D0] h-12">
 						<path
 							strokeLinecap="round"

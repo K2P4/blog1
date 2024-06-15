@@ -4,18 +4,16 @@ import React, { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import {
 	ContainerComponent,
-	DetailHeaderComponent,
 	FooterComponent,
 	NavigationHomeSectionComponent,
 } from "../components";
 import { motion } from "framer-motion";
 import InstagramComponent from "../components/Instagram.component";
+import DetailHeaderMediaComponent from "../components/DetailHeaderMedia.component";
 
-const DetailPage = () => {
-
+const DetailMediaPage = () => {
 	const [isFixed, setIsFixed] = useState(false);
-	
-	
+
 	const searchRef = useRef();
 	const nav = useNavigate();
 
@@ -55,9 +53,9 @@ const DetailPage = () => {
 
 	return (
 		<div id="logo" className=" bg-white  h-auto ">
-			<NavigationHomeSectionComponent/>
+			<NavigationHomeSectionComponent />
 			<ContainerComponent>
-				<DetailHeaderComponent />
+				<DetailHeaderMediaComponent />
 			</ContainerComponent>
 
 			<InstagramComponent />
@@ -86,4 +84,4 @@ const DetailPage = () => {
 	);
 };
 
-export default DetailPage;
+export default DetailMediaPage;

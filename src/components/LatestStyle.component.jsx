@@ -7,13 +7,15 @@ import BlogLoadingComponent from "./BlogLoading.component";
 import { useGetLatestStyleQuery } from "../service/endpoints/BlogEndpints";
 import LatestStyle2Component from "./LatestStyle2.component";
 import LatestStyle3Component from "./LatestStyle3.component";
+import InstagramComponent from "./Instagram.component";
+import FooterComponent from "./Footer.component";
 
 const LatestStyleComponent = () => {
 	const { data, isLoading } = useGetLatestStyleQuery();
 	const nav = useNavigate();
 
 	const handleDetail = (id) => {
-		nav(`/detail/${id}`);
+		nav(`/detailmedia/${id}`);
 	};
 
 	return (
@@ -101,7 +103,8 @@ const LatestStyleComponent = () => {
 
 			<LatestStyle2Component />
 			<LatestStyle3Component />
-			
+			<InstagramComponent />
+			<FooterComponent />
 		</div>
 	);
 };

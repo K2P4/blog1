@@ -2,10 +2,30 @@
 
 import React from "react";
 import { Route, Routes } from "react-router-dom/dist";
-import { AboutPage, DetailMediaPage, DetailPage, FashionPage, HomePage } from "./Page";
 import {
+	AboutPage,
+	DetailMediaPage,
+	ContactPage,
+	DetailPage,
+	FashionPage,
+	HomePage,
+	RightSideBarPage,
+	LeftSideBarPage,
+	NoSideBarPage,
+	CompactPage,
+	DividedPage,
+	CategoryPage,
+	BeautyPage,
+	InspirationPage,
+	TravelOnePage,
+	TravelTwoPage,
+} from "./Page";
+import {
+	BeautyThreeComponent,
+	BeautyTwoComponent,
 	HomePage2Component,
 	HomeSectionComponent,
+	InspirationTwoComponent,
 	LifeStyleComponent,
 	NavigationHomeSectionComponent,
 } from "./components";
@@ -22,6 +42,20 @@ const App = () => {
 				<Route path="lifestyle" element={<LifeStyleComponent />} />
 				<Route path="fashion" element={<FashionPage />} />
 				<Route path="about" element={<AboutPage />} />
+				<Route path="contact" element={<ContactPage />} />
+				<Route path="rightside" element={<RightSideBarPage />} />
+				<Route path="leftside" element={<LeftSideBarPage />} />
+				<Route path="noside" element={<NoSideBarPage />} />
+				<Route path="compact" element={<CompactPage />} />
+				<Route path="divided" element={<DividedPage />} />
+				<Route path="category" element={<CategoryPage />} />
+				<Route path="beauty" element={<BeautyPage />} />
+				<Route path="beauty-two" element={<BeautyTwoComponent />} />
+				<Route path="inspiration-two" element={<InspirationTwoComponent />} />
+				<Route path="beauty-three" element={<BeautyThreeComponent />} />
+				<Route path="inspiration" element={<InspirationPage />} />
+				<Route path="travel" element={<TravelOnePage />} />
+				<Route path="travel-two" element={<TravelTwoPage />} />
 			</Routes>
 
 			<Routes>

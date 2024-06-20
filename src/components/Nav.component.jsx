@@ -157,11 +157,15 @@ const NavComponent = () => {
 												About
 											</li>
 
-											<li className="    group     ">
+											<li
+												onClick={() => navRoute("/contact")}
+												className="    group     ">
 												<span className=" group-hover:border-s-[#ED9455]  duration-500 group-hover:ms-3   group-hover:me-2 group-hover:border-s "></span>
 												Contact
 											</li>
-											<li className="    group      ">
+											<li
+												onClick={() => navRoute("/contact")}
+												className="    group      ">
 												<span className=" group-hover:border-s-[#ED9455] duration-500 group-hover:ms-3  group-hover:me-2 group-hover:border-s "></span>
 												Contact Me
 											</li>
@@ -188,29 +192,35 @@ const NavComponent = () => {
 													LIST TYPES
 												</h1>
 												<ul className="  text-gray-700 space-y-4 ">
-													<li className="    group     ">
+													<li
+														onClick={() => navRoute("/rightside")}
+														className="    group     ">
 														<span className=" group-hover:border-s-[#ED9455] text-sm  duration-500 group-hover:ms-3   group-hover:me-2 group-hover:border-s "></span>
 														Right SideBar
 													</li>
 
-													<li className="    group     ">
+													<li
+														onClick={() => navRoute("/leftside")}
+														className="    group     ">
 														<span className=" group-hover:border-s-[#ED9455] text-sm  duration-500 group-hover:ms-3   group-hover:me-2 group-hover:border-s "></span>
 														Left SideBar
 													</li>
-													<li className="    group      ">
+													<li
+														onClick={() => navRoute("/noside")}
+														className="    group      ">
 														<span className=" group-hover:border-s-[#ED9455] text-sm duration-500 group-hover:ms-3  group-hover:me-2 group-hover:border-s "></span>
 														No SideBar
 													</li>
-													<li className="    group      ">
-														<span className=" group-hover:border-s-[#ED9455] text-sm duration-500 group-hover:ms-3  group-hover:me-2 group-hover:border-s "></span>
-														Info Right
-													</li>
 
-													<li className="    group      ">
+													<li
+														onClick={() => navRoute("/compact")}
+														className="    group      ">
 														<span className=" group-hover:border-s-[#ED9455] text-sm duration-500 group-hover:ms-3  group-hover:me-2 group-hover:border-s "></span>
 														Compact
 													</li>
-													<li className="    group      ">
+													<li
+														onClick={() => navRoute("/divided")}
+														className="    group      ">
 														<span className=" group-hover:border-s-[#ED9455] text-sm duration-500 group-hover:ms-3  group-hover:me-2 group-hover:border-s "></span>
 														Divided
 													</li>
@@ -218,7 +228,9 @@ const NavComponent = () => {
 														<span className=" group-hover:border-s-[#ED9455] text-sm duration-500 group-hover:ms-3  group-hover:me-2 group-hover:border-s "></span>
 														Info Box
 													</li>
-													<li className="    group      ">
+													<li
+														onClick={() => navRoute("/category")}
+														className="    group      ">
 														<span className=" group-hover:border-s-[#ED9455] text-sm duration-500 group-hover:ms-3  group-hover:me-2 group-hover:border-s "></span>
 														Category List
 													</li>

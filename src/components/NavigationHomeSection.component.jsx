@@ -150,12 +150,16 @@ const NavigationHomeSectionComponent = () => {
 								{togglePage && (
 									<div className=" w-[230px]   z-50   duration-1000    top-[100%]  -left-[90px] border border-slate-200 bg-white p-4 text-slate-950 absolute   h-[200px] animate__animated     animate__fadeIn  ">
 										<ul className="  text-gray-700 space-y-5 p-5 ">
-											<li className="    group     ">
+											<li
+												onClick={() => navRoute("/about")}
+												className="    group     ">
 												<span className=" group-hover:border-s-[#ED9455]  duration-500 group-hover:ms-3   group-hover:me-2 group-hover:border-s "></span>
 												About
 											</li>
 
-											<li className="    group     ">
+											<li
+												onClick={() => navRoute("/contact")}
+												className="    group     ">
 												<span className=" group-hover:border-s-[#ED9455]  duration-500 group-hover:ms-3   group-hover:me-2 group-hover:border-s "></span>
 												Contact
 											</li>

@@ -36,3 +36,7 @@ export { default as NavLifeStyleComponent } from "./NavLifeStyle.component";
 export { default as AboutOneComponent } from "./AboutOne.component";
 export { default as AssistantComponent } from "./Assistant.component";
 export { default as AboutTwoComponent } from "./AboutTwo.component";
+export { default as BeautyOneComponent } from "./BeautyOne.component";
+export { default as BeautyTwoComponent } from "./BeautyTwo.component";
+export { default as BeautyThreeComponent } from "./BeautyThree.component";
+export { default as InspirationTwoComponent } from "./InspirationTwo.component";

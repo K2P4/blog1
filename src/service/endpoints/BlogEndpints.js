@@ -107,6 +107,55 @@ const BlogApi = ApiService.injectEndpoints({
 			}),
 		}),
 
+		getBeautyOne: builder.query({
+			query: () => ({
+				url: "BeautyOne ",
+				method: "GET",
+			}),
+		}),
+
+		getBeautyTwo: builder.query({
+			query: () => ({
+				url: "BeautyTwo",
+				method: "GET",
+			}),
+		}),
+
+		getBeautyThree: builder.query({
+			query: () => ({
+				url: "BeautyThree",
+				method: "GET",
+			}),
+		}),
+
+		getInspiration1: builder.query({
+			query: () => ({
+				url: "InspirationOne",
+				method: "GET",
+			}),
+		}),
+
+		getInspiration2: builder.query({
+			query: () => ({
+				url: "InspirationTwo",
+				method: "GET",
+			}),
+		}),
+
+		getTravelOne: builder.query({
+			query: () => ({
+				url: "TravelOne",
+				method: "GET",
+			}),
+		}),
+
+		getTravelTwo: builder.query({
+			query: () => ({
+				url: "TravelTwo",
+				method: "GET",
+			}),
+		}),
+
 		getFashionItem: builder.query({
 			query: () => ({
 				url: "FashionItem",
@@ -122,6 +171,15 @@ export const {
 	useGetFashionItemQuery,
 	useGetLatestStyle3Query,
 	useGetTagsQuery,
+	useGetBeautyOneQuery,
+	useGetInspiration1Query,
+	useGetInspiration2Query,
+	useGetBeautyTwoQuery,
+	useGetBeautyThreeQuery,
+
+	useGetTravelOneQuery,
+
+	useGetTravelTwoQuery,
 	useGetLatestQuery,
 	useGetDateCollectionsQuery,
 	useGetLatestStyleQuery,

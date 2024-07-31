@@ -20,6 +20,9 @@ import {
 	TravelOnePage,
 	TravelTwoPage,
 	ColumnPage,
+	ColumnThreePage,
+	ColumnFourPage,
+	ColumnFivePage,
 } from "./Page";
 import {
 	BeautyThreeComponent,
@@ -59,6 +62,9 @@ const App = () => {
 				<Route path="travel" element={<TravelOnePage />} />
 				<Route path="travel-two" element={<TravelTwoPage />} />
 				<Route path="column-two" element={<ColumnTwoPage />} />
+				<Route path="column-three" element={<ColumnThreePage />} />
+				<Route path="column-four" element={<ColumnFourPage />} />
+				<Route path="column-five" element={<ColumnFivePage />} />
 			</Routes>
 
 			<Routes>

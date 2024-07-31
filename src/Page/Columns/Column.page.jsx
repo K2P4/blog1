@@ -7,8 +7,11 @@ import {
 	NavigationHomeSectionComponent,
 } from "../../components";
 import { useNavigate } from "react-router-dom";
+import { useGetProductsQuery } from "../../service/endpoints/BlogEndpints";
 
-const ColumnPage = ({ data, isLoading, width, height }) => {
+const ColumnPage = ({ width, height, fontSize }) => {
+	const { data, isLoading } = useGetProductsQuery();
+
 	const nav = useNavigate();
 
 	const handleDetail = (id) => {
@@ -20,7 +23,8 @@ const ColumnPage = ({ data, isLoading, width, height }) => {
 			<NavigationHomeSectionComponent />
 
 			<ContainerComponent>
-				<div className="flex flex-wrap w-full  justify-center gap-16 mx-auto  my-32">
+				<div
+					className={`flex flex-wrap w-full  justify-center gap-14 mx-auto  my-32`}>
 					{isLoading ? (
 						"Loading"
 					) : (
@@ -45,7 +49,8 @@ const ColumnPage = ({ data, isLoading, width, height }) => {
 											<p className="h-px w-[30px]  duration-500 group-hover:bg-pink-100 bg-pink-200 "></p>
 										</div>
 
-										<p className=" cursor-pointer text-2xl  text-wrap  tracking-[2px] text-gray-950 text-center ">
+										<p
+											className={` cursor-pointer text-${fontSize} text-wrap  tracking-[2px] text-gray-950 text-center `}>
 											{item?.name}
 										</p>
 

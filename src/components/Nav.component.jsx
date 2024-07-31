@@ -248,32 +248,46 @@ const NavComponent = () => {
 														Two Colums
 													</li>
 
-													<li className="    group     ">
+													<li
+														onClick={() => navRoute("/column-three")}
+														className="    group     ">
 														<span className=" group-hover:border-s-[#ED9455] text-sm  duration-500 group-hover:ms-3   group-hover:me-2 group-hover:border-s "></span>
 														Three Columns Wide
 													</li>
-													<li className="    group      ">
+													<li
+														onClick={() => navRoute("/column-four")}
+														className="    group      ">
 														<span className=" group-hover:border-s-[#ED9455] text-sm duration-500 group-hover:ms-3  group-hover:me-2 group-hover:border-s "></span>
 														Four Columns
 													</li>
-													<li className="    group      ">
+													<li
+														onClick={() => navRoute("/column-four")}
+														className="    group      ">
 														<span className=" group-hover:border-s-[#ED9455] text-sm duration-500 group-hover:ms-3  group-hover:me-2 group-hover:border-s "></span>
 														Four Columns Wide
 													</li>
 
-													<li className="    group      ">
+													<li
+														onClick={() => navRoute("/column-five")}
+														className="    group      ">
 														<span className=" group-hover:border-s-[#ED9455] text-sm duration-500 group-hover:ms-3  group-hover:me-2 group-hover:border-s "></span>
 														Five Columns
 													</li>
-													<li className="    group      ">
+													<li
+														onClick={() => navRoute("/column-five")}
+														className="    group      ">
 														<span className=" group-hover:border-s-[#ED9455] text-sm duration-500 group-hover:ms-3  group-hover:me-2 group-hover:border-s "></span>
 														Five Columns Wide
 													</li>
-													<li className="    group      ">
+													<li
+														onClick={() => navRoute("/column-five")}
+														className="    group      ">
 														<span className=" group-hover:border-s-[#ED9455] text-sm duration-500 group-hover:ms-3  group-hover:me-2 group-hover:border-s "></span>
 														Six Columns
 													</li>
-													<li className="    group      ">
+													<li
+														onClick={() => navRoute("/column-five")}
+														className="    group      ">
 														<span className=" group-hover:border-s-[#ED9455] text-sm duration-500 group-hover:ms-3  group-hover:me-2 group-hover:border-s "></span>
 														Six Columns Wide
 													</li>

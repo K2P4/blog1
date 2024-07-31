@@ -13,6 +13,7 @@ export { default as CompactPage } from "./Compact.page";
 export { default as BeautyPage } from "./Beauty.page";
 export { default as DividedPage } from "./Divided.page";
 export { default as CategoryPage } from "./Category.page";
+export { default as ColumnPage } from "./Columns/Column.page";
 export { default as InspirationPage } from "./Inspiration.page";
 export { default as TravelOnePage } from "./Travel/TravelOne.page";
 export { default as TravelTwoPage } from "./Travel/TravelTwo.page";

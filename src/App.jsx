@@ -19,6 +19,7 @@ import {
 	InspirationPage,
 	TravelOnePage,
 	TravelTwoPage,
+	ColumnPage,
 } from "./Page";
 import {
 	BeautyThreeComponent,
@@ -29,6 +30,7 @@ import {
 	LifeStyleComponent,
 	NavigationHomeSectionComponent,
 } from "./components";
+import ColumnTwoPage from "./Page/Columns/ColumnTwo.page";
 
 const App = () => {
 	return (
@@ -56,6 +58,7 @@ const App = () => {
 				<Route path="inspiration" element={<InspirationPage />} />
 				<Route path="travel" element={<TravelOnePage />} />
 				<Route path="travel-two" element={<TravelTwoPage />} />
+				<Route path="column-two" element={<ColumnTwoPage />} />
 			</Routes>
 
 			<Routes>

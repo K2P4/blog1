@@ -241,7 +241,9 @@ const NavComponent = () => {
 													LAYOUT TYPES
 												</h1>
 												<ul className="  text-gray-700 space-y-4 ">
-													<li className="    group     ">
+													<li
+														onClick={() => navRoute("/column-two")}
+														className="    group     ">
 														<span className=" group-hover:border-s-[#ED9455] text-sm  duration-500 group-hover:ms-3   group-hover:me-2 group-hover:border-s "></span>
 														Two Colums
 													</li>

@@ -9,7 +9,7 @@ import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import NextPostComponent from "./NextPost.component";
 
-const CarouselPostComponent = () => {
+const CarouselPostComponent = ({ gallery }) => {
 	const [currentBox, setCurrentBox] = useState(1);
 	const { id } = useParams();
 
@@ -20,7 +20,11 @@ const CarouselPostComponent = () => {
 	const handlePrevious = () => {
 		setCurrentBox((prev) => (prev === 1 ? 6 : prev - 1));
 
-		nav(`/detail/${id - 1}`);
+		if (gallery) {
+			nav("/");
+		} else {
+			nav(`/detail/${id - 1}`);
+		}
 		window.location.reload();
 	};
 

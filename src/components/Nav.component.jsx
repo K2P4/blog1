@@ -298,29 +298,41 @@ const NavComponent = () => {
 													ARCHIVE PAGES
 												</h1>
 												<ul className="  text-gray-700 space-y-4 ">
-													<li className="    group     ">
+													<li
+														onClick={() => navRoute("/author")}
+														className="    group     ">
 														<span className=" group-hover:border-s-[#ED9455] text-sm  duration-500 group-hover:ms-3   group-hover:me-2 group-hover:border-s "></span>
 														Author Page
 													</li>
 
-													<li className="    group     ">
+													<li
+														onClick={() => navRoute("/archive-category")}
+														className="    group     ">
 														<span className=" group-hover:border-s-[#ED9455] text-sm  duration-500 group-hover:ms-3   group-hover:me-2 group-hover:border-s "></span>
 														Filter By Category
 													</li>
-													<li className="    group      ">
+													<li
+														onClick={() => navRoute("/archive-date")}
+														className="    group      ">
 														<span className=" group-hover:border-s-[#ED9455] text-sm duration-500 group-hover:ms-3  group-hover:me-2 group-hover:border-s "></span>
 														Filter By Date
 													</li>
-													<li className="    group      ">
+													<li
+														onClick={() => navRoute("/archive-tag")}
+														className="    group      ">
 														<span className=" group-hover:border-s-[#ED9455] text-sm duration-500 group-hover:ms-3  group-hover:me-2 group-hover:border-s "></span>
 														Filter By Tag
 													</li>
 
-													<li className="    group      ">
+													<li
+														onClick={() => navRoute("/archive-view")}
+														className="    group      ">
 														<span className=" group-hover:border-s-[#ED9455] text-sm duration-500 group-hover:ms-3  group-hover:me-2 group-hover:border-s "></span>
 														View All Posts
 													</li>
-													<li className="    group      ">
+													<li
+														onClick={() => navRoute("/archive-search")}
+														className="    group      ">
 														<span className=" group-hover:border-s-[#ED9455] text-sm duration-500 group-hover:ms-3  group-hover:me-2 group-hover:border-s "></span>
 														Search Results
 													</li>
@@ -331,29 +343,41 @@ const NavComponent = () => {
 													POST TYPES
 												</h1>
 												<ul className="  text-gray-700 space-y-4 ">
-													<li className="    group     ">
+													<li
+														onClick={() => navRoute("/detail/31")}
+														className="    group     ">
 														<span className=" group-hover:border-s-[#ED9455] text-sm  duration-500 group-hover:ms-3   group-hover:me-2 group-hover:border-s "></span>
 														Standard
 													</li>
 
-													<li className="    group     ">
+													<li
+														onClick={() => navRoute("/gallery-scan")}
+														className="    group     ">
 														<span className=" group-hover:border-s-[#ED9455] text-sm  duration-500 group-hover:ms-3   group-hover:me-2 group-hover:border-s "></span>
 														Gallery
 													</li>
-													<li className="    group      ">
+													<li
+														onClick={() => navRoute("/detailmedia/37")}
+														className="    group      ">
 														<span className=" group-hover:border-s-[#ED9455] text-sm duration-500 group-hover:ms-3  group-hover:me-2 group-hover:border-s "></span>
 														Audio
 													</li>
-													<li className="    group      ">
+													<li
+														onClick={() => navRoute("/video")}
+														className="    group      ">
 														<span className=" group-hover:border-s-[#ED9455] text-sm duration-500 group-hover:ms-3  group-hover:me-2 group-hover:border-s "></span>
 														Video
 													</li>
 
-													<li className="    group      ">
+													<li
+														onClick={() => navRoute("/quote")}
+														className="    group      ">
 														<span className=" group-hover:border-s-[#ED9455] text-sm duration-500 group-hover:ms-3  group-hover:me-2 group-hover:border-s "></span>
 														Quote
 													</li>
-													<li className="    group      ">
+													<li
+														onClick={() => navRoute("/link")}
+														className="    group      ">
 														<span className=" group-hover:border-s-[#ED9455] text-sm duration-500 group-hover:ms-3  group-hover:me-2 group-hover:border-s "></span>
 														Link
 													</li>

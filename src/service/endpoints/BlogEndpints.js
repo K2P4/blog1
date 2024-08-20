@@ -156,6 +156,13 @@ const BlogApi = ApiService.injectEndpoints({
 			}),
 		}),
 
+		getAllProducts: builder.query({
+			query: () => ({
+				url: "ZoyaAllProducts",
+				method: "GET",
+			}),
+		}),
+
 		getFashionItem: builder.query({
 			query: () => ({
 				url: "FashionItem",
@@ -167,6 +174,7 @@ const BlogApi = ApiService.injectEndpoints({
 
 export const {
 	useGetBlogQuery,
+	useGetAllProductsQuery,
 	useGetHomeSlideQuery,
 	useGetFashionItemQuery,
 	useGetLatestStyle3Query,

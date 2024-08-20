@@ -23,6 +23,16 @@ import {
 	ColumnThreePage,
 	ColumnFourPage,
 	ColumnFivePage,
+	GalleryScanPage,
+	VideoPage,
+	QuotePage,
+	LinkPage,
+	AuthorPage,
+	ArchiveCategoryPage,
+	DatePage,
+	ArchiveTagPage,
+	ViewPostPage,
+	ArchiveSearchPage,
 } from "./Page";
 import {
 	BeautyThreeComponent,
@@ -65,6 +75,16 @@ const App = () => {
 				<Route path="column-three" element={<ColumnThreePage />} />
 				<Route path="column-four" element={<ColumnFourPage />} />
 				<Route path="column-five" element={<ColumnFivePage />} />
+				<Route path="gallery-scan" element={<GalleryScanPage />} />
+				<Route path="video" element={<VideoPage />} />
+				<Route path="quote" element={<QuotePage />} />
+				<Route path="link" element={<LinkPage />} />
+				<Route path="author" element={<AuthorPage />} />
+				<Route path="archive-category" element={<ArchiveCategoryPage />} />
+				<Route path="archive-tag" element={<ArchiveTagPage />} />
+				<Route path="archive-date" element={<DatePage />} />
+				<Route path="archive-view" element={<ViewPostPage />} />
+				<Route path="archive-search" element={<ArchiveSearchPage />} />
 			</Routes>
 
 			<Routes>

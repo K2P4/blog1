@@ -17,7 +17,16 @@ export { default as ColumnPage } from "./Columns/Column.page";
 export { default as ColumnThreePage } from "./Columns/ColumnThree.page";
 export { default as ColumnFourPage } from "./Columns/ColumnFour.page";
 export { default as ColumnFivePage } from "./Columns/ColumnFive.page";
+export { default as GalleryScanPage } from "./PostType/GalleryScan.page";
+export { default as VideoPage } from "./PostType/Video.page";
+export { default as QuotePage } from "./PostType/Quote.page";
+export { default as LinkPage } from "./PostType/Link.page";
+export { default as AuthorPage } from "./Archive/author.page";
+export { default as DatePage } from "./Archive/Date.page";
+export { default as ArchiveCategoryPage } from "./Archive/ArchiveCategory.page";
+export { default as ArchiveTagPage } from "./Archive/ArchiveTag.page";
+export { default as ArchiveSearchPage } from "./Archive/ArchiveSearch.page";
+export { default as ViewPostPage } from "./Archive/ViewPost.page";
 export { default as InspirationPage } from "./Inspiration.page";
 export { default as TravelOnePage } from "./Travel/TravelOne.page";
 export { default as TravelTwoPage } from "./Travel/TravelTwo.page";
-

@@ -88,6 +88,7 @@ const NavigationHomeSectionComponent = () => {
 						{/*LOGO */}
 						{isFixed && (
 							<img
+								onClick={() => navRoute("/")}
 								className="  h-16 w-auto  me-auto object-contain "
 								src="https://zoya.qodeinteractive.com/wp-content/uploads/2021/06/logo-sticky-img-04.png"
 								alt=""

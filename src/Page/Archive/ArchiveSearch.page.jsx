@@ -1,6 +1,6 @@
 /** @format */
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import {
 	AuthorPostComponent,
@@ -17,15 +17,24 @@ import { useGetAllProductsQuery } from "../../service/endpoints/BlogEndpints";
 
 const ArchiveSearchPage = () => {
 	const { data, isLoading } = useGetAllProductsQuery();
+	const [submitQuery, setSubmitQuery] = useState("");
 	const [searchData, setData] = useState("");
+	const [filteredProducts, setFilteredProducts] = useState(data);
 
-	const handleSearch = (event, searchData, setFilterProducts) => {
-		const filtered = data?.filter((product) =>
+	useEffect(() => {
+		const result = data?.filter((product) =>
 			product?.name.toLowerCase().includes(searchData.toLowerCase())
 		);
-		event.preventDefault();
+		setFilteredProducts(result); // Update filtered products
+	}, [submitQuery, data]);
 
-		setFilterProducts(filtered);
+	const handleSearch = (e) => {
+		setData(e.target.value);
+	};
+
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		setSubmitQuery(searchData);
 	};
 
 	return (
@@ -41,7 +50,7 @@ const ArchiveSearchPage = () => {
 					<div className="w-[70%]">
 						<div className="w-full">
 							{/* Search Section */}
-							<form onSubmit={handleSearch} className=" mb-20 space-y-3 ">
+							<form onSubmit={handleSubmit} className=" mb-20 space-y-3 ">
 								<h1 className="text-[30px]  tracking-wide text-gray-800 ">
 									Search Post :
 								</h1>
@@ -49,7 +58,7 @@ const ArchiveSearchPage = () => {
 								<div className="flex w-full  ">
 									<Input
 										value={searchData}
-										onChange={(e) => setData(e.target.value)}
+										onChange={handleSearch}
 										type="text"
 										className=" border border-e-0  focus:ring-0  focus:border-slate-200    border-slate-200 w-[470px] rounded-none tracking-wide placeholder:text-slate-600 text-md  "
 										placeholder="Search"
@@ -68,8 +77,9 @@ const ArchiveSearchPage = () => {
 
 							<AuthorPostComponent
 								handleSearch={handleSearch}
-								
+								dataOne={filteredProducts}
 								isLoading={isLoading}
+								pageCondition={true}
 							/>
 						</div>
 					</div>

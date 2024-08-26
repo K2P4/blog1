@@ -30,3 +30,4 @@ export { default as ViewPostPage } from "./Archive/ViewPost.page";
 export { default as InspirationPage } from "./Inspiration.page";
 export { default as TravelOnePage } from "./Travel/TravelOne.page";
 export { default as TravelTwoPage } from "./Travel/TravelTwo.page";
+export { default as ShopListPage } from "./Shop/ShopList.page";

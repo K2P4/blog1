@@ -25,7 +25,10 @@ const authorPage = () => {
 	return (
 		<div>
 			<NavigationHomeSectionComponent />
-			<NavigateRouteComponent Route1={"POSTED BY KARTHERINE BISHOP"} path={"/author"} />
+			<NavigateRouteComponent
+				Route1={"POSTED BY KARTHERINE BISHOP"}
+				path={"/author"}
+			/>
 
 			<div className="">
 				<ContainerComponent>

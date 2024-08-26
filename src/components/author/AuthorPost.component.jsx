@@ -3,14 +3,14 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { useGetAllProductsQuery } from "../../service/endpoints/BlogEndpints";
 
-const AuthorPostComponent = ({ isLoading, dataOne, dataTwo }) => {
-	const { data } = useGetAllProductsQuery();
-	const [filterProducts, setFilterProducts] = useState(data);
-	console.log(filterProducts);
-
-	const filterData = filterProducts?.slice(0, 6);
+const AuthorPostComponent = ({
+	isLoading,
+	dataOne,
+	dataTwo,
+	pageCondition,
+}) => {
+	const filterData = dataOne?.slice(0, 6);
 
 	const [chgData, setChgData] = useState(true);
 
@@ -33,7 +33,7 @@ const AuthorPostComponent = ({ isLoading, dataOne, dataTwo }) => {
 			) : (
 				<div className="flex  flex-wrap gap-5  justify-between">
 					{chgData
-						? filterData?.map((item) => (
+						? dataOne?.slice(0, 6).map((item) => (
 								<div
 									onClick={() => handleDetail(item?.id)}
 									key={item?.id}
@@ -98,8 +98,9 @@ const AuthorPostComponent = ({ isLoading, dataOne, dataTwo }) => {
 				</div>
 			)}
 
-			{/* Another Page */}
-			{chgData ? (
+			{pageCondition ? (
+				" "
+			) : chgData ? (
 				<div className=" font-serif pb-16 flex items-center gap-5 justify-center mx-auto ">
 					<p className="text-gray-500 cursor-pointer  text-center">1</p>
 					<p className="cursor-pointer text-center">2</p>

@@ -33,6 +33,7 @@ import {
 	ArchiveTagPage,
 	ViewPostPage,
 	ArchiveSearchPage,
+	ShopListPage,
 } from "./Page";
 import {
 	BeautyThreeComponent,
@@ -85,6 +86,7 @@ const App = () => {
 				<Route path="archive-date" element={<DatePage />} />
 				<Route path="archive-view" element={<ViewPostPage />} />
 				<Route path="archive-search" element={<ArchiveSearchPage />} />
+				<Route path="shop-list" element={<ShopListPage />} />
 			</Routes>
 
 			<Routes>

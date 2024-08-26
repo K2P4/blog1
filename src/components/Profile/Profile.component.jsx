@@ -2,6 +2,7 @@
 
 import React from "react";
 
+
 const ProfileComponent = ({ img, title, description }) => {
 	return (
 		<div className="flex w-full items-center gap-5 ">

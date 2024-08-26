@@ -169,12 +169,20 @@ const BlogApi = ApiService.injectEndpoints({
 				method: "GET",
 			}),
 		}),
+
+		getShopProduct: builder.query({
+			query: () => ({
+				url: "Shoplist-Products",
+				method: "GET",
+			}),
+		}),
 	}),
 });
 
 export const {
 	useGetBlogQuery,
 	useGetAllProductsQuery,
+	useGetShopProductQuery,
 	useGetHomeSlideQuery,
 	useGetFashionItemQuery,
 	useGetLatestStyle3Query,

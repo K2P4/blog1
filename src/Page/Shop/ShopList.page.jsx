@@ -16,6 +16,8 @@ import InstagramComponent from "../../components/Instagram.component";
 
 const ShopListPage = () => {
 	const { data, isLoading } = useGetShopProductQuery();
+	const filterData = data?.slice(0, 12);
+	const filterDataTwo = data?.slice(12, data?.length);
 
 	return (
 		<div>
@@ -25,7 +27,11 @@ const ShopListPage = () => {
 				<div className=" my-20 flex gap-10">
 					{/* Section One */}
 					<div className="w-[75%]">
-						<ShopProductComponent dataOne={data} isLoading={isLoading} />
+						<ShopProductComponent
+							dataOne={filterData}
+							dataTwo={filterDataTwo}
+							isLoading={isLoading}
+						/>
 					</div>
 
 					{/* Section Two */}

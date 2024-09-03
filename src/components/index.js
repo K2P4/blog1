@@ -46,5 +46,7 @@ export { default as AuthorTwoComponent } from "./author/AuthorTwo.component";
 export { default as AuthorPostComponent } from "./author/AuthorPost.component";
 export { default as ViewPostComponent } from "./PostView/ViewPost.component";
 export { default as PostLayoutComponent } from "./PostView/PostLayout.component";
+export { default as StarComponent } from "./Rating/Star.component";
 export { default as ShopProductComponent } from "./Shop/ShopProduct.component";
 export { default as ShopSectionTwoComponent } from "./Shop/ShopSectionTwo.component";
+export { default as ShopCategoryComponent } from "./Shop/ShopCateogry.component";

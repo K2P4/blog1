@@ -31,3 +31,4 @@ export { default as InspirationPage } from "./Inspiration.page";
 export { default as TravelOnePage } from "./Travel/TravelOne.page";
 export { default as TravelTwoPage } from "./Travel/TravelTwo.page";
 export { default as ShopListPage } from "./Shop/ShopList.page";
+export { default as ShopProductPage } from "./Shop/DetailModule/ShopProduct.page";

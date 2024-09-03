@@ -34,6 +34,7 @@ import {
 	ViewPostPage,
 	ArchiveSearchPage,
 	ShopListPage,
+	ShopProductPage,
 } from "./Page";
 import {
 	BeautyThreeComponent,
@@ -87,6 +88,7 @@ const App = () => {
 				<Route path="archive-view" element={<ViewPostPage />} />
 				<Route path="archive-search" element={<ArchiveSearchPage />} />
 				<Route path="shop-list" element={<ShopListPage />} />
+				<Route path="shop-product/:id" element={<ShopProductPage />} />
 			</Routes>
 
 			<Routes>

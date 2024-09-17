@@ -2,16 +2,18 @@
 
 import React, { useState } from "react";
 import { IoIosStar } from "react-icons/io";
+import { MdOutlineStarBorderPurple500 } from "react-icons/md";
+import { IoMdStarHalf } from "react-icons/io";
 
 const StarComponent = ({ rating }) => {
 	const fullStars = Math.floor(rating);
-	console.log(fullStars);
+	
 	const halfStar = rating % 1 !== 0;
-	console.log(halfStar);
+	
 	const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
 
 	return (
-		<div className=" space-x-1 ">
+		<div className=" space-x-1 flex  items-center ">
 			{Array(fullStars)
 				.fill()
 				.map((_, index) => (
@@ -20,14 +22,15 @@ const StarComponent = ({ rating }) => {
 					</span>
 				))}
 
-			{halfStar && <span className="text-[#b9a6ac] text-lg">★</span>}
+			{halfStar && <IoMdStarHalf className="text-[#EECAD5] text-lg" />}
 
 			{Array(emptyStars)
 				.fill()
 				.map((_, index) => (
-					<span key={index} className="text-[#EECAD5] text-lg">
-						★
-					</span>
+					<MdOutlineStarBorderPurple500
+						key={index}
+						className="text-[#EECAD5] text-lg"
+					/>
 				))}
 		</div>
 	);

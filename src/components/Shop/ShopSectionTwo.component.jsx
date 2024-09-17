@@ -1,34 +1,55 @@
 /** @format */
 
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { CiSearch } from "react-icons/ci";
 import { Button } from "@/components/ui/button";
 import { useGetShopProductQuery } from "../../service/endpoints/BlogEndpints";
 import StarComponent from "../Rating/Star.component";
 
 import ShopCateogryComponent from "./ShopCateogry.component";
+import { ShopContext } from "../../Contexts/ShopProductContext";
+import { useNavigate } from "react-router-dom";
 
-const ShopSectionTwoComponent = () => {
-	const [price, setPrice] = useState(20);
+const ShopSectionTwoComponent = ({ price, setPrice, FilterPrice }) => {
 	const { data, isLoading } = useGetShopProductQuery();
+	const [content, setContent] = useState("");
 	const [selectedRating, setSelectedRating] = useState(0);
+	const { filterProduct, setFilterProduct } = useContext(ShopContext);
+	const nav = useNavigate();
+
 	const TrendProducts = data?.filter((item) => item?.trend == "top");
+
+	const handleSubmit = (event) => {
+		event.preventDefault();
+		const filterSearch = filterProduct?.filter((product) =>
+			product?.name.toLowerCase().includes(content.toLowerCase())
+		);
+		setFilterProduct(filterSearch);
+	};
 
 	const handlePriceChange = (event) => {
 		setPrice(event.target.value);
 	};
 
+	const handleProduct = (id) => {
+		nav(`/shop-product/${id}`);
+	};
+
 	return (
 		<div className="w-[25%] space-y-10">
 			{/* Search Bar */}
-			<div className="bg-gray-50 px-4  py-3 border-pink-100 border    w-full flex items-center justify-between">
+			<form
+				onSubmit={handleSubmit}
+				className="bg-gray-50 px-4  py-3 border-pink-100 border    w-full flex items-center justify-between">
 				<input
+					value={content}
+					onChange={(event) => setContent(event.target.value)}
 					type="text"
 					placeholder="Search"
 					className=" focus:border-0 p-0 text-[#757575] bg-transparent focus:outline-none focus:ring-0  text-[13.6px]  w-full border-0"
 				/>
 				<CiSearch className="text-black   duration-500 h-7 w-7" />
-			</div>
+			</form>
 
 			{/* Filter Price */}
 			<div className=" space-y-5 flex-col flex  justify-center mx-auto">
@@ -50,7 +71,9 @@ const ShopSectionTwoComponent = () => {
 						PRICE: $ 20 - ${price}
 					</span>
 				</div>
-				<Button className=" hover:bg-gray-900 bg-black w-auto m-auto  font-serif font-normal text-white border tracking-[2.4px]   px-6  py-2 text-center rounded-none">
+				<Button
+					onClick={() => FilterPrice(price)}
+					className=" hover:bg-gray-900 bg-black w-auto m-auto  font-serif font-normal text-white border tracking-[2.4px]   px-6  py-2 text-center rounded-none">
 					FILTER
 				</Button>
 			</div>
@@ -62,10 +85,15 @@ const ShopSectionTwoComponent = () => {
 				</h1>
 
 				{isLoading ? (
-					<h1 className="flex justify-center  items-center align-middle mx-auto w-full h-lvh">Loading</h1>
+					<h1 className="flex justify-center  items-center align-middle mx-auto w-full h-lvh">
+						Loading
+					</h1>
 				) : (
 					TrendProducts?.map((item) => (
-						<div className="flex gap-5 items-center align-middle">
+						<div
+							onClick={() => handleProduct(item?.id)}
+							key={item?.id}
+							className="flex gap-5 items-center align-middle">
 							<img
 								className="w-28 h-28 object-cover"
 								src={item?.image}

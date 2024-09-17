@@ -20,6 +20,7 @@ const ArchiveSearchPage = () => {
 	const [submitQuery, setSubmitQuery] = useState("");
 	const [searchData, setData] = useState("");
 	const [filteredProducts, setFilteredProducts] = useState(data);
+	
 
 	useEffect(() => {
 		const result = data?.filter((product) =>

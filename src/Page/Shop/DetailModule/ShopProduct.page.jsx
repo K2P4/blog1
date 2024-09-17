@@ -1,11 +1,12 @@
 /** @format */
 
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import {
 	ContainerComponent,
 	FooterComponent,
 	NavigationHomeSectionComponent,
 	RelatedComponent,
+	StarComponent,
 } from "../../../components";
 import { useGetShopProductDetailQuery } from "../../../service/endpoints/BlogEndpints";
 import { useParams } from "react-router-dom";
@@ -13,13 +14,39 @@ import { Button } from "@/components/ui/button";
 import { GoPlus } from "react-icons/go";
 import { AiOutlineMinus } from "react-icons/ai";
 import InstagramComponent from "../../../components/Instagram.component";
+import ReactImageMagnify from "react-image-magnify";
 
 const ShopProductPage = () => {
 	const { id } = useParams();
 	const [quantity, setQuantity] = useState(1);
+	const [backgroundPosition, setBackgroundPosition] = useState("50% 50%");
+	const [checkOpacity, setOpacity] = useState(true);
+
+	const menuRef = useRef();
+	const customOrigin = {
+		transformOrigin: `${menuRef?.current?.offsetLeft}px + ${menuRef?.current?.offsetTop}px`,
+	};
 
 	const { data, isLoading } = useGetShopProductDetailQuery(id);
-	console.log(data);
+
+	const handleQuantity = (MinusSum) => {
+		setQuantity(quantity + MinusSum);
+	};
+
+	const handleMouseMove = (e) => {
+		const { left, top, width, height } =
+			e.currentTarget.getBoundingClientRect();
+		const x = ((e.pageX - left) / width) * 100;
+		const y = ((e.pageY - top) / height) * 50;
+
+		setBackgroundPosition(`${x}% ${y}%`);
+		setOpacity(true);
+	};
+
+	const handleMouseLeave = () => {
+		setBackgroundPosition("0% 0%");
+		setOpacity(false);
+	};
 
 	return (
 		<div>
@@ -53,16 +80,31 @@ const ShopProductPage = () => {
 										/>
 									</div>
 
-									<div className="w-full h-full relative">
+									<div
+										style={{
+											backgroundImage: `url(${data?.image})`, // Replace with your detailed image
+											backgroundPosition: backgroundPosition,
+											objectFit: "cover",
+											backgroundSize: "200%", // This controls the zoom level (200% for 2x zoom)
+										}}
+										onMouseLeave={handleMouseLeave}
+										onMouseMove={handleMouseMove}
+										className="w-full h-full  relative bg-cover bg-no-repeat  group overflow-hidden cursor-crosshair ">
 										<img
+											style={customOrigin}
 											src={data?.image}
-											className="  object-cover h-full  w-[500px] "
+											className={` ${
+												checkOpacity ? "opacity-0" : "opacity-100"
+											}  duration-500 ease-in-out      transition-transform   object-cover h-full  w-full `}
 											alt=""
 										/>
-
-										<Button className=" absolute hover:bg-stone-50 bg-stone-50 font-serif font-normal text-[#757575] border-pink-200 border tracking-[2.2px]  top-4 right-6 text-xs py-1 px-3 text-center rounded-none">
-											{data?.type}
-										</Button>
+										{data?.type ? (
+											<Button className=" absolute hover:bg-stone-50 bg-stone-50 font-serif font-normal text-[#757575] border-pink-200 border tracking-[2.2px]  top-4 right-6 text-xs py-1 px-3 text-center rounded-none">
+												{data?.type}
+											</Button>
+										) : (
+											""
+										)}
 									</div>
 								</div>
 
@@ -73,8 +115,22 @@ const ShopProductPage = () => {
 											{data?.name}
 										</h1>
 
-										<h1 className="text-[14.5px]  tracking-[2.5px] font-serif text-gray-500">
-											${data?.price}
+										{data?.review && (
+											<div className="flex gap-4 items-center">
+												<StarComponent rating={data?.ratingtotal} />
+												<p className="text-gray-500  text-sm tracking-wide ">
+													({data?.review.length} Customer Review)
+												</p>
+											</div>
+										)}
+
+										<h1 className="text-[14.5px] flex items-center gap-3 tracking-[2.5px] font-serif text-gray-500">
+											${data?.price}{" "}
+											{data?.disPrice && (
+												<span className="text-gray-600">
+													(${data?.disPrice})
+												</span>
+											)}
 										</h1>
 
 										<p className="w-full   leading-7 text-[16px] text-gray-500 tracking-wide ">
@@ -85,11 +141,17 @@ const ShopProductPage = () => {
 									<div className="flex items-center my-9 gap-5">
 										<Button
 											className="border bg-white 
-									 border-pink-100 py-4 flex px-3  justify-center gap-10  hover:bg-white text-gray-500  items-center">
-											<AiOutlineMinus className="text-gray-600 text-[14px] hover:text-pink-400 duration-500  cursor-pointer" />
+									 border-pink-100  w-36  px-3 py-4 rounded-none flex  justify-center gap-10  hover:bg-white text-gray-500  items-center">
+											<AiOutlineMinus
+												onClick={() => quantity > 1 && handleQuantity(-1)}
+												className="text-gray-600 text-[14px] mx-auto text-center hover:text-pink-400 duration-500  cursor-pointer"
+											/>
 
-											{quantity}
-											<GoPlus className="text-gray-600 text-[15px]  font-medium hover:text-pink-400 duration-500  cursor-pointer" />
+											<span className="w-2">{quantity}</span>
+											<GoPlus
+												onClick={() => quantity >= 0 && handleQuantity(+1)}
+												className="text-gray-600 text-[15px] text-center mx-auto font-medium hover:text-pink-400 duration-500  cursor-pointer"
+											/>
 										</Button>
 										<Button
 											type="submit"
@@ -126,7 +188,12 @@ const ShopProductPage = () => {
 					</div>
 
 					<div className="">
-						<RelatedComponent review={data?.review} dimension={data?.dimension} weight={data?.weight} />
+						<RelatedComponent
+							product={data?.name}
+							review={data?.review}
+							dimension={data?.dimension}
+							weight={data?.weighrt}
+						/>
 					</div>
 				</div>
 			</ContainerComponent>

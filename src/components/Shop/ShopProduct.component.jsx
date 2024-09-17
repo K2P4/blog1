@@ -1,6 +1,6 @@
 /** @format */
 
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
 	DropdownMenu,
 	DropdownMenuContent,
@@ -12,15 +12,45 @@ import { Button } from "@/components/ui/button";
 import { SlBag } from "react-icons/sl";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import { ShopContext } from "../../Contexts/ShopProductContext";
 
-const ShopProductComponent = ({ dataOne, isLoading, dataTwo }) => {
-	const [selectedOption, setSelectedOption] = useState("Sort by latest");
+const ShopProductComponent = ({ isLoading, dataAll }) => {
+	const [selectedOption, setSelectedOption] = useState("Default sorting");
+	const { filterProduct, setFilterProduct } = useContext(ShopContext);
 	const [chgData, setChgData] = useState(true);
-	const [animated, setAnimated] = useState(false);
+	const [filterState, setFilterState] = useState(false);
+
 	const nav = useNavigate();
+
+	useEffect(() => {
+		setFilterProduct(dataAll);
+	}, [dataAll]);
 
 	const handlePage = (path) => {
 		setChgData(path);
+	};
+
+	const handleSorting = (status, condition) => {
+		if (status == "latest") {
+			const filterData = dataAll?.filter((item) => item?.status == status);
+			setFilterProduct(filterData);
+		} else if (status == "popular") {
+			const filterData = dataAll?.filter((item) => item?.status == status);
+			setFilterProduct(filterData);
+		} else if (status == "rating") {
+			const filterData = dataAll?.filter((item) => item?.review);
+			setFilterProduct(filterData);
+		} else if (status == "low to high") {
+			const filterData = [...dataAll].sort((a, b) => a.price - b.price);
+			setFilterProduct(filterData);
+		} else if (status == "high to low") {
+			const filterData = [...dataAll].sort((a, b) => b.price - a.price);
+			setFilterProduct(filterData);
+		} else {
+			setFilterProduct(dataAll);
+		}
+
+		setFilterState(condition);
 	};
 
 	const handleProduct = (id) => {
@@ -29,9 +59,8 @@ const ShopProductComponent = ({ dataOne, isLoading, dataTwo }) => {
 
 	const handleSelect = (option) => {
 		setSelectedOption(option);
-
-		console.log(`Selected: ${option}`);
 	};
+
 	return (
 		<div className="">
 			{/* Filter Product */}
@@ -66,25 +95,34 @@ const ShopProductComponent = ({ dataOne, isLoading, dataTwo }) => {
 						<DropdownMenuLabel className="text-sm text-gray-900">
 							{selectedOption}
 						</DropdownMenuLabel>
-						<DropdownMenuItem onSelect={() => handleSelect("Default sorting")}>
-							Default sorting
-						</DropdownMenuItem>
+
 						<DropdownMenuItem
+							onClick={() => handleSorting("popular")}
 							onSelect={() => handleSelect("Sort by popularity")}>
 							Sort by popularity
 						</DropdownMenuItem>
 						<DropdownMenuItem
+							onClick={() => handleSorting("default")}
+							onSelect={() => handleSelect("Default sorting")}>
+							Default sorting
+						</DropdownMenuItem>
+						<DropdownMenuItem
+							onClick={() => handleSorting("rating")}
 							onSelect={() => handleSelect("Sort by average rating")}>
 							Sort by average rating
 						</DropdownMenuItem>
-						<DropdownMenuItem onSelect={() => handleSelect("Sort by latest")}>
+						<DropdownMenuItem
+							onClick={() => handleSorting("latest")}
+							onSelect={() => handleSelect("Sort by latest")}>
 							Sort by latest
 						</DropdownMenuItem>
 						<DropdownMenuItem
+							onClick={() => handleSorting("low to high")}
 							onSelect={() => handleSelect("Sort by price: low to high")}>
 							Sort by price: low to high
 						</DropdownMenuItem>
 						<DropdownMenuItem
+							onClick={() => handleSorting("high to low")}
 							onSelect={() => handleSelect("Sort by price: high to low")}>
 							Sort by price: high to low
 						</DropdownMenuItem>
@@ -98,7 +136,7 @@ const ShopProductComponent = ({ dataOne, isLoading, dataTwo }) => {
 			) : (
 				<div className="flex  flex-wrap gap-7 mt-8  justify-between">
 					{chgData
-						? dataOne?.map((item) => (
+						? filterProduct?.slice(0, 12).map((item) => (
 								<motion.div
 									initial="rest"
 									whileHover="hover"
@@ -141,7 +179,7 @@ const ShopProductComponent = ({ dataOne, isLoading, dataTwo }) => {
 									</motion.button>
 								</motion.div>
 						  ))
-						: dataTwo?.map((item) => (
+						: filterProduct?.slice(13, dataAll.length).map((item) => (
 								<motion.div
 									initial="rest"
 									whileHover="hover"

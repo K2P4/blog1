@@ -5,18 +5,46 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { SlBag } from "react-icons/sl";
 import { useGetShopProductQuery } from "../../service/endpoints/BlogEndpints";
+import { useNavigate } from "react-router-dom";
+import StarComponent from "../Rating/Star.component";
+import { Input } from "@/components/ui/input";
 
-const RelatedComponent = ({ review, weight , dimension}) => {
+const RelatedComponent = ({ review, weight, dimension, product }) => {
 	const { data, isLoading } = useGetShopProductQuery();
-	const [activeMenu, setActiveMenu] = useState(1); // Set default active menu
-	const [sliderPosition, setSliderPosition] = useState(0); // Track slider position
-	const menuRef = useRef([]); // Create a ref for each menu item
+	const [activeMenu, setActiveMenu] = useState(1);
+	const [sliderPosition, setSliderPosition] = useState(0);
+	const [describe, setDescribe] = useState(true);
+	const [additional, setAdditional] = useState(false);
+	const [customer, setCustomer] = useState(false);
+	const [ratingStar, setRatingStar] = useState(0);
+	const menuRef = useRef([]);
 	const [sliderWidth, setSliderWidth] = useState(0);
-
+	const nav = useNavigate();
 	const randomInt = Math.floor(Math.random() * 23);
 	const Max = randomInt + 4;
-
 	const RelatedFilter = data?.slice(randomInt, Max);
+
+	const handleStarClick = (index) => {
+		setRatingStar(index);
+	};
+
+	const handleSection = (
+		active,
+		conditionOne,
+		conditionTwo,
+		conditionThree
+	) => {
+		setActiveMenu(active);
+		setDescribe(conditionOne);
+		setAdditional(conditionTwo);
+		setCustomer(conditionThree);
+	};
+
+	const handleProduct = (id) => {
+		nav(`/shop-product/${id}`);
+	};
+
+	console.log(RelatedFilter);
 
 	useEffect(() => {
 		if (menuRef.current[activeMenu]) {
@@ -35,7 +63,7 @@ const RelatedComponent = ({ review, weight , dimension}) => {
 				<h1
 					ref={(el) => (menuRef.current[1] = el)}
 					onMouseEnter={() => setActiveMenu(1)}
-					onClick={() => setActiveMenu(1)}
+					onClick={() => handleSection(1, true, false, false)}
 					className={`   cursor-pointer   duration-1000  h-full w-auto text-center transition-all  font-serif  select-none  text-[13px]    text-gray-700   tracking-[2.7px]  `}>
 					DESCRIPTION
 				</h1>
@@ -43,7 +71,7 @@ const RelatedComponent = ({ review, weight , dimension}) => {
 				<h1
 					ref={(el) => (menuRef.current[2] = el)}
 					onMouseEnter={() => setActiveMenu(2)}
-					onClick={() => setActiveMenu(2)}
+					onClick={() => handleSection(2, false, true, false)}
 					className={` cursor-pointer   duration-1000  h-full w-auto text-center transition-all  font-serif  select-none  text-[13px]    text-gray-700   tracking-[2.7px]  `}>
 					ADDITIONAL INFORMATION
 				</h1>
@@ -51,7 +79,7 @@ const RelatedComponent = ({ review, weight , dimension}) => {
 				<h1
 					ref={(el) => (menuRef.current[3] = el)}
 					onMouseEnter={() => setActiveMenu(3)}
-					onClick={() => setActiveMenu(3)}
+					onClick={() => handleSection(3, false, false, true)}
 					className={`  cursor-pointer   duration-1000  h-full w-auto text-center transition-all  font-serif  select-none  text-[13px]    text-gray-700   tracking-[2.7px]  `}>
 					REVIEWS <span>({review?.length > 0 ? review?.length : "0"})</span>
 				</h1>
@@ -63,9 +91,9 @@ const RelatedComponent = ({ review, weight , dimension}) => {
 				style={{ left: `${sliderPosition}px`, width: `${sliderWidth}px` }} // Adjust the width as needed
 			/>
 
-			{/*Description*/}
 			<div className="mt-10 mb-20">
-				{activeMenu == 1 && (
+				{/*Description*/}
+				{describe && (
 					<p className="  text-gray-500 tracking-wide leading-[29px] text-[15.3px] w-full">
 						Lorem ipsum dolor sit amet, in dicant recteque sit, vis illum consul
 						interesset in, semper persequeris sit in. Pro at delicata
@@ -80,7 +108,9 @@ const RelatedComponent = ({ review, weight , dimension}) => {
 						an. Id sed saperet habemus, ei semper vocibus ius.
 					</p>
 				)}
-				{activeMenu == 2 && (
+
+				{/*Additional*/}
+				{additional && (
 					<div className="">
 						<p className="font-serif   flex items-center  border w-full p-4 border-pink-100 gap-20   text-[13px]    text-gray-600   tracking-[2.5px]">
 							WEIGHT
@@ -97,6 +127,123 @@ const RelatedComponent = ({ review, weight , dimension}) => {
 						</p>
 					</div>
 				)}
+
+				{/*Review*/}
+				{customer && review ? (
+					<div className="">
+						<h1 className="text-gray-900 text-2xl   tracking-[1.4px]  ">
+							{review.length} review for{" "}
+							<span className="text-3xl text-gray-800">{product}</span>
+						</h1>
+
+						{/*Customer*/}
+						{review?.map((item) => (
+							<div
+								className="flex mt-8 mb-20  items-center gap-7"
+								key={item.id}>
+								<img
+									className=" rounded-full   object-cover  w-28 h-28  "
+									src={item?.image}
+									alt=""
+								/>
+
+								<div className=" space-y-1 ">
+									<StarComponent rating={item?.rating} />
+
+									<p className="  text-xs  capitalize  cursor-pointer duration-300 hover:text-[#f5baba]  font-serif text-[#e9afaf] tracking-[2.2px]">
+										{item?.date}
+									</p>
+
+									<h1 className="  text-lg   tracking-wide  ">{item?.name}</h1>
+
+									<p className="  text-gray-500 text-md tracking-wide ">
+										Mei tota veniam ei, mea docendi praesent in. Te pri amet
+										affert, pro sanctus voluptua an.
+									</p>
+								</div>
+							</div>
+						))}
+
+						{/*feedback*/}
+
+						<div className=" space-y-5">
+							<h1 className=" text-lg tracking-wider text-gray-900 ">
+								Add a review{" "}
+							</h1>
+
+							<div className=" space-y-2 ">
+								<p className="text-gray-500 tracking-wide text-md">
+									Your email address will not be published. Required fields are
+									marked *
+								</p>
+
+								<p className="text-gray-500 tracking-wide text-md">
+									Your Rating *
+								</p>
+
+								<div className="flex items-center gap-1">
+									{Array(5)
+										.fill(0)
+										.map((_, index) => (
+											<span
+												key={index}
+												onClick={() => handleStarClick(index + 1)}
+												className={`  ${
+													ratingStar > index
+														? "text-[#EECAD5] duration-300  opacity-100"
+														: "text-[#eedbe0]  duration-300 opacity-90 "
+												} cursor-pointer text-lg`}>
+												★
+											</span>
+										))}
+								</div>
+							</div>
+
+							{/* Reply Session */}
+							<div className="">
+								<div className=" w-full ">
+									<div className=" space-y-4 flex flex-col">
+										<Input
+											className="h-[250px]  tracking-wide placeholder:text-[15px] text-gray-500 focus:ring-0 focus:outline-none focus:border-0 focus:placeholder:text-black placeholder:text-gray-500  pb-44 ps-4"
+											placeholder="Your Review *"
+										/>
+
+										<div className="flex items-center gap-2">
+											<Input
+												className="  py-4 tracking-wide placeholder:text-[15px] text-gray-500 focus:ring-0 focus:outline-none focus:border-0 focus:placeholder:text-black placeholder:text-gray-500 "
+												placeholder="Your Name  *"
+											/>
+											<Input
+												className="  py-4 tracking-wide placeholder:text-[15px] text-gray-500 focus:ring-0 focus:outline-none focus:border-0 focus:placeholder:text-black placeholder:text-gray-500 "
+												placeholder="Your Email  *"
+											/>
+										</div>
+
+										<div className="flex items-center gap-2">
+											<input
+												type="checkbox"
+												className="h-3 w-3 text-center focus:ring-0 focus:outline-none  form-checkbox text-blue-500 "
+											/>
+
+											<p className="text-gray-600  w-[80%]  text-[14px] text-wrap  tracking-wider">
+												Save my name, email, and website in this browser for the
+												next time I comment.
+											</p>
+										</div>
+
+										<Button
+											type="submit"
+											className="font-serif w-[15%]  opacity-85   mb-5  rounded-none text-sm  px-4 hover:bg-stone-800 duration-300  text-center   py-3 bg-black tracking-[3px] font-normal">
+											SUBMIT
+										</Button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				) : (
+					""
+				)}
 			</div>
 
 			<div className="">
@@ -104,13 +251,13 @@ const RelatedComponent = ({ review, weight , dimension}) => {
 					Related Products
 				</h1>
 
-				<div className="flex  flex-wrap gap-5 mt-10 w-full">
+				<div className="flex  select-none flex-wrap gap-5 mt-10 w-full">
 					{RelatedFilter?.map((item) => (
 						<motion.div
 							initial="rest"
 							whileHover="hover"
 							animate="rest"
-							onClick={() => handleProduct(item?.id)}
+							onClick={() => handleProduct(item.id)}
 							key={item?.id}
 							className={`relative   duration-1000 group w-[23%] mb-10 h-[50%]  group   space-y-2 `}>
 							<img

@@ -1,34 +1,30 @@
 /** @format */
 
-import React, { useContext, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import {
 	ContainerComponent,
 	FooterComponent,
 	NavigationHomeSectionComponent,
 	RelatedComponent,
 	StarComponent,
-} from "../../../components";
-import { useGetShopProductDetailQuery } from "../../../service/endpoints/BlogEndpints";
+} from "../../components";
+import { useGetShopProductDetailQuery } from "../../service/endpoints/BlogEndpints";
 import { useParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { GoPlus } from "react-icons/go";
 import { AiOutlineMinus } from "react-icons/ai";
-import InstagramComponent from "../../../components/Instagram.component";
-import { ShopContext } from "../../../Contexts/ShopProductContext";
-
-const ShopProductPage = () => {
-	const { id } = useParams();
+import InstagramComponent from "../../components/Instagram.component";
+const ShopSinglePage = () => {
 	const [quantity, setQuantity] = useState(1);
 	const [backgroundPosition, setBackgroundPosition] = useState("50% 50%");
 	const [checkOpacity, setOpacity] = useState(true);
-	const [submitBlock, setBlock] = useState(false);
+
 	const menuRef = useRef();
-	const { addCart, cart } = useContext(ShopContext);
 	const customOrigin = {
 		transformOrigin: `${menuRef?.current?.offsetLeft}px + ${menuRef?.current?.offsetTop}px`,
 	};
 
-	const { data, isLoading } = useGetShopProductDetailQuery(id);
+	const { data, isLoading } = useGetShopProductDetailQuery("33s");
 
 	const handleQuantity = (MinusSum) => {
 		setQuantity(quantity + MinusSum);
@@ -47,20 +43,6 @@ const ShopProductPage = () => {
 	const handleMouseLeave = () => {
 		setBackgroundPosition("0% 0%");
 		setOpacity(false);
-	};
-
-	const handleCart = () => {
-		const newCart = {
-			id: data?.id,
-			name: data?.name,
-			image: data?.image,
-			quantity: quantity,
-			price: data?.price,
-		};
-		addCart(newCart);
-		setBlock(!submitBlock);
-
-		console.log(newCart);
 	};
 
 	return (
@@ -169,8 +151,6 @@ const ShopProductPage = () => {
 											/>
 										</Button>
 										<Button
-											onClick={handleCart}
-											disabled={submitBlock}
 											type="submit"
 											className="  bg-black   hover:bg-gray-900  flex justify-center items-end gap-2 text-center transform      text-stone-50 font-serif  rounded-none     font-normal  opacity-95  text-sm py-4 px-7  tracking-[2.3px] w-auto   ">
 											ADD TO CART
@@ -221,4 +201,4 @@ const ShopProductPage = () => {
 	);
 };
 
-export default ShopProductPage;
+export default ShopSinglePage;

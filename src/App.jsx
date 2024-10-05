@@ -35,6 +35,9 @@ import {
 	ArchiveSearchPage,
 	ShopListPage,
 	ShopProductPage,
+	ShopSinglePage,
+	ShopAccountPage,
+	CartPage,
 } from "./Page";
 import {
 	BeautyThreeComponent,
@@ -89,6 +92,9 @@ const App = () => {
 				<Route path="archive-search" element={<ArchiveSearchPage />} />
 				<Route path="shop-list" element={<ShopListPage />} />
 				<Route path="shop-product/:id" element={<ShopProductPage />} />
+				<Route path="shop-single" element={<ShopSinglePage />} />
+				<Route path="shop-account" element={<ShopAccountPage />} />
+				<Route path="shop-cart" element={<CartPage />} />
 			</Routes>
 
 			<Routes>

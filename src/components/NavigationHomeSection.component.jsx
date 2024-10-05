@@ -1,6 +1,6 @@
 /** @format */
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { Outlet, useNavigate, useParams } from "react-router-dom";
 import { ContainerComponent } from "../components";
 import { SlBag } from "react-icons/sl";
@@ -23,6 +23,8 @@ import {
 } from "@/components/ui/hover-card";
 
 import { Input } from "@/components/ui/input";
+import { ShopContext } from "../Contexts/ShopProductContext";
+import { ListItem } from "@mui/material";
 
 const NavigationHomeSectionComponent = () => {
 	const [toggleHome, setHome] = useState(false);
@@ -30,12 +32,13 @@ const NavigationHomeSectionComponent = () => {
 	const [toggleBlog, setBlog] = useState(false);
 	const [toggleShop, setShop] = useState(false);
 	const [toggleCart, setCart] = useState(false);
-
 	const [isFixed, setIsFixed] = useState(false);
 	const [toggleSearch, setToggleSearch] = useState(false);
+	const { cart } = useContext(ShopContext);
 	const { id } = useParams();
 	const searchRef = useRef();
 	const nav = useNavigate();
+	console.log(cart);
 
 	const handleSearch = () => {
 		setToggleSearch(true);
@@ -422,15 +425,35 @@ const NavigationHomeSectionComponent = () => {
 									className="flex hover:border-b    py-[30px]  relative   transition-transform   hover:border-b-black group items-end gap-1">
 									<SlBag className=" w-5 h-5" />
 									<p className=" font-serif text-xs duration-700  cursor-pointer group-hover:text-[#e2bfbf] ">
-										{" "}
-										(0)
+										{cart.length}
 									</p>
 
-									{toggleCart && (
-										<div className=" w-[350px]   text-gray-500 z-50   duration-1000   top-[100%]  -left-[90px] border border-slate-200 bg-white p-4  absolute   h-[100px] animate__animated     animate__fadeIn  ">
-											No Products in the cart.
-										</div>
-									)}
+									{toggleCart &&
+										(cart?.length == 0 ? (
+											<div className=" w-[350px]   text-gray-500 z-50   duration-1000   top-[100%]  -left-[90px] border border-slate-200 bg-white p-4  absolute   h-[100px] animate__animated     animate__fadeIn  ">
+												No Products in the cart.
+											</div>
+										) : (
+											<div className=" w-[350px]   text-gray-500 z-50   duration-1000   top-[100%]  -left-[90px] border border-slate-200 bg-white p-4  absolute   h-[auto] animate__animated     animate__fadeIn  ">
+												{cart?.map((item) => (
+													<div
+														key={item?.id}
+														className="flex gap-10 items-center align-middle">
+														<img
+															src={item?.image}
+															className=" w-[50%] border border-pink-200 p-3 object-cover "
+															alt=""
+														/>
+
+														<div className=" space-y-3 ">
+															<h1>{item?.name}</h1>
+															<p>QUANTIY : {item?.quantity}</p>
+															<p>${item?.price}</p>
+														</div>
+													</div>
+												))}
+											</div>
+										))}
 								</div>
 							)}
 						</div>

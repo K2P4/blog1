@@ -44,7 +44,7 @@ const RelatedComponent = ({ review, weight, dimension, product }) => {
 		nav(`/shop-product/${id}`);
 	};
 
-	console.log(RelatedFilter);
+	
 
 	useEffect(() => {
 		if (menuRef.current[activeMenu]) {

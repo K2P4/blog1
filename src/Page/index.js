@@ -32,3 +32,6 @@ export { default as TravelOnePage } from "./Travel/TravelOne.page";
 export { default as TravelTwoPage } from "./Travel/TravelTwo.page";
 export { default as ShopListPage } from "./Shop/ShopList.page";
 export { default as ShopProductPage } from "./Shop/DetailModule/ShopProduct.page";
+export { default as ShopSinglePage } from "./Shop/ShopSingle.page";
+export { default as ShopAccountPage } from "./Shop/Auth/ShopAccount.page";
+export { default as CartPage } from "./Shop/Cart.page";

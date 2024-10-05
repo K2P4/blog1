@@ -408,7 +408,9 @@ const NavComponent = () => {
 												Shop List
 											</li>
 
-											<li className="    group     ">
+											<li
+												onClick={() => navRoute("/shop-single")}
+												className="    group     ">
 												<span className=" group-hover:border-s-[#ED9455]  duration-500 group-hover:ms-3   group-hover:me-2 group-hover:border-s "></span>
 												Shop Single
 											</li>
@@ -436,11 +438,15 @@ const NavComponent = () => {
 
 												<HoverCardContent className="h-[150px]    absolute   -top-20   animate__fadeIn duration-500  animate__animated     left-28 w-[230px]">
 													<ul className="   text-gray-700 space-y-5 p-3 ">
-														<li className="    group     ">
+														<li
+															onClick={() => navRoute("/shop-account")}
+															className="    group     ">
 															<span className=" group-hover:border-s-[#ED9455]  duration-500 group-hover:ms-3   group-hover:me-2 group-hover:border-s "></span>
 															My Account
 														</li>
-														<li className="    group     ">
+														<li
+															onClick={() => navRoute("/shop-cart")}
+															className="    group     ">
 															<span className=" group-hover:border-s-[#ED9455]  duration-500 group-hover:ms-3   group-hover:me-2 group-hover:border-s "></span>
 															Cart
 														</li>

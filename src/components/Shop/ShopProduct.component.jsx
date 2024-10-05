@@ -16,7 +16,8 @@ import { ShopContext } from "../../Contexts/ShopProductContext";
 
 const ShopProductComponent = ({ isLoading, dataAll }) => {
 	const [selectedOption, setSelectedOption] = useState("Default sorting");
-	const { filterProduct, setFilterProduct } = useContext(ShopContext);
+	const { filterProduct, setFilterProduct, addCart, cart } =
+		useContext(ShopContext);
 	const [chgData, setChgData] = useState(true);
 	const [filterState, setFilterState] = useState(false);
 
@@ -29,6 +30,8 @@ const ShopProductComponent = ({ isLoading, dataAll }) => {
 	const handlePage = (path) => {
 		setChgData(path);
 	};
+
+
 
 	const handleSorting = (status, condition) => {
 		if (status == "latest") {

@@ -13,9 +13,9 @@ import {
 	FaSnapchatGhost,
 } from "react-icons/fa";
 import { FaPinterestP } from "react-icons/fa";
-
 import { FaInstagram } from "react-icons/fa6";
 import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
 import {
 	HoverCard,
 	HoverCardContent,
@@ -34,7 +34,7 @@ const NavigationHomeSectionComponent = () => {
 	const [toggleCart, setCart] = useState(false);
 	const [isFixed, setIsFixed] = useState(false);
 	const [toggleSearch, setToggleSearch] = useState(false);
-	const { cart } = useContext(ShopContext);
+	const { cart, toggleDelete, setBlock } = useContext(ShopContext);
 	const { id } = useParams();
 	const searchRef = useRef();
 	const nav = useNavigate();
@@ -42,6 +42,11 @@ const NavigationHomeSectionComponent = () => {
 
 	const handleSearch = () => {
 		setToggleSearch(true);
+	};
+
+	const removeCart = () => {
+		toggleDelete(id);
+		setBlock(false);
 	};
 
 	const scrollToSection = (id) => {
@@ -55,6 +60,10 @@ const NavigationHomeSectionComponent = () => {
 	const navRoute = (route) => {
 		nav(route);
 	};
+
+	const totalAmount = cart?.reduce((total, item) => {
+		return Math.ceil(total) + Math.ceil(item?.price);
+	}, 0);
 
 	useEffect(() => {
 		const handleScroll = () => {
@@ -434,24 +443,63 @@ const NavigationHomeSectionComponent = () => {
 												No Products in the cart.
 											</div>
 										) : (
-											<div className=" w-[350px]   text-gray-500 z-50   duration-1000   top-[100%]  -left-[90px] border border-slate-200 bg-white p-4  absolute   h-[auto] animate__animated     animate__fadeIn  ">
+											<div className=" w-[400px]   space-y-5 text-gray-500 z-50   duration-1000   top-[100%]  -left-[90px] border border-pink-100 bg-white p-4  absolute   h-[auto] animate__animated     animate__fadeIn  ">
 												{cart?.map((item) => (
 													<div
 														key={item?.id}
-														className="flex gap-10 items-center align-middle">
+														className="flex  h-[100px] items-center justify-between align-middle">
 														<img
 															src={item?.image}
-															className=" w-[50%] border border-pink-200 p-3 object-cover "
+															className=" w-[130px] h-full border border-pink-200 p-1 object-cover "
 															alt=""
 														/>
 
-														<div className=" space-y-3 ">
-															<h1>{item?.name}</h1>
-															<p>QUANTIY : {item?.quantity}</p>
-															<p>${item?.price}</p>
+														<div className=" w-[150px] text-left  space-y-2 ">
+															<h1 className="text-xl text-gray-800 tracking-wider">
+																{item?.name}
+															</h1>
+															<p className="text-gray-400 tracking-widest text-sm">
+																QUANTIY: {item?.quantity}
+															</p>
+															<p className="text-gray-400  tracking-widest text-sm">
+																${Math.ceil(item?.price * item?.quantity)}
+															</p>
 														</div>
+
+														<svg
+															xmlns="http://www.w3.org/2000/svg"
+															fill="none"
+															viewBox="0 0 24 24"
+															strokeWidth={1.5}
+															onClick={removeCart}
+															stroke="currentColor"
+															className=" w-5 h-5 active:scale-90 select-none hover:text-gray-900 duration-700 transition-transform cursor-pointer  text-gray-800 ">
+															<path
+																strokeLinecap="round"
+																strokeLinejoin="round"
+																d="M6 18 18 6M6 6l12 12"
+															/>
+														</svg>
 													</div>
 												))}
+
+												<div className="flex  pt-5 items-center text-xl justify-between text-gray-800 tracking-widest">
+													TOTAL : <p>${totalAmount}</p>
+												</div>
+
+												<div className="flex w-full items-center justify-between gap-5">
+													<Button
+														onClick={() => navRoute("/shop-cart")}
+														className="  bg-black   hover:bg-gray-900   text-center transform      text-stone-50 font-serif  rounded-none     font-normal  opacity-95  text-xs py-4 px-7  tracking-[2.3px] w-full   ">
+														VIEW CART
+													</Button>
+
+													<Button
+														onClick={() => navRoute("/shop-cart")}
+														className="  bg-black   hover:bg-gray-900   text-center transform      text-stone-50 font-serif  rounded-none     font-normal  opacity-95  text-xs py-4 px-7  tracking-[2.3px] w-full   ">
+														CHECKOUT
+													</Button>
+												</div>
 											</div>
 										))}
 								</div>

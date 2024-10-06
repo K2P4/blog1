@@ -21,9 +21,8 @@ const ShopProductPage = () => {
 	const [quantity, setQuantity] = useState(1);
 	const [backgroundPosition, setBackgroundPosition] = useState("50% 50%");
 	const [checkOpacity, setOpacity] = useState(true);
-	const [submitBlock, setBlock] = useState(false);
 	const menuRef = useRef();
-	const { addCart, cart } = useContext(ShopContext);
+	const { addCart, cart, submitBlock, setBlock } = useContext(ShopContext);
 	const customOrigin = {
 		transformOrigin: `${menuRef?.current?.offsetLeft}px + ${menuRef?.current?.offsetTop}px`,
 	};
@@ -60,8 +59,8 @@ const ShopProductPage = () => {
 		addCart(newCart);
 		setBlock(!submitBlock);
 
-		console.log(newCart);
 	};
+
 
 	return (
 		<div>
@@ -132,7 +131,7 @@ const ShopProductPage = () => {
 
 										{data?.review && (
 											<div className="flex gap-4 items-center">
-												<StarComponent rating={data?.ratingtotal} />
+												<StarComponent key={data?.id} rating={data?.ratingtotal} />
 												<p className="text-gray-500  text-sm tracking-wide ">
 													({data?.review.length} Customer Review)
 												</p>

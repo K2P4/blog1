@@ -1,6 +1,6 @@
 /** @format */
 
-import React, { useContext, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import {
 	ContainerComponent,
 	FooterComponent,
@@ -48,19 +48,28 @@ const ShopProductPage = () => {
 		setOpacity(false);
 	};
 
+	useEffect(() => {
+		const filterBlock = cart?.filter((item) => item.id != id);
+
+		if (filterBlock) {
+			setBlock(false);
+		} else {
+			setBlock(true);
+		}
+	}, [id]);
+
 	const handleCart = () => {
 		const newCart = {
 			id: data?.id,
 			name: data?.name,
 			image: data?.image,
 			quantity: quantity,
+			updatePrice: 0,
 			price: data?.price,
 		};
 		addCart(newCart);
 		setBlock(!submitBlock);
-
 	};
-
 
 	return (
 		<div>
@@ -131,7 +140,10 @@ const ShopProductPage = () => {
 
 										{data?.review && (
 											<div className="flex gap-4 items-center">
-												<StarComponent key={data?.id} rating={data?.ratingtotal} />
+												<StarComponent
+													key={data?.id}
+													rating={data?.ratingtotal}
+												/>
 												<p className="text-gray-500  text-sm tracking-wide ">
 													({data?.review.length} Customer Review)
 												</p>
@@ -170,7 +182,6 @@ const ShopProductPage = () => {
 										<Button
 											onClick={handleCart}
 											disabled={submitBlock}
-											type="submit"
 											className="  bg-black   hover:bg-gray-900  flex justify-center items-end gap-2 text-center transform      text-stone-50 font-serif  rounded-none     font-normal  opacity-95  text-sm py-4 px-7  tracking-[2.3px] w-auto   ">
 											ADD TO CART
 										</Button>

@@ -35,3 +35,4 @@ export { default as ShopProductPage } from "./Shop/DetailModule/ShopProduct.page
 export { default as ShopSinglePage } from "./Shop/ShopSingle.page";
 export { default as ShopAccountPage } from "./Shop/Auth/ShopAccount.page";
 export { default as CartPage } from "./Shop/Cart.page";
+export { default as CheckoutPage } from "./Shop/Checkout.page";

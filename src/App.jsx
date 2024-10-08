@@ -38,6 +38,7 @@ import {
 	ShopSinglePage,
 	ShopAccountPage,
 	CartPage,
+	CheckoutPage,
 } from "./Page";
 import {
 	BeautyThreeComponent,
@@ -95,6 +96,7 @@ const App = () => {
 				<Route path="shop-single" element={<ShopSinglePage />} />
 				<Route path="shop-account" element={<ShopAccountPage />} />
 				<Route path="shop-cart" element={<CartPage />} />
+				<Route path="shop-checkout" element={<CheckoutPage />} />
 			</Routes>
 
 			<Routes>

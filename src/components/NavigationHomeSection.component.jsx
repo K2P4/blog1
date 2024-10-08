@@ -38,7 +38,6 @@ const NavigationHomeSectionComponent = () => {
 	const { id } = useParams();
 	const searchRef = useRef();
 	const nav = useNavigate();
-	console.log(cart);
 
 	const handleSearch = () => {
 		setToggleSearch(true);
@@ -401,7 +400,9 @@ const NavigationHomeSectionComponent = () => {
 															<span className=" group-hover:border-s-[#ED9455]  duration-500 group-hover:ms-3   group-hover:me-2 group-hover:border-s "></span>
 															My Account
 														</li>
-														<li className="    group     ">
+														<li
+															onClick={() => navRoute("/shop-cart")}
+															className="    group     ">
 															<span className=" group-hover:border-s-[#ED9455]  duration-500 group-hover:ms-3   group-hover:me-2 group-hover:border-s "></span>
 															Cart
 														</li>

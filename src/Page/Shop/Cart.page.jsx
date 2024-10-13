@@ -28,6 +28,7 @@ const CartPage = () => {
 		useContext(ShopContext);
 
 	const [quantity, setQuantity] = useState(1);
+	
 	const nav = useNavigate();
 
 	const totalAmount = cart?.reduce((total, item) => {
@@ -137,12 +138,6 @@ const CartPage = () => {
 										</TableRow>
 									))}
 								</TableBody>
-								{/* <TableFooter>
-							<TableRow>
-								<TableCell colSpan={3}>Total</TableCell>
-								<TableCell className="text-right">$2,500.00</TableCell>
-							</TableRow>
-						</TableFooter> */}
 							</Table>
 
 							<Button
@@ -171,7 +166,7 @@ const CartPage = () => {
 								</div>
 
 								<Button
-									onClick={() => setUpdate(true)}
+									onClick={() => nav("/shop-checkout")}
 									className="  bg-black   hover:bg-gray-900   text-center transform      text-stone-50 font-serif  rounded-none     font-normal  opacity-95  text-xs py-4 px-7  tracking-[2.3px] w-[30%] mt-5 mb-20">
 									PROCEED TO CHECKOUT
 								</Button>

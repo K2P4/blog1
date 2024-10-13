@@ -450,7 +450,9 @@ const NavComponent = () => {
 															<span className=" group-hover:border-s-[#ED9455]  duration-500 group-hover:ms-3   group-hover:me-2 group-hover:border-s "></span>
 															Cart
 														</li>
-														<li className="    group     ">
+														<li
+															onClick={() => navRoute("/shop-checkout")}
+															className="    group     ">
 															<span className=" group-hover:border-s-[#ED9455]  duration-500 group-hover:ms-3   group-hover:me-2 group-hover:border-s "></span>
 															Check Out
 														</li>

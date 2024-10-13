@@ -496,7 +496,7 @@ const NavigationHomeSectionComponent = () => {
 													</Button>
 
 													<Button
-														onClick={() => navRoute("/shop-cart")}
+														onClick={() => navRoute("/shop-checkout")}
 														className="  bg-black   hover:bg-gray-900   text-center transform      text-stone-50 font-serif  rounded-none     font-normal  opacity-95  text-xs py-4 px-7  tracking-[2.3px] w-full   ">
 														CHECKOUT
 													</Button>

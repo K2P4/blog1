@@ -11,3 +11,14 @@ export const ApiService = createApi({
 	tagTypes: ["api"],
 	endpoints: (builder) => ({}),
 });
+
+
+export const ContactService = createApi({
+	reducerPath: "api",
+	baseQuery: fetchBaseQuery({
+		baseUrl: "https://project-data-2-j6db.onrender.com/",
+	}),
+
+	tagTypes: ["contact"],
+	endpoints: (builder) => ({}),
+});

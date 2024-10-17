@@ -73,7 +73,7 @@ const NavigationHomeSectionComponent = () => {
 			}
 		};
 		const handleMouse = (e) => {
-			if (!searchRef.current.contains(e.target)) {
+			if (!searchRef?.current?.contains(e.target)) {
 				setToggleSearch(false);
 			}
 		};

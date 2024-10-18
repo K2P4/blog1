@@ -6,6 +6,7 @@ import {
 	FooterComponent,
 	NavigateRouteComponent,
 	NavigationHomeSectionComponent,
+	PaymentComponent,
 } from "../../components";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { Button } from "@/components/ui/button";
@@ -50,6 +51,7 @@ const CheckoutPage = () => {
 		address: "",
 		phone: "",
 		country: "",
+		payment: "",
 	};
 
 	const handleSelect = (option) => {
@@ -74,6 +76,7 @@ const CheckoutPage = () => {
 		address: yup.string().required("address is required"),
 
 		phone: yup.number().required("phone is required"),
+		payment: yup.string().required("payment is required"),
 	});
 
 	const totalAmount = cart?.reduce((total, item) => {
@@ -105,206 +108,212 @@ const CheckoutPage = () => {
 						{({ isSubmitting, handleChange, handleBlur, values }) => (
 							<Form className="space-y-4">
 								{/* Billing Details */}
-								<h1 className="text-gray-900 text-4xl mb-3 tracking-[2px]  ">
-									Billing details
-								</h1>
+								{cart?.length > 0 && (
+									<div className="">
+										<h1 className="text-gray-900 text-4xl mb-3 tracking-[2px]  ">
+											Billing details
+										</h1>
 
-								<div className=" space-y-5 ">
-									<div className="space-y-2 flex flex-col  ">
-										<Label
-											className="text-gray-500 tracking-wide text-md"
-											htmlFor="terms">
-											First name *{" "}
-										</Label>
-										<input
-											onChange={handleChange}
-											onBlur={handleBlur}
-											name="firstname"
-											type="text"
-											id="firstname"
-											value={values.firstname}
-											className=" bg-gray-50 rounded-none  border-0  py-5 tracking-wide placeholder:text-[15px] text-gray-600 focus:ring-0 focus:outline-none focus:border-0 focus:placeholder:text-black placeholder:text-gray-500 "
-											placeholder=""
-										/>
-										<ErrorMessage
-											component={"p"}
-											name="firstname"
-											className="text-red-500 text-sm font-medium"
-										/>
+										<div className=" space-y-5 ">
+											<div className="space-y-2 flex flex-col  ">
+												<Label
+													className="text-gray-500 tracking-wide text-md"
+													htmlFor="terms">
+													First name *{" "}
+												</Label>
+												<input
+													onChange={handleChange}
+													onBlur={handleBlur}
+													name="firstname"
+													type="text"
+													id="firstname"
+													value={values.firstname}
+													className=" bg-gray-50 rounded-none  border-0  py-5 tracking-wide placeholder:text-[15px] text-gray-600 focus:ring-0 focus:outline-none focus:border-0 focus:placeholder:text-black placeholder:text-gray-500 "
+													placeholder=""
+												/>
+												<ErrorMessage
+													component={"p"}
+													name="firstname"
+													className="text-red-500 text-sm font-medium"
+												/>
+											</div>
+											<div className="space-y-2 flex flex-col  ">
+												<Label
+													className="text-gray-500 tracking-wide text-md"
+													htmlFor="terms">
+													Last name *
+												</Label>
+												<input
+													onChange={handleChange}
+													onBlur={handleBlur}
+													value={values.lastname}
+													name="lastname"
+													type="text"
+													id="lastname"
+													className=" bg-gray-50 rounded-none   border-0  py-5 tracking-wide placeholder:text-[15px] text-gray-600 focus:ring-0 focus:outline-none focus:border-0 focus:placeholder:text-black placeholder:text-gray-500"
+													placeholder=""
+												/>
+												<ErrorMessage
+													component={"p"}
+													name="lastname"
+													className="text-red-500 text-sm font-medium"
+												/>
+											</div>
+
+											<div className="space-y-2 flex flex-col  ">
+												<Label
+													className="text-gray-500 tracking-wide text-md"
+													htmlFor="terms">
+													Company name (optional)
+												</Label>
+												<input
+													onChange={handleChange}
+													onBlur={handleBlur}
+													value={values.company}
+													name="company"
+													type="text"
+													id="company"
+													className=" bg-gray-50 rounded-none   border-0  py-5 tracking-wide placeholder:text-[15px] text-gray-600 focus:ring-0 focus:outline-none focus:border-0 focus:placeholder:text-black placeholder:text-gray-500"
+													placeholder=""
+												/>
+
+												<ErrorMessage
+													component={"p"}
+													name="company"
+													className="text-red-500 text-sm font-medium"
+												/>
+											</div>
+
+											<div className="space-y-2 flex flex-col   ">
+												<Label
+													className="text-gray-500 tracking-wide text-md"
+													htmlFor="terms">
+													Country / Region *
+												</Label>
+												<DropdownMenu className=" ">
+													<DropdownMenuTrigger
+														onChange={handleChange}
+														onBlur={handleBlur}
+														value={(values.country = selectedOption)}
+														name="country"
+														type="text"
+														id="country"
+														placeholder="United States (US)"
+														className="w-[50%]  text-gray-600 text-left border-0 tracking-wide  text-[14px] focus:ring-0 rounded-sm  h-14 ">
+														{checkSelect ? "Myanmar (MM)" : selectedOption}
+													</DropdownMenuTrigger>
+
+													<DropdownMenuContent className="space-y-2 w-[530px]  overflow-scroll rounded-none">
+														<DropdownMenuLabel>
+															Country / Region
+														</DropdownMenuLabel>
+														<DropdownMenuItem
+															onSelect={() => handleSelect("Myanmar (MM)")}
+															value="myanmar">
+															Myanmar (MM)
+														</DropdownMenuItem>
+														<DropdownMenuItem
+															onSelect={() => handleSelect("Thailand (TH)")}
+															value="thialand">
+															Thailand (TH)
+														</DropdownMenuItem>
+														<DropdownMenuItem
+															onSelect={() => handleSelect("Cambodia (CH)")}
+															value="cambodia">
+															Cambodia (CH)
+														</DropdownMenuItem>
+														<DropdownMenuItem
+															onSelect={() => handleSelect("Indonesia (ID)")}
+															value="indonesia">
+															Indonesia (ID)
+														</DropdownMenuItem>
+														<DropdownMenuItem
+															onSelect={() => handleSelect("Philipines (PH)")}
+															value="philipines">
+															Philipines (PH)
+														</DropdownMenuItem>
+														<DropdownMenuItem
+															onSelect={() => handleSelect("Russia (RA)")}
+															value="russia">
+															Russia (RA)
+														</DropdownMenuItem>
+													</DropdownMenuContent>
+												</DropdownMenu>
+											</div>
+
+											<div className="space-y-2 flex flex-col  ">
+												<Label
+													className="text-gray-500 tracking-wide text-md"
+													htmlFor="terms">
+													Street address *
+												</Label>
+												<input
+													onChange={handleChange}
+													onBlur={handleBlur}
+													value={values.address}
+													name="address"
+													type="text"
+													id="address"
+													className=" bg-gray-50 rounded-none   border-0  py-5  placeholder:text-[14px] tracking-wide text-gray-500 focus:ring-0 focus:outline-none focus:border-0 focus:placeholder:text-black placeholder:text-gray-500"
+													placeholder="House number and street name"
+												/>
+												<ErrorMessage
+													component={"p"}
+													name="address"
+													className="text-red-500 text-sm font-medium"
+												/>
+											</div>
+
+											<div className="space-y-2 flex flex-col  ">
+												<Label
+													className="text-gray-500 tracking-wide text-md"
+													htmlFor="terms">
+													Phone *
+												</Label>
+												<input
+													onChange={handleChange}
+													onBlur={handleBlur}
+													value={values.phone}
+													name="phone"
+													type="text"
+													id="phone"
+													className=" bg-gray-50 rounded-none   border-0  py-5  placeholder:text-[14px] tracking-wide text-gray-500 focus:ring-0 focus:outline-none focus:border-0 focus:placeholder:text-black placeholder:text-gray-500"
+													placeholder="094500..."
+												/>
+												<ErrorMessage
+													component={"p"}
+													name="phone"
+													className="text-red-500 text-sm font-medium"
+												/>
+											</div>
+
+											<div className="space-y-2 flex flex-col  ">
+												<Label
+													className="text-gray-500 tracking-wide text-md"
+													htmlFor="terms">
+													Email address *
+												</Label>
+												<input
+													onChange={handleChange}
+													onBlur={handleBlur}
+													value={values.email}
+													name="email"
+													type="email"
+													id="email"
+													className=" bg-gray-50 rounded-none   border-0  py-5  placeholder:text-[14px] tracking-wide text-gray-500 focus:ring-0 focus:outline-none focus:border-0 focus:placeholder:text-black placeholder:text-gray-500"
+													placeholder="zoya@email.com"
+												/>
+												<ErrorMessage
+													component={"p"}
+													name="email"
+													className="text-red-500 text-sm font-medium"
+												/>
+											</div>
+										</div>
 									</div>
-									<div className="space-y-2 flex flex-col  ">
-										<Label
-											className="text-gray-500 tracking-wide text-md"
-											htmlFor="terms">
-											Last name *
-										</Label>
-										<input
-											onChange={handleChange}
-											onBlur={handleBlur}
-											value={values.lastname}
-											name="lastname"
-											type="text"
-											id="lastname"
-											className=" bg-gray-50 rounded-none   border-0  py-5 tracking-wide placeholder:text-[15px] text-gray-600 focus:ring-0 focus:outline-none focus:border-0 focus:placeholder:text-black placeholder:text-gray-500"
-											placeholder=""
-										/>
-										<ErrorMessage
-											component={"p"}
-											name="lastname"
-											className="text-red-500 text-sm font-medium"
-										/>
-									</div>
+								)}
 
-									<div className="space-y-2 flex flex-col  ">
-										<Label
-											className="text-gray-500 tracking-wide text-md"
-											htmlFor="terms">
-											Company name (optional)
-										</Label>
-										<input
-											onChange={handleChange}
-											onBlur={handleBlur}
-											value={values.company}
-											name="company"
-											type="text"
-											id="company"
-											className=" bg-gray-50 rounded-none   border-0  py-5 tracking-wide placeholder:text-[15px] text-gray-600 focus:ring-0 focus:outline-none focus:border-0 focus:placeholder:text-black placeholder:text-gray-500"
-											placeholder=""
-										/>
-
-										<ErrorMessage
-											component={"p"}
-											name="company"
-											className="text-red-500 text-sm font-medium"
-										/>
-									</div>
-
-									<div className="space-y-2 flex flex-col   ">
-										<Label
-											className="text-gray-500 tracking-wide text-md"
-											htmlFor="terms">
-											Country / Region *
-										</Label>
-										<DropdownMenu className=" ">
-											<DropdownMenuTrigger
-												onChange={handleChange}
-												onBlur={handleBlur}
-												value={(values.country = selectedOption)}
-												name="country"
-												type="text"
-												id="country"
-												placeholder="United States (US)"
-												className="w-[50%]  text-gray-600 text-left border-0 tracking-wide  text-[14px] focus:ring-0 rounded-sm  h-14 ">
-												{checkSelect ? "Myanmar (MM)" : selectedOption}
-											</DropdownMenuTrigger>
-
-											<DropdownMenuContent className="space-y-2 w-[530px]  overflow-scroll rounded-none">
-												<DropdownMenuLabel>Country / Region</DropdownMenuLabel>
-												<DropdownMenuItem
-													onSelect={() => handleSelect("Myanmar (MM)")}
-													value="myanmar">
-													Myanmar (MM)
-												</DropdownMenuItem>
-												<DropdownMenuItem
-													onSelect={() => handleSelect("Thailand (TH)")}
-													value="thialand">
-													Thailand (TH)
-												</DropdownMenuItem>
-												<DropdownMenuItem
-													onSelect={() => handleSelect("Cambodia (CH)")}
-													value="cambodia">
-													Cambodia (CH)
-												</DropdownMenuItem>
-												<DropdownMenuItem
-													onSelect={() => handleSelect("Indonesia (ID)")}
-													value="indonesia">
-													Indonesia (ID)
-												</DropdownMenuItem>
-												<DropdownMenuItem
-													onSelect={() => handleSelect("Philipines (PH)")}
-													value="philipines">
-													Philipines (PH)
-												</DropdownMenuItem>
-												<DropdownMenuItem
-													onSelect={() => handleSelect("Russia (RA)")}
-													value="russia">
-													Russia (RA)
-												</DropdownMenuItem>
-											</DropdownMenuContent>
-										</DropdownMenu>
-									</div>
-
-									<div className="space-y-2 flex flex-col  ">
-										<Label
-											className="text-gray-500 tracking-wide text-md"
-											htmlFor="terms">
-											Street address *
-										</Label>
-										<input
-											onChange={handleChange}
-											onBlur={handleBlur}
-											value={values.address}
-											name="address"
-											type="text"
-											id="address"
-											className=" bg-gray-50 rounded-none   border-0  py-5  placeholder:text-[14px] tracking-wide text-gray-500 focus:ring-0 focus:outline-none focus:border-0 focus:placeholder:text-black placeholder:text-gray-500"
-											placeholder="House number and street name"
-										/>
-										<ErrorMessage
-											component={"p"}
-											name="address"
-											className="text-red-500 text-sm font-medium"
-										/>
-									</div>
-
-									<div className="space-y-2 flex flex-col  ">
-										<Label
-											className="text-gray-500 tracking-wide text-md"
-											htmlFor="terms">
-											Phone *
-										</Label>
-										<input
-											onChange={handleChange}
-											onBlur={handleBlur}
-											value={values.phone}
-											name="phone"
-											type="text"
-											id="phone"
-											className=" bg-gray-50 rounded-none   border-0  py-5  placeholder:text-[14px] tracking-wide text-gray-500 focus:ring-0 focus:outline-none focus:border-0 focus:placeholder:text-black placeholder:text-gray-500"
-											placeholder="094500..."
-										/>
-										<ErrorMessage
-											component={"p"}
-											name="phone"
-											className="text-red-500 text-sm font-medium"
-										/>
-									</div>
-
-									<div className="space-y-2 flex flex-col  ">
-										<Label
-											className="text-gray-500 tracking-wide text-md"
-											htmlFor="terms">
-											Email address *
-										</Label>
-										<input
-											onChange={handleChange}
-											onBlur={handleBlur}
-											value={values.email}
-											name="email"
-											type="email"
-											id="email"
-											className=" bg-gray-50 rounded-none   border-0  py-5  placeholder:text-[14px] tracking-wide text-gray-500 focus:ring-0 focus:outline-none focus:border-0 focus:placeholder:text-black placeholder:text-gray-500"
-											placeholder="zoya@email.com"
-										/>
-										<ErrorMessage
-											component={"p"}
-											name="email"
-											className="text-red-500 text-sm font-medium"
-										/>
-									</div>
-								</div>
-
-								{/* Your Order
+								{/* Your Order */}
 								<div className="   ">
 									{cart?.length > 0 ? (
 										<div className="mt-5">
@@ -369,18 +378,27 @@ const CheckoutPage = () => {
 											</Button>
 										</div>
 									)}
-								</div> */}
+								</div>
 
-								<Button
-									onClick={handleSubmit}
-									type="submit"
-									className="font-serif w-[15%]   mb-5  rounded-none text-[12.5px]  px-5 hover:bg-stone-800 duration-300  text-center   py-4 bg-black tracking-[2.5px] text-white font-normal ">
-									{isLoading ? (
-										<Loader2 className=" mr-2 text-white h-5 w-5 animate-spin" />
-									) : (
-										<> PLACE ORDER</>
-									)}
-								</Button>
+								{cart?.length > 0 && (
+									<>
+										<PaymentComponent
+											handleChange={handleChange}
+											handleBlur={handleBlur}
+											values={values}
+										/>
+										<Button
+											onClick={handleSubmit}
+											type="submit"
+											className="font-serif w-[15%]   mb-5  rounded-none text-[12.5px]  px-5 hover:bg-stone-800 duration-300  text-center   py-4 bg-black tracking-[2.5px] text-white font-normal ">
+											{isLoading ? (
+												<Loader2 className=" mr-2 text-white h-5 w-5 animate-spin" />
+											) : (
+												<> PLACE ORDER</>
+											)}
+										</Button>
+									</>
+								)}
 							</Form>
 						)}
 					</Formik>

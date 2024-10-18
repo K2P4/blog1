@@ -50,4 +50,5 @@ export { default as StarComponent } from "./Rating/Star.component";
 export { default as ShopProductComponent } from "./Shop/ShopProduct.component";
 export { default as ShopSectionTwoComponent } from "./Shop/ShopSectionTwo.component";
 export { default as ShopCategoryComponent } from "./Shop/ShopCateogry.component";
+export { default as PaymentComponent } from "./Shop/Payment.component";
 export { default as RelatedComponent } from "./Shop/Related.component";

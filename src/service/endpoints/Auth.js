@@ -6,9 +6,16 @@ const authEndpoints = ApiService.injectEndpoints({
 	endpoints: (builder) => ({
 		Signin: builder.mutation({
 			query: (arg) => ({
-				url: "/login",
+				url: "/user",
 				method: "POST",
 				body: arg,
+			}),
+		}),
+
+		getAuth: builder.query({
+			query: () => ({
+				url: "user",
+				method: "GET",
 			}),
 		}),
 
@@ -29,4 +36,4 @@ const authEndpoints = ApiService.injectEndpoints({
 	}),
 });
 
-export const { useSigninMutation } = authEndpoints;
+export const { useSigninMutation, useGetAuthQuery } = authEndpoints;

@@ -8,13 +8,15 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { Provider } from "react-redux";
 import { store } from "./service/store/store.js";
 import ShopProductContext from "./Contexts/ShopProductContext.jsx";
+import { Toaster } from "./components/ui/toaster";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
 	<Router>
-		<ShopProductContext>
-			<Provider store={store}>
+		<Provider store={store}>
+			<ShopProductContext>
 				<App />
-			</Provider>
-		</ShopProductContext>
+				<Toaster />
+			</ShopProductContext>
+		</Provider>
 	</Router>
 );

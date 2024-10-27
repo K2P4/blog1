@@ -12,7 +12,6 @@ export const ApiService = createApi({
 	endpoints: (builder) => ({}),
 });
 
-
 export const ContactService = createApi({
 	reducerPath: "api",
 	baseQuery: fetchBaseQuery({
@@ -23,25 +22,33 @@ export const ContactService = createApi({
 	endpoints: (builder) => ({}),
 });
 
-
-
 export const AuthService = createApi({
 	reducerPath: "api",
 	baseQuery: fetchBaseQuery({
-		baseUrl: "https://contact.sankyitar.store/api/v1/",
-
-		prepareHeaders: (headers, { getState }) => {
-			const token = localStorage.getItem("token");
-
-			if (token) {
-				headers.set("authorization", `Bearer ${JSON.parse(token)}`);
-			}
-
-			return headers;
-		},
+		baseUrl: "https://project-data-2-j6db.onrender.com/",
 	}),
 
 	tagTypes: ["auth"],
-
 	endpoints: (builder) => ({}),
 });
+
+// export const AuthService = createApi({
+// 	reducerPath: "api",
+// 	baseQuery: fetchBaseQuery({
+// 		baseUrl: "https://contact.sankyitar.store/api/v1/",
+
+// 		prepareHeaders: (headers, { getState }) => {
+// 			const token = localStorage.getItem("token");
+
+// 			if (token) {
+// 				headers.set("authorization", `Bearer ${JSON.parse(token)}`);
+// 			}
+
+// 			return headers;
+// 		},
+// 	}),
+
+// 	tagTypes: ["auth"],
+
+// 	endpoints: (builder) => ({}),
+// });

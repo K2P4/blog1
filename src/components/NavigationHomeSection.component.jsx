@@ -548,7 +548,7 @@ const NavigationHomeSectionComponent = () => {
 						<div
 							ref={searchRef}
 							onClick={handleSearch}
-							className={` font-serif cursor-pointer   flex items-center  select-none gap-1`}>
+							className={` font-serif cursor-pointer  w-full  flex items-center  select-none gap-1`}>
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
 								fill="none"
@@ -568,7 +568,9 @@ const NavigationHomeSectionComponent = () => {
 							)}
 							{toggleSearch ? (
 								<Input
-									className={` mt-0 p-0 w-[180px]  focus:outline-0  animate__animated   outline-0 border-0 border-b border-b-black rounded-none  text-sm text-left  animate__slideInLeft duration-1000 `}
+								placeholder="search"
+								type="text"
+									className={` cursor-auto mt-0 p-0 w-[180px]  focus:outline-0  animate__animated   outline-0 border-0 border-b border-b-black rounded-none  text-sm text-left  animate__slideInLeft duration-1000 `}
 								/>
 							) : (
 								<p
@@ -578,9 +580,9 @@ const NavigationHomeSectionComponent = () => {
 							)}
 						</div>
 
-						<div className="w-[45%] mx-auto">
+						<div className="w-[2000px]  h-[210px]  mx-auto">
 							<img
-								className=" w-[300px] mx-auto h-[210px] object-contain"
+								className=" w-full mx-auto h-full object-contain"
 								src="https://zoya.qodeinteractive.com/wp-content/uploads/2021/04/logo-main-img-01.png"
 								alt=""
 							/>

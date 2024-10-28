@@ -52,3 +52,4 @@ export { default as ShopSectionTwoComponent } from "./Shop/ShopSectionTwo.compon
 export { default as ShopCategoryComponent } from "./Shop/ShopCateogry.component";
 export { default as PaymentComponent } from "./Shop/Payment.component";
 export { default as RelatedComponent } from "./Shop/Related.component";
+export { default as ProductLoadingComponent } from "./Loading/ProductLoading.component";

@@ -19,9 +19,36 @@ const NavComponent = () => {
 	const [toggleBlog, setBlog] = useState(false);
 	const [toggleShop, setShop] = useState(false);
 	const [isFixed, setIsFixed] = useState(false);
+	const [sliderWidth, setSliderWidth] = useState(0);
 	const [toggleSearch, setToggleSearch] = useState(false);
+	const [sliderPosition, setSliderPosition] = useState(0);
 	const searchRef = useRef();
 	const nav = useNavigate();
+	const menuRef = useRef([]);
+
+	const [activeMenu, setActiveMenu] = useState(1);
+
+	useEffect(() => {
+		if (menuRef.current[activeMenu]) {
+			const menuItem = menuRef.current[activeMenu];
+			setSliderPosition(menuItem.offsetLeft);
+			setSliderWidth(menuItem.offsetWidth); // Adjust slider position based on active menu item
+		}
+	}, [activeMenu]);
+
+	const handleSection = (
+		active,
+		conditionOne,
+		conditionTwo,
+		conditionThree,
+		conditionFour
+	) => {
+		setActiveMenu(active);
+		setHome(conditionOne);
+		setPage(conditionTwo);
+		setBlog(conditionThree);
+		setShop(conditionFour);
+	};
 
 	const handleSearch = () => {
 		setToggleSearch(true);
@@ -73,14 +100,18 @@ const NavComponent = () => {
 							alt=""
 						/>
 
-						<div className=" flex items-center  space-x-12   h-24  ">
+						<div
+							style={{ left: `${sliderPosition}px` }}
+							className=" flex items-center  space-x-16    h-24  ">
 							{/*HOME */}
 
 							<div
+								ref={(el) => (menuRef.current[1] = el)}
 								onMouseLeave={() => setHome(false)}
-								onMouseEnter={() => setHome(true)}
-								className="hover:border-b     py-9  relative   transition-transform   hover:border-b-black">
-								<h1 className="  font-serif select-none  text-[13px]    text-gray-700    tracking-[3px]  ">
+								onMouseEnter={() => setActiveMenu(1)}
+								onClick={() => handleSection(1, true, false, false, false)}
+								className=" w-full     relative   transition-transform  ">
+								<h1 className="  text-center mx-auto w-full font-serif select-none  text-[13px]    text-gray-700    tracking-[3px]  ">
 									HOME
 								</h1>
 
@@ -114,35 +145,15 @@ const NavComponent = () => {
 										</ul>
 									</div>
 								)}
-
-								{/* <div className=" w-[250px]   z-50     top-[99%]  -left-[90px] border border-slate-200 bg-white p-4 text-slate-950 absolute   h-[240px] animate__animated     animate__fadeIn  ">
-									<ul className="  text-gray-700 space-y-5 p-5 ">
-										<li onMouseEnter={() => setIsOpen(true)} className="         ">
-											<span className=" group-hover:border-s-[#ED9455]  border-s-0  group-hover:ms-3   group-hover:me-2 group-hover:border-s "></span>
-											Main Home
-										</li>
-
-										<li className="    group     ">
-											<span className=" group-hover:border-s-[#ED9455]  duration-500 group-hover:ms-3   group-hover:me-2 group-hover:border-s "></span>
-											Travel Blog
-										</li>
-										<li className="    group      ">
-											<span className=" group-hover:border-s-[#ED9455] duration-500 group-hover:ms-3  group-hover:me-2 group-hover:border-s "></span>
-											Lifestyle Blog
-										</li>
-										<li className="    group      ">
-											<span className=" group-hover:border-s-[#ED9455] duration-500 group-hover:ms-3   group-hover:me-2 group-hover:border-s "></span>
-											Fashion Blog
-										</li>
-									</ul>
-								</div> */}
 							</div>
 
 							{/* PAGES */}
 							<div
+								ref={(el) => (menuRef.current[2] = el)}
 								onMouseLeave={() => setPage(false)}
-								onMouseEnter={() => setPage(true)}
-								className="hover:border-b     py-9  relative   transition-transform   hover:border-b-black">
+								onMouseEnter={() => setActiveMenu(2)}
+								onClick={() => handleSection(2, false, true, false, false)}
+								className=" w-full   relative   transition-transform   ">
 								<h1 className="  font-serif select-none  text-[13px]    text-gray-700    tracking-[3px]  ">
 									PAGES
 								</h1>
@@ -177,9 +188,11 @@ const NavComponent = () => {
 							{/* BLOG */}
 
 							<div
+								ref={(el) => (menuRef.current[3] = el)}
 								onMouseLeave={() => setBlog(false)}
-								onMouseEnter={() => setBlog(true)}
-								className="hover:border-b     py-9  relative   transition-transform   hover:border-b-black">
+								onMouseEnter={() => setActiveMenu(3)}
+								onClick={() => handleSection(3, false, false, true, false)}
+								className=" w-full     relative   transition-transform   ">
 								<h1 className="  font-serif select-none  text-[13px]    text-gray-700    tracking-[3px]  ">
 									BLOG
 								</h1>
@@ -391,9 +404,11 @@ const NavComponent = () => {
 							{/* SHOP */}
 
 							<div
+								ref={(el) => (menuRef.current[4] = el)}
 								onMouseLeave={() => setShop(false)}
-								onMouseEnter={() => setShop(true)}
-								className="hover:border-b     py-9  relative   transition-transform   hover:border-b-black">
+								onMouseEnter={() => setActiveMenu(4)}
+								onClick={() => handleSection(4, false, false, false, true)}
+								className="   w-full   relative   transition-transform   ">
 								<h1 className="  font-serif select-none  text-[13px]    text-gray-700    tracking-[3px]  ">
 									SHOP
 								</h1>
@@ -465,13 +480,22 @@ const NavComponent = () => {
 							</div>
 
 							<HoverCard>
-								<HoverCardTrigger className="    hover:border-b    py-9    transition-transform   hover:border-b-black ">
+								<HoverCardTrigger className="       py-9    transition-transform   hover:border-b-black ">
 									<h1 className="  font-serif select-none  text-[13px]    text-gray-700    tracking-[3px]  ">
 										LANDING
 									</h1>
 								</HoverCardTrigger>
 							</HoverCard>
 						</div>
+
+						{/* Slide Bar */}
+						<div
+							className=" absolute  text-center  w-full  top-24 z-40 duration-1000 border-b border-b-black transition-all "
+							style={{
+								left: `${sliderPosition - 57}px`,
+								width: `${sliderWidth + 20}px`,
+							}} // Adjust the width as needed
+						/>
 					</div>
 					{/* search bar  */}
 					<div

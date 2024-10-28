@@ -5,6 +5,7 @@ import {
 	ContainerComponent,
 	FooterComponent,
 	NavigationHomeSectionComponent,
+	ProductLoadingComponent,
 	RelatedComponent,
 	StarComponent,
 } from "../../../components";
@@ -78,7 +79,7 @@ const ShopProductPage = () => {
 				<div className="my-20">
 					<div className="mb-20">
 						{isLoading ? (
-							<>Loading </>
+							<ProductLoadingComponent  widthOne={"50"} />
 						) : (
 							<div className="flex  gap-8 items-start">
 								{/* Section One */}

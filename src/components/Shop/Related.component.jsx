@@ -44,8 +44,6 @@ const RelatedComponent = ({ review, weight, dimension, product }) => {
 		nav(`/shop-product/${id}`);
 	};
 
-	
-
 	useEffect(() => {
 		if (menuRef.current[activeMenu]) {
 			const menuItem = menuRef.current[activeMenu];
@@ -248,7 +246,7 @@ const RelatedComponent = ({ review, weight, dimension, product }) => {
 
 			<div className="">
 				<h1 className="text-gray-900 text-4xl   tracking-[1.5px]  ">
-					Related Products
+					{RelatedFilter && "Related Products"}
 				</h1>
 
 				<div className="flex  select-none flex-wrap gap-5 mt-10 w-full">

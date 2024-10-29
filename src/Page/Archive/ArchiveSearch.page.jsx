@@ -18,20 +18,23 @@ import { useGetAllProductsQuery } from "../../service/endpoints/BlogEndpints";
 const ArchiveSearchPage = () => {
 	const { data, isLoading } = useGetAllProductsQuery();
 	const [submitQuery, setSubmitQuery] = useState("");
+
 	const [searchData, setData] = useState("");
 	const [filteredProducts, setFilteredProducts] = useState(data);
-	
 
 	useEffect(() => {
 		const result = data?.filter((product) =>
-			product?.name.toLowerCase().includes(searchData.toLowerCase())
+			product?.name.toLowerCase().includes(searchData?.toLowerCase())
 		);
+
 		setFilteredProducts(result); // Update filtered products
 	}, [submitQuery, data]);
 
-	const handleSearch = (e) => {
+	const hanldeSearch = (e) => {
 		setData(e.target.value);
 	};
+
+	console.log(searchData);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -42,7 +45,7 @@ const ArchiveSearchPage = () => {
 		<div>
 			<NavigationHomeSectionComponent />
 			<NavigateRouteComponent
-				Route1={`SEARCH RESULTS FOR " ${searchData} "`}
+				Route1={`SEARCH RESULTS FOR "${submitQuery && searchData}" `}
 				path={"/author"}
 			/>
 
@@ -59,8 +62,8 @@ const ArchiveSearchPage = () => {
 								<div className="flex w-full  ">
 									<Input
 										value={searchData}
-										onChange={handleSearch}
 										type="text"
+										onChange={hanldeSearch}
 										className=" border border-e-0  focus:ring-0  focus:border-slate-200    border-slate-200 w-[470px] rounded-none tracking-wide placeholder:text-slate-600 text-md  "
 										placeholder="Search"
 									/>
@@ -77,7 +80,7 @@ const ArchiveSearchPage = () => {
 							</form>
 
 							<AuthorPostComponent
-								handleSearch={handleSearch}
+								searchData={searchData}
 								dataOne={filteredProducts}
 								isLoading={isLoading}
 								pageCondition={true}

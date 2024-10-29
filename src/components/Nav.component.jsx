@@ -22,6 +22,7 @@ const NavComponent = () => {
 	const [sliderWidth, setSliderWidth] = useState(0);
 	const [toggleSearch, setToggleSearch] = useState(false);
 	const [sliderPosition, setSliderPosition] = useState(0);
+	const [NavData, setNavData] = useState("");
 	const searchRef = useRef();
 	const nav = useNavigate();
 	const menuRef = useRef([]);
@@ -66,6 +67,10 @@ const NavComponent = () => {
 		}
 	};
 
+	const handleChange = (e) => {
+		setNavData(e.target.value);
+	};
+
 	useEffect(() => {
 		const handleScroll = () => {
 			if (window.scrollY > 500) {
@@ -107,16 +112,16 @@ const NavComponent = () => {
 
 							<div
 								ref={(el) => (menuRef.current[1] = el)}
-								onMouseLeave={() => setHome(false)}
-								onMouseEnter={() => setActiveMenu(1)}
-								onClick={() => handleSection(1, true, false, false, false)}
+								onMouseEnter={() => handleSection(1, true, false, false, false)}
 								className=" w-full     relative   transition-transform  ">
 								<h1 className="  text-center mx-auto w-full font-serif select-none  text-[13px]    text-gray-700    tracking-[3px]  ">
 									HOME
 								</h1>
 
 								{toggleHome && (
-									<div className=" w-[250px]  cursor-pointer  z-50   duration-500   top-[100%]  -left-[90px] border border-slate-200 bg-white p-4 text-slate-950 absolute   h-[240px] animate__animated     animate__fadeIn  ">
+									<div
+										onMouseLeave={() => setHome(false)}
+										className=" w-[250px]  cursor-pointer  z-50   duration-500   top-14  -left-[90px] border border-slate-200 bg-white p-4 text-slate-950 absolute   h-[240px] animate__animated     animate__fadeIn  ">
 										<ul className="  text-gray-700 space-y-5 p-5 ">
 											<li
 												onClick={() => navRoute("/HomeSection")}
@@ -150,16 +155,16 @@ const NavComponent = () => {
 							{/* PAGES */}
 							<div
 								ref={(el) => (menuRef.current[2] = el)}
-								onMouseLeave={() => setPage(false)}
-								onMouseEnter={() => setActiveMenu(2)}
-								onClick={() => handleSection(2, false, true, false, false)}
+								onMouseEnter={() => handleSection(2, false, true, false, false)}
 								className=" w-full   relative   transition-transform   ">
 								<h1 className="  font-serif select-none  text-[13px]    text-gray-700    tracking-[3px]  ">
 									PAGES
 								</h1>
 
 								{togglePage && (
-									<div className=" w-[230px]  cursor-pointer  z-50   duration-500   top-[100%]  -left-[90px] border border-slate-200 bg-white p-4 text-slate-950 absolute   h-[200px] animate__animated     animate__fadeIn  ">
+									<div
+										onMouseLeave={() => setPage(false)}
+										className=" w-[230px]  cursor-pointer  z-50   duration-500   top-14  -left-[90px] border border-slate-200 bg-white p-4 text-slate-950 absolute   h-[200px] animate__animated     animate__fadeIn  ">
 										<ul className="  text-gray-700 space-y-5 p-5 ">
 											<li
 												onClick={() => navRoute("/about")}
@@ -189,16 +194,16 @@ const NavComponent = () => {
 
 							<div
 								ref={(el) => (menuRef.current[3] = el)}
-								onMouseLeave={() => setBlog(false)}
-								onMouseEnter={() => setActiveMenu(3)}
-								onClick={() => handleSection(3, false, false, true, false)}
+								onMouseEnter={() => handleSection(3, false, false, true, false)}
 								className=" w-full     relative   transition-transform   ">
 								<h1 className="  font-serif select-none  text-[13px]    text-gray-700    tracking-[3px]  ">
 									BLOG
 								</h1>
 
 								{toggleBlog && (
-									<div className=" w-[5000px]  cursor-pointer  z-50   duration-500  -left-[470px]  top-[100%]  border border-slate-200 bg-white  px-40 py-10 text-slate-950 absolute   h-[450px] animate__animated     animate__fadeIn  ">
+									<div
+										onMouseLeave={() => setBlog(false)}
+										className=" w-[5000px]  cursor-pointer  z-50   duration-500  -left-[470px]  top-14  border border-slate-200 bg-white  px-40 py-10 text-slate-950 absolute   h-[450px] animate__animated     animate__fadeIn  ">
 										<div className=" flex items-start ">
 											<div className="  flex flex-col w-[6%] items-start space-y-6 ">
 												<h1 className=" tracking-[3px] font-medium text-gray-700 text-sm font-serif">
@@ -405,16 +410,16 @@ const NavComponent = () => {
 
 							<div
 								ref={(el) => (menuRef.current[4] = el)}
-								onMouseLeave={() => setShop(false)}
-								onMouseEnter={() => setActiveMenu(4)}
-								onClick={() => handleSection(4, false, false, false, true)}
+								onMouseEnter={() => handleSection(4, false, false, false, true)}
 								className="   w-full   relative   transition-transform   ">
 								<h1 className="  font-serif select-none  text-[13px]    text-gray-700    tracking-[3px]  ">
 									SHOP
 								</h1>
 
 								{toggleShop && (
-									<div className=" w-[230px]  cursor-pointer  z-50   duration-500   top-[100%]  -left-[90px] border border-slate-200 bg-white p-4 text-slate-950 absolute   h-[200px] animate__animated     animate__fadeIn  ">
+									<div
+										onMouseLeave={() => setShop(false)}
+										className=" w-[230px]  cursor-pointer  z-50   duration-500   top-14  -left-[90px] border border-slate-200 bg-white p-4 text-slate-950 absolute   h-[200px] animate__animated     animate__fadeIn  ">
 										<ul className="  relative text-gray-700 space-y-5 p-5 w-full">
 											<li
 												onClick={() => navRoute("/shop-list")}
@@ -480,7 +485,12 @@ const NavComponent = () => {
 							</div>
 
 							<HoverCard>
-								<HoverCardTrigger className="       py-9    transition-transform   hover:border-b-black ">
+								<HoverCardTrigger
+									ref={(el) => (menuRef.current[5] = el)}
+									onMouseEnter={() =>
+										handleSection(5, false, false, false, false)
+									}
+									className="       py-9    transition-transform   hover:border-b-black ">
 									<h1 className="  font-serif select-none  text-[13px]    text-gray-700    tracking-[3px]  ">
 										LANDING
 									</h1>
@@ -509,7 +519,10 @@ const NavComponent = () => {
 						)}
 						{toggleSearch ? (
 							<Input
-								className={` mb-4   w-[180px]  focus:outline-0  animate__animated   outline-0 border-0 border-b border-b-black rounded-none  text-sm text-left  animate__slideInRight duration-1000 `}
+								type="text"
+								value={NavData}
+								onChange={handleChange}
+								className={` mb-4   w-[180px] focus:border-0  focus:outline-0  animate__animated   outline-0 border-0 border-b border-b-black rounded-none  text-sm text-left  animate__slideInRight duration-1000 `}
 							/>
 						) : (
 							<p

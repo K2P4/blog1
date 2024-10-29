@@ -1,6 +1,6 @@
 /** @format */
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 
@@ -9,9 +9,9 @@ const AuthorPostComponent = ({
 	dataOne,
 	dataTwo,
 	pageCondition,
+	searchData,
 }) => {
 	const filterData = dataOne?.slice(0, 6);
-
 	const [chgData, setChgData] = useState(true);
 
 	const nav = useNavigate();
@@ -26,6 +26,11 @@ const AuthorPostComponent = ({
 
 	return (
 		<div>
+			{dataOne.length == 0 ? (
+				<p className="text-gray-500 text-center   tracking-wider text-lg">No posts were found for provided query parameters.</p>
+			) : (
+				""
+			)}
 			{isLoading ? (
 				<div className="w-full m-auto h-screen justify-center flex items-center text-3xl">
 					Loading

@@ -14,38 +14,48 @@ import InstagramComponent from "../../components/Instagram.component";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useGetAllProductsQuery } from "../../service/endpoints/BlogEndpints";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const ArchiveSearchPage = () => {
 	const { data, isLoading } = useGetAllProductsQuery();
-	const [submitQuery, setSubmitQuery] = useState("");
-
+	const [submitQuery, setSubmitQuery] = useState(false);
+	const location = useLocation();
+	const NavData = location.state?.NavData;
 	const [searchData, setData] = useState("");
 	const [filteredProducts, setFilteredProducts] = useState(data);
+	const navigate = useNavigate();
 
 	useEffect(() => {
-		const result = data?.filter((product) =>
-			product?.name.toLowerCase().includes(searchData?.toLowerCase())
-		);
-
-		setFilteredProducts(result); // Update filtered products
+		if (NavData) {
+			const result = data?.filter((product) =>
+				product?.name.toLowerCase().includes(NavData?.toLowerCase())
+			);
+			setFilteredProducts(result);
+		} else {
+			const result = data?.filter((product) =>
+				product?.name.toLowerCase().includes(searchData?.toLowerCase())
+			);
+			setFilteredProducts(result);
+		}
 	}, [submitQuery, data]);
 
 	const hanldeSearch = (e) => {
 		setData(e.target.value);
 	};
 
-	console.log(searchData);
-
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		setSubmitQuery(searchData);
+		setSubmitQuery(!submitQuery);
+		navigate(location.pathname, { replace: true, state: null });
 	};
 
 	return (
 		<div>
 			<NavigationHomeSectionComponent />
 			<NavigateRouteComponent
-				Route1={`SEARCH RESULTS FOR "${submitQuery && searchData}" `}
+				Route1={`SEARCH RESULTS FOR ${
+					NavData ? NavData : submitQuery ? searchData : ""
+				}   `}
 				path={"/author"}
 			/>
 
@@ -91,7 +101,6 @@ const ArchiveSearchPage = () => {
 					<AuthorTwoComponent />
 				</div>
 			</ContainerComponent>
-
 			<InstagramComponent />
 			<FooterComponent />
 		</div>

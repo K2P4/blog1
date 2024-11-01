@@ -33,11 +33,16 @@ const NavigationHomeSectionComponent = () => {
 	const [toggleShop, setShop] = useState(false);
 	const [toggleCart, setCart] = useState(false);
 	const [isFixed, setIsFixed] = useState(false);
+	const [sliderWidth, setSliderWidth] = useState(0);
+	const [activeMenu, setActiveMenu] = useState(1);
+
+	const menuRef = useRef([]);
 	const [toggleSearch, setToggleSearch] = useState(false);
 	const { cart, toggleDelete, setBlock } = useContext(ShopContext);
 	const { id } = useParams();
 	const searchRef = useRef();
 	const nav = useNavigate();
+	const [sliderPosition, setSliderPosition] = useState(0);
 
 	const handleSearch = () => {
 		setToggleSearch(true);
@@ -47,6 +52,28 @@ const NavigationHomeSectionComponent = () => {
 		toggleDelete(id);
 		setBlock(false);
 	};
+
+	const handleSection = (
+		active,
+		conditionOne,
+		conditionTwo,
+		conditionThree,
+		conditionFour
+	) => {
+		setActiveMenu(active);
+		setHome(conditionOne);
+		setPage(conditionTwo);
+		setBlog(conditionThree);
+		setShop(conditionFour);
+	};
+
+	useEffect(() => {
+		if (menuRef.current[activeMenu]) {
+			const menuItem = menuRef.current[activeMenu];
+			setSliderPosition(menuItem.offsetLeft);
+			setSliderWidth(menuItem.offsetWidth); // Adjust slider position based on active menu item
+		}
+	}, [activeMenu]);
 
 	const scrollToSection = (id) => {
 		const element = document.getElementById(id);
@@ -107,19 +134,22 @@ const NavigationHomeSectionComponent = () => {
 						)}
 
 						<div
-							className={` w-auto  flex items-center justify-center mx-auto  space-x-12   h-20  `}>
+							style={{ left: `${sliderPosition}px` }}
+							className=" flex items-center  space-x-16  justify-center mx-auto   h-24  ">
 							{/*HOME */}
 
 							<div
-								onMouseLeave={() => setHome(false)}
-								onMouseEnter={() => setHome(true)}
-								className="hover:border-b  cursor-pointer  py-[30px] relative   transition-transform   hover:border-b-black">
-								<h1 className="   font-serif select-none  text-[13px]    text-gray-700    tracking-[3px]  ">
+								ref={(el) => (menuRef.current[1] = el)}
+								onMouseEnter={() => handleSection(1, true, false, false, false)}
+								className=" w-full     relative   transition-transform  ">
+								<h1 className="  text-center mx-auto w-full font-serif select-none  text-[13px]    text-gray-700    tracking-[3px]  ">
 									HOME
 								</h1>
 
 								{toggleHome && (
-									<div className=" w-[250px]   z-50   duration-1000   top-[100%]  -left-[90px] border border-slate-200 bg-white p-4 text-slate-950 absolute   h-[240px] animate__animated     animate__fadeIn  ">
+									<div
+										onMouseLeave={() => setHome(false)}
+										className=" w-[250px]  cursor-pointer  z-50   duration-500   top-14  -left-[90px] border border-slate-200 bg-white p-4 text-slate-950 absolute   h-[240px] animate__animated     animate__fadeIn  ">
 										<ul className="  text-gray-700 space-y-5 p-5 ">
 											<li
 												onClick={() => navRoute("/HomeSection")}
@@ -152,15 +182,17 @@ const NavigationHomeSectionComponent = () => {
 
 							{/* PAGES */}
 							<div
-								onMouseLeave={() => setPage(false)}
-								onMouseEnter={() => setPage(true)}
-								className="hover:border-b cursor-pointer   py-[30px] relative   transition-transform   hover:border-b-black">
+								ref={(el) => (menuRef.current[2] = el)}
+								onMouseEnter={() => handleSection(2, false, true, false, false)}
+								className=" w-full   relative   transition-transform   ">
 								<h1 className="  font-serif select-none  text-[13px]    text-gray-700    tracking-[3px]  ">
 									PAGES
 								</h1>
 
 								{togglePage && (
-									<div className=" w-[230px]   z-50   duration-1000    top-[100%]  -left-[90px] border border-slate-200 bg-white p-4 text-slate-950 absolute   h-[200px] animate__animated     animate__fadeIn  ">
+									<div
+										onMouseLeave={() => setPage(false)}
+										className=" w-[230px]  cursor-pointer  z-50   duration-500   top-14  -left-[90px] border border-slate-200 bg-white p-4 text-slate-950 absolute   h-[200px] animate__animated     animate__fadeIn  ">
 										<ul className="  text-gray-700 space-y-5 p-5 ">
 											<li
 												onClick={() => navRoute("/about")}
@@ -175,7 +207,9 @@ const NavigationHomeSectionComponent = () => {
 												<span className=" group-hover:border-s-[#ED9455]  duration-500 group-hover:ms-3   group-hover:me-2 group-hover:border-s "></span>
 												Contact
 											</li>
-											<li className="    group      ">
+											<li
+												onClick={() => navRoute("/contact")}
+												className="    group      ">
 												<span className=" group-hover:border-s-[#ED9455] duration-500 group-hover:ms-3  group-hover:me-2 group-hover:border-s "></span>
 												Contact Me
 											</li>
@@ -187,44 +221,52 @@ const NavigationHomeSectionComponent = () => {
 							{/* BLOG */}
 
 							<div
-								onMouseLeave={() => setBlog(false)}
-								onMouseEnter={() => setBlog(true)}
-								className="hover:border-b  cursor-pointer  py-[30px] relative   transition-transform   hover:border-b-black">
+								ref={(el) => (menuRef.current[3] = el)}
+								onMouseEnter={() => handleSection(3, false, false, true, false)}
+								className=" w-full     relative   transition-transform   ">
 								<h1 className="  font-serif select-none  text-[13px]    text-gray-700    tracking-[3px]  ">
 									BLOG
 								</h1>
 
 								{toggleBlog && (
-									<div className=" w-[5000px]   z-50   duration-1000   -left-[630px]  top-[100%]  border border-slate-200 bg-white  px-40 py-10 text-slate-950 absolute   h-[450px] animate__animated     animate__fadeIn  ">
+									<div
+										onMouseLeave={() => setBlog(false)}
+										className=" w-[5000px]  cursor-pointer  z-50   duration-500  -left-[700px]  top-14  border border-slate-200 bg-white  px-40 py-10 text-slate-950 absolute   h-[475px] animate__animated     animate__fadeIn  ">
 										<div className=" flex items-start ">
 											<div className="  flex flex-col w-[6%] items-start space-y-6 ">
 												<h1 className=" tracking-[3px] font-medium text-gray-700 text-sm font-serif">
 													LIST TYPES
 												</h1>
 												<ul className="  text-gray-700 space-y-4 ">
-													<li className="    group     ">
+													<li
+														onClick={() => navRoute("/rightside")}
+														className="    group     ">
 														<span className=" group-hover:border-s-[#ED9455] text-sm  duration-500 group-hover:ms-3   group-hover:me-2 group-hover:border-s "></span>
 														Right SideBar
 													</li>
 
-													<li className="    group     ">
+													<li
+														onClick={() => navRoute("/leftside")}
+														className="    group     ">
 														<span className=" group-hover:border-s-[#ED9455] text-sm  duration-500 group-hover:ms-3   group-hover:me-2 group-hover:border-s "></span>
 														Left SideBar
 													</li>
-													<li className="    group      ">
+													<li
+														onClick={() => navRoute("/noside")}
+														className="    group      ">
 														<span className=" group-hover:border-s-[#ED9455] text-sm duration-500 group-hover:ms-3  group-hover:me-2 group-hover:border-s "></span>
 														No SideBar
 													</li>
-													<li className="    group      ">
-														<span className=" group-hover:border-s-[#ED9455] text-sm duration-500 group-hover:ms-3  group-hover:me-2 group-hover:border-s "></span>
-														Info Right
-													</li>
 
-													<li className="    group      ">
+													<li
+														onClick={() => navRoute("/compact")}
+														className="    group      ">
 														<span className=" group-hover:border-s-[#ED9455] text-sm duration-500 group-hover:ms-3  group-hover:me-2 group-hover:border-s "></span>
 														Compact
 													</li>
-													<li className="    group      ">
+													<li
+														onClick={() => navRoute("/divided")}
+														className="    group      ">
 														<span className=" group-hover:border-s-[#ED9455] text-sm duration-500 group-hover:ms-3  group-hover:me-2 group-hover:border-s "></span>
 														Divided
 													</li>
@@ -232,7 +274,9 @@ const NavigationHomeSectionComponent = () => {
 														<span className=" group-hover:border-s-[#ED9455] text-sm duration-500 group-hover:ms-3  group-hover:me-2 group-hover:border-s "></span>
 														Info Box
 													</li>
-													<li className="    group      ">
+													<li
+														onClick={() => navRoute("/category")}
+														className="    group      ">
 														<span className=" group-hover:border-s-[#ED9455] text-sm duration-500 group-hover:ms-3  group-hover:me-2 group-hover:border-s "></span>
 														Category List
 													</li>
@@ -243,72 +287,55 @@ const NavigationHomeSectionComponent = () => {
 													LAYOUT TYPES
 												</h1>
 												<ul className="  text-gray-700 space-y-4 ">
-													<li className="    group     ">
+													<li
+														onClick={() => navRoute("/column-two")}
+														className="    group     ">
 														<span className=" group-hover:border-s-[#ED9455] text-sm  duration-500 group-hover:ms-3   group-hover:me-2 group-hover:border-s "></span>
 														Two Colums
 													</li>
 
-													<li className="    group     ">
+													<li
+														onClick={() => navRoute("/column-three")}
+														className="    group     ">
 														<span className=" group-hover:border-s-[#ED9455] text-sm  duration-500 group-hover:ms-3   group-hover:me-2 group-hover:border-s "></span>
 														Three Columns Wide
 													</li>
-													<li className="    group      ">
+													<li
+														onClick={() => navRoute("/column-four")}
+														className="    group      ">
 														<span className=" group-hover:border-s-[#ED9455] text-sm duration-500 group-hover:ms-3  group-hover:me-2 group-hover:border-s "></span>
 														Four Columns
 													</li>
-													<li className="    group      ">
+													<li
+														onClick={() => navRoute("/column-four")}
+														className="    group      ">
 														<span className=" group-hover:border-s-[#ED9455] text-sm duration-500 group-hover:ms-3  group-hover:me-2 group-hover:border-s "></span>
 														Four Columns Wide
 													</li>
 
-													<li className="    group      ">
+													<li
+														onClick={() => navRoute("/column-five")}
+														className="    group      ">
 														<span className=" group-hover:border-s-[#ED9455] text-sm duration-500 group-hover:ms-3  group-hover:me-2 group-hover:border-s "></span>
 														Five Columns
 													</li>
-													<li className="    group      ">
+													<li
+														onClick={() => navRoute("/column-five")}
+														className="    group      ">
 														<span className=" group-hover:border-s-[#ED9455] text-sm duration-500 group-hover:ms-3  group-hover:me-2 group-hover:border-s "></span>
 														Five Columns Wide
 													</li>
-													<li className="    group      ">
+													<li
+														onClick={() => navRoute("/column-five")}
+														className="    group      ">
 														<span className=" group-hover:border-s-[#ED9455] text-sm duration-500 group-hover:ms-3  group-hover:me-2 group-hover:border-s "></span>
 														Six Columns
 													</li>
-													<li className="    group      ">
+													<li
+														onClick={() => navRoute("/column-five")}
+														className="    group      ">
 														<span className=" group-hover:border-s-[#ED9455] text-sm duration-500 group-hover:ms-3  group-hover:me-2 group-hover:border-s "></span>
 														Six Columns Wide
-													</li>
-												</ul>
-											</div>
-											<div className="  flex flex-col w-[6%] items-start space-y-6 ">
-												<h1 className=" tracking-[3px] font-medium text-gray-700 text-sm font-serif">
-													POST TYPES
-												</h1>
-												<ul className="  text-gray-700 space-y-4 ">
-													<li className="    group     ">
-														<span className=" group-hover:border-s-[#ED9455] text-sm  duration-500 group-hover:ms-3   group-hover:me-2 group-hover:border-s "></span>
-														Standard
-													</li>
-
-													<li className="    group     ">
-														<span className=" group-hover:border-s-[#ED9455] text-sm  duration-500 group-hover:ms-3   group-hover:me-2 group-hover:border-s "></span>
-														Gallery
-													</li>
-													<li className="    group      ">
-														<span className=" group-hover:border-s-[#ED9455] text-sm duration-500 group-hover:ms-3  group-hover:me-2 group-hover:border-s "></span>
-														Audio
-													</li>
-													<li className="    group      ">
-														<span className=" group-hover:border-s-[#ED9455] text-sm duration-500 group-hover:ms-3  group-hover:me-2 group-hover:border-s "></span>
-														Video
-													</li>
-
-													<li className="    group      ">
-														<span className=" group-hover:border-s-[#ED9455] text-sm duration-500 group-hover:ms-3  group-hover:me-2 group-hover:border-s "></span>
-														Quote
-													</li>
-													<li className="    group      ">
-														<span className=" group-hover:border-s-[#ED9455] text-sm duration-500 group-hover:ms-3  group-hover:me-2 group-hover:border-s "></span>
-														Link
 													</li>
 												</ul>
 											</div>
@@ -317,31 +344,88 @@ const NavigationHomeSectionComponent = () => {
 													ARCHIVE PAGES
 												</h1>
 												<ul className="  text-gray-700 space-y-4 ">
-													<li className="    group     ">
+													<li
+														onClick={() => navRoute("/author")}
+														className="    group     ">
 														<span className=" group-hover:border-s-[#ED9455] text-sm  duration-500 group-hover:ms-3   group-hover:me-2 group-hover:border-s "></span>
 														Author Page
 													</li>
 
-													<li className="    group     ">
+													<li
+														onClick={() => navRoute("/archive-category")}
+														className="    group     ">
 														<span className=" group-hover:border-s-[#ED9455] text-sm  duration-500 group-hover:ms-3   group-hover:me-2 group-hover:border-s "></span>
 														Filter By Category
 													</li>
-													<li className="    group      ">
+													<li
+														onClick={() => navRoute("/archive-date")}
+														className="    group      ">
 														<span className=" group-hover:border-s-[#ED9455] text-sm duration-500 group-hover:ms-3  group-hover:me-2 group-hover:border-s "></span>
 														Filter By Date
 													</li>
-													<li className="    group      ">
+													<li
+														onClick={() => navRoute("/archive-tag")}
+														className="    group      ">
 														<span className=" group-hover:border-s-[#ED9455] text-sm duration-500 group-hover:ms-3  group-hover:me-2 group-hover:border-s "></span>
 														Filter By Tag
 													</li>
 
-													<li className="    group      ">
+													<li
+														onClick={() => navRoute("/archive-view")}
+														className="    group      ">
 														<span className=" group-hover:border-s-[#ED9455] text-sm duration-500 group-hover:ms-3  group-hover:me-2 group-hover:border-s "></span>
 														View All Posts
 													</li>
-													<li className="    group      ">
+													<li
+														onClick={() => navRoute("/archive-search")}
+														className="    group      ">
 														<span className=" group-hover:border-s-[#ED9455] text-sm duration-500 group-hover:ms-3  group-hover:me-2 group-hover:border-s "></span>
 														Search Results
+													</li>
+												</ul>
+											</div>
+											<div className="  flex flex-col w-[6%] items-start space-y-6 ">
+												<h1 className=" tracking-[3px] font-medium text-gray-700 text-sm font-serif">
+													POST TYPES
+												</h1>
+												<ul className="  text-gray-700 space-y-4 ">
+													<li
+														onClick={() => navRoute("/detail/31")}
+														className="    group     ">
+														<span className=" group-hover:border-s-[#ED9455] text-sm  duration-500 group-hover:ms-3   group-hover:me-2 group-hover:border-s "></span>
+														Standard
+													</li>
+
+													<li
+														onClick={() => navRoute("/gallery-scan")}
+														className="    group     ">
+														<span className=" group-hover:border-s-[#ED9455] text-sm  duration-500 group-hover:ms-3   group-hover:me-2 group-hover:border-s "></span>
+														Gallery
+													</li>
+													<li
+														onClick={() => navRoute("/detailmedia/37")}
+														className="    group      ">
+														<span className=" group-hover:border-s-[#ED9455] text-sm duration-500 group-hover:ms-3  group-hover:me-2 group-hover:border-s "></span>
+														Audio
+													</li>
+													<li
+														onClick={() => navRoute("/video")}
+														className="    group      ">
+														<span className=" group-hover:border-s-[#ED9455] text-sm duration-500 group-hover:ms-3  group-hover:me-2 group-hover:border-s "></span>
+														Video
+													</li>
+
+													<li
+														onClick={() => navRoute("/quote")}
+														className="    group      ">
+														<span className=" group-hover:border-s-[#ED9455] text-sm duration-500 group-hover:ms-3  group-hover:me-2 group-hover:border-s "></span>
+														Quote
+													</li>
+													<li
+														onClick={() => navRoute("/link")}
+														className="    group      ">
+														<span className=" group-hover:border-s-[#ED9455] text-sm duration-500 group-hover:ms-3  group-hover:me-2 group-hover:border-s "></span>
+														Link
 													</li>
 												</ul>
 											</div>
@@ -353,22 +437,28 @@ const NavigationHomeSectionComponent = () => {
 							{/* SHOP */}
 
 							<div
-								onMouseLeave={() => setShop(false)}
-								onMouseEnter={() => setShop(true)}
-								className="hover:border-b  cursor-pointer  py-[30px] relative   transition-transform   hover:border-b-black">
+								ref={(el) => (menuRef.current[4] = el)}
+								onMouseEnter={() => handleSection(4, false, false, false, true)}
+								className="   w-full   relative   transition-transform   ">
 								<h1 className="  font-serif select-none  text-[13px]    text-gray-700    tracking-[3px]  ">
 									SHOP
 								</h1>
 
 								{toggleShop && (
-									<div className=" w-[230px]   z-50  duration-1000    top-[100%]  -left-[90px] border border-slate-200 bg-white p-4 text-slate-950 absolute   h-[200px] animate__animated     animate__fadeIn  ">
+									<div
+										onMouseLeave={() => setShop(false)}
+										className=" w-[230px]  cursor-pointer  z-50   duration-500   top-14  -left-[90px] border border-slate-200 bg-white p-4 text-slate-950 absolute   h-[200px] animate__animated     animate__fadeIn  ">
 										<ul className="  relative text-gray-700 space-y-5 p-5 w-full">
-											<li className="    group     ">
+											<li
+												onClick={() => navRoute("/shop-list")}
+												className="    group     ">
 												<span className=" group-hover:border-s-[#ED9455]  duration-500 group-hover:ms-3   group-hover:me-2 group-hover:border-s "></span>
 												Shop List
 											</li>
 
-											<li className="    group     ">
+											<li
+												onClick={() => navRoute("/shop-single")}
+												className="    group     ">
 												<span className=" group-hover:border-s-[#ED9455]  duration-500 group-hover:ms-3   group-hover:me-2 group-hover:border-s "></span>
 												Shop Single
 											</li>
@@ -396,7 +486,9 @@ const NavigationHomeSectionComponent = () => {
 
 												<HoverCardContent className="h-[150px]    absolute   -top-20   animate__fadeIn duration-500  animate__animated     left-28 w-[230px]">
 													<ul className="   text-gray-700 space-y-5 p-3 ">
-														<li className="    group     ">
+														<li
+															onClick={() => navRoute("/shop-account")}
+															className="    group     ">
 															<span className=" group-hover:border-s-[#ED9455]  duration-500 group-hover:ms-3   group-hover:me-2 group-hover:border-s "></span>
 															My Account
 														</li>
@@ -406,7 +498,9 @@ const NavigationHomeSectionComponent = () => {
 															<span className=" group-hover:border-s-[#ED9455]  duration-500 group-hover:ms-3   group-hover:me-2 group-hover:border-s "></span>
 															Cart
 														</li>
-														<li className="    group     ">
+														<li
+															onClick={() => navRoute("/shop-checkout")}
+															className="    group     ">
 															<span className=" group-hover:border-s-[#ED9455]  duration-500 group-hover:ms-3   group-hover:me-2 group-hover:border-s "></span>
 															Check Out
 														</li>
@@ -419,8 +513,13 @@ const NavigationHomeSectionComponent = () => {
 							</div>
 
 							<HoverCard>
-								<HoverCardTrigger className="    hover:border-b  py-[30px]   transition-transform   hover:border-b-black ">
-									<h1 className=" cursor-pointer  font-serif select-none  text-[13px]    text-gray-700    tracking-[3px]  ">
+								<HoverCardTrigger
+									ref={(el) => (menuRef.current[5] = el)}
+									onMouseEnter={() =>
+										handleSection(5, false, false, false, false)
+									}
+									className="       py-9    transition-transform   hover:border-b-black ">
+									<h1 className="  font-serif select-none  text-[13px]    text-gray-700    tracking-[3px]  ">
 										LANDING
 									</h1>
 								</HoverCardTrigger>
@@ -432,7 +531,7 @@ const NavigationHomeSectionComponent = () => {
 								<div
 									onMouseLeave={() => setCart(false)}
 									onMouseEnter={() => setCart(true)}
-									className="flex hover:border-b    py-[30px]  relative   transition-transform   hover:border-b-black group items-end gap-1">
+									className="flex     relative   transition-transform    group items-end gap-1">
 									<SlBag className=" w-5 h-5" />
 									<p className=" font-serif text-xs duration-700  cursor-pointer group-hover:text-[#e2bfbf] ">
 										{cart.length}
@@ -440,11 +539,11 @@ const NavigationHomeSectionComponent = () => {
 
 									{toggleCart &&
 										(cart?.length == 0 ? (
-											<div className=" w-[350px]   text-gray-500 z-50   duration-1000   top-[100%]  -left-[90px] border border-slate-200 bg-white p-4  absolute   h-[100px] animate__animated     animate__fadeIn  ">
+											<div className=" w-[350px]   text-gray-500 z-50   duration-1000   top-14  -left-[90px] border border-slate-200 bg-white p-4  absolute   h-[100px] animate__animated     animate__fadeIn  ">
 												No Products in the cart.
 											</div>
 										) : (
-											<div className=" w-[400px]   space-y-5 text-gray-500 z-50   duration-1000   top-[100%]  -left-[90px] border border-pink-100 bg-white p-4  absolute   h-[auto] animate__animated     animate__fadeIn  ">
+											<div className=" w-[400px]   space-y-5 text-gray-500 z-50   duration-1000   top-14  -left-[90px] border border-pink-100 bg-white p-4  absolute   h-[auto] animate__animated     animate__fadeIn  ">
 												{cart?.map((item) => (
 													<div
 														key={item?.id}
@@ -507,6 +606,15 @@ const NavigationHomeSectionComponent = () => {
 							)}
 						</div>
 
+						{/* Slide Bar */}
+						<div
+							className=" absolute  text-center  w-full  top-24 z-40 duration-1000 border-b border-b-black transition-all "
+							style={{
+								left: `${sliderPosition - 7}px`,
+								width: `${sliderWidth + 12}px`,
+							}} // Adjust the width as needed
+						/>
+
 						{isFixed && (
 							<div
 								ref={searchRef}
@@ -568,8 +676,8 @@ const NavigationHomeSectionComponent = () => {
 							)}
 							{toggleSearch ? (
 								<Input
-								placeholder="search"
-								type="text"
+									placeholder="search"
+									type="text"
 									className={` cursor-auto mt-0 p-0 w-[180px]  focus:outline-0  animate__animated   outline-0 border-0 border-b border-b-black rounded-none  text-sm text-left  animate__slideInLeft duration-1000 `}
 								/>
 							) : (

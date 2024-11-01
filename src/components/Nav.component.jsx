@@ -29,6 +29,12 @@ const NavComponent = () => {
 
 	const [activeMenu, setActiveMenu] = useState(1);
 
+	const transferSearch = () => {
+		nav("/archive-search", { state: { NavData: NavData, status: true } });
+	};
+
+	console.log(NavData);
+
 	useEffect(() => {
 		if (menuRef.current[activeMenu]) {
 			const menuItem = menuRef.current[activeMenu];
@@ -508,7 +514,8 @@ const NavComponent = () => {
 						/>
 					</div>
 					{/* search bar  */}
-					<div
+					<form
+						onSubmit={transferSearch}
 						ref={searchRef}
 						onClick={handleSearch}
 						className={` font-serif cursor-pointer  flex items-center  select-none gap-2`}>
@@ -518,11 +525,11 @@ const NavComponent = () => {
 							</div>
 						)}
 						{toggleSearch ? (
-							<Input
+							<input
 								type="text"
 								value={NavData}
 								onChange={handleChange}
-								className={` mb-4   w-[180px] focus:border-0  focus:outline-0  animate__animated   outline-0 border-0 border-b border-b-black rounded-none  text-sm text-left  animate__slideInRight duration-1000 `}
+								className={` mb-4   focus:border-0 focus:ring-0 focus:outline-0  w-[180px]  outline-none  animate__animated ring-0 border-0 border-b border-b-black rounded-none  text-sm text-left  animate__slideInRight duration-1000 `}
 							/>
 						) : (
 							<p
@@ -544,7 +551,7 @@ const NavComponent = () => {
 								d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
 							/>
 						</svg>
-					</div>
+					</form>
 				</div>
 			</ContainerComponent>
 

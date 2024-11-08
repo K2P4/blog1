@@ -1,17 +1,15 @@
 /** @format */
 
 import React, { useEffect, useRef, useState } from "react";
-
 import {
 	HoverCard,
 	HoverCardContent,
 	HoverCardTrigger,
 } from "@/components/ui/hover-card";
 import { motion } from "framer-motion";
-import { Input } from "@/components/ui/input";
-
 import ContainerComponent from "./Container.component";
-import { NavLink, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
+import SearchComponent from "./Search/Search.component";
 
 const NavComponent = () => {
 	const [toggleHome, setHome] = useState(false);
@@ -20,20 +18,13 @@ const NavComponent = () => {
 	const [toggleShop, setShop] = useState(false);
 	const [isFixed, setIsFixed] = useState(false);
 	const [sliderWidth, setSliderWidth] = useState(0);
-	const [toggleSearch, setToggleSearch] = useState(false);
+
 	const [sliderPosition, setSliderPosition] = useState(0);
-	const [NavData, setNavData] = useState("");
-	const searchRef = useRef();
+
 	const nav = useNavigate();
 	const menuRef = useRef([]);
 
 	const [activeMenu, setActiveMenu] = useState(1);
-
-	const transferSearch = () => {
-		nav("/archive-search", { state: { NavData: NavData, status: true } });
-	};
-
-	console.log(NavData);
 
 	useEffect(() => {
 		if (menuRef.current[activeMenu]) {
@@ -57,10 +48,6 @@ const NavComponent = () => {
 		setShop(conditionFour);
 	};
 
-	const handleSearch = () => {
-		setToggleSearch(true);
-	};
-
 	const navRoute = (route) => {
 		nav(route);
 	};
@@ -71,10 +58,6 @@ const NavComponent = () => {
 		if (element) {
 			element.scrollIntoView({ behavior: "smooth" });
 		}
-	};
-
-	const handleChange = (e) => {
-		setNavData(e.target.value);
 	};
 
 	useEffect(() => {
@@ -514,44 +497,7 @@ const NavComponent = () => {
 						/>
 					</div>
 					{/* search bar  */}
-					<form
-						onSubmit={transferSearch}
-						ref={searchRef}
-						onClick={handleSearch}
-						className={` font-serif cursor-pointer  flex items-center  select-none gap-2`}>
-						{!toggleSearch && (
-							<div className="w-[180px] mt-5 me-7 border-b animate__fadeOutRight border-b-black animate__animated  duration-1000 ">
-								{" "}
-							</div>
-						)}
-						{toggleSearch ? (
-							<input
-								type="text"
-								value={NavData}
-								onChange={handleChange}
-								className={` mb-4   focus:border-0 focus:ring-0 focus:outline-0  w-[180px]  outline-none  animate__animated ring-0 border-0 border-b border-b-black rounded-none  text-sm text-left  animate__slideInRight duration-1000 `}
-							/>
-						) : (
-							<p
-								className={`font-serif font-normal duration-700     text-gray-700 tracking-[3px] text-sm  `}>
-								SEARCH
-							</p>
-						)}
-
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							fill="none"
-							viewBox="0 0 24 24"
-							strokeWidth={1.5}
-							stroke="currentColor"
-							className="w-6 text-gray-700 h-6">
-							<path
-								strokeLinecap="round"
-								strokeLinejoin="round"
-								d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
-							/>
-						</svg>
-					</form>
+					<SearchComponent fontSize="text-[14.5px]" />
 				</div>
 			</ContainerComponent>
 

@@ -2,7 +2,7 @@
 
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { Outlet, useNavigate, useParams } from "react-router-dom";
-import { ContainerComponent } from "../components";
+import { ContainerComponent, SearchComponent } from "../components";
 import { SlBag } from "react-icons/sl";
 import {
 	FaLinkedinIn,
@@ -35,18 +35,14 @@ const NavigationHomeSectionComponent = () => {
 	const [isFixed, setIsFixed] = useState(false);
 	const [sliderWidth, setSliderWidth] = useState(0);
 	const [activeMenu, setActiveMenu] = useState(1);
-
+	const [NavData, setNavData] = useState("");
 	const menuRef = useRef([]);
-	const [toggleSearch, setToggleSearch] = useState(false);
+
 	const { cart, toggleDelete, setBlock } = useContext(ShopContext);
 	const { id } = useParams();
 	const searchRef = useRef();
 	const nav = useNavigate();
 	const [sliderPosition, setSliderPosition] = useState(0);
-
-	const handleSearch = () => {
-		setToggleSearch(true);
-	};
 
 	const removeCart = () => {
 		toggleDelete(id);
@@ -614,89 +610,28 @@ const NavigationHomeSectionComponent = () => {
 								width: `${sliderWidth + 12}px`,
 							}} // Adjust the width as needed
 						/>
-
-						{isFixed && (
-							<div
-								ref={searchRef}
-								onClick={handleSearch}
-								className={` font-serif cursor-pointer  w-28 ms-auto flex items-center  select-none gap-1`}>
-								{toggleSearch ? (
-									<Input
-										className={` mt-0 p-0 w-[150px]  focus:outline-0  animate__animated   outline-0 border-0 border-b border-b-black rounded-none  text-sm text-left  animate__fadeInRight duration-1000 `}
-									/>
-								) : (
-									<p
-										className={`font-serif font-normal duration-700     text-gray-700 tracking-[3px] text-sm  `}>
-										SEARCH
-									</p>
-								)}
-
-								<svg
-									xmlns="http://www.w3.org/2000/svg"
-									fill="none"
-									viewBox="0 0 24 24"
-									strokeWidth={1.5}
-									stroke="currentColor"
-									className={`w-6 text-gray-700  mt-0 h-6`}>
-									<path
-										strokeLinecap="round"
-										strokeLinejoin="round"
-										d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
-									/>
-								</svg>
-							</div>
-						)}
 					</div>
 				</ContainerComponent>
 			</div>
 			<div className="border-b-[#d1d1d1] border-b  ">
 				<ContainerComponent>
-					<div className="flex items-center gap-56  ">
+					<div className="flex items-center gap-28  w-full justify-center  py-14 ">
 						{/* search bar  */}
-						<div
-							ref={searchRef}
-							onClick={handleSearch}
-							className={` font-serif cursor-pointer  w-full  flex items-center  select-none gap-1`}>
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								fill="none"
-								viewBox="0 0 24 24"
-								strokeWidth={1.5}
-								stroke="currentColor"
-								className="w-6 text-gray-700 mt-0 h-6">
-								<path
-									strokeLinecap="round"
-									strokeLinejoin="round"
-									d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
-								/>
-							</svg>
-
-							{!toggleSearch && (
-								<div className="    border-b animate__fadeOutLeft border-b-gray-800 animate__animated  duration-1000 "></div>
-							)}
-							{toggleSearch ? (
-								<Input
-									placeholder="search"
-									type="text"
-									className={` cursor-auto mt-0 p-0 w-[180px]  focus:outline-0  animate__animated   outline-0 border-0 border-b border-b-black rounded-none  text-sm text-left  animate__slideInLeft duration-1000 `}
-								/>
-							) : (
-								<p
-									className={`font-serif font-normal duration-700     text-gray-700 tracking-[3px] text-sm  `}>
-									SEARCH
-								</p>
-							)}
-						</div>
-
-						<div className="w-[2000px]  h-[210px]  mx-auto">
-							<img
-								className=" w-full mx-auto h-full object-contain"
-								src="https://zoya.qodeinteractive.com/wp-content/uploads/2021/04/logo-main-img-01.png"
-								alt=""
+						<div className="w-[25%] mx-auto">
+							<SearchComponent
+								
+								fullWidth="w-[300px]"
+								fontSize="text-[16px]"
 							/>
 						</div>
 
-						<div className="flex  items-center gap-2 ">
+						<img
+							className=" w-[45%]    mx-auto h-full object-contain "
+							src="https://zoya.qodeinteractive.com/wp-content/uploads/2021/04/logo-main-img-01.png"
+							alt=""
+						/>
+
+						<div className="flex w-[25%]  items-center gap-2 ">
 							<FaLinkedinIn className=" hover:text-gray-600 duration-500 " />
 							<FaTwitter className=" hover:text-gray-600 duration-500 " />
 							<FaFacebookF className=" hover:text-gray-600 duration-500 " />

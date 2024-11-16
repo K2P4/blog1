@@ -9,7 +9,6 @@ const AuthorPostComponent = ({
 	dataOne,
 	dataTwo,
 	pageCondition,
-	
 }) => {
 	const filterData = dataOne?.slice(0, 6);
 	const [chgData, setChgData] = useState(true);
@@ -27,11 +26,13 @@ const AuthorPostComponent = ({
 	return (
 		<div>
 			{dataOne?.length == 0 ? (
-				<p className="text-gray-500 text-center   tracking-wider text-lg">No posts were found for provided query parameters.</p>
+				<p className="text-gray-500 text-center mx-auto flex justify-center h-screen  tracking-wider text-lg">
+					No posts were found for provided query parameters.
+				</p>
 			) : (
 				""
 			)}
-			
+
 			{isLoading ? (
 				<div className="w-full m-auto h-screen justify-center flex items-center text-3xl">
 					Loading
@@ -70,7 +71,7 @@ const AuthorPostComponent = ({
 									</div>
 								</div>
 						  ))
-						: dataTwo.map((item) => (
+						: dataTwo?.slice(7, dataTwo?.length).map((item) => (
 								<div
 									onClick={() => handleDetail(item?.id)}
 									key={item?.id}

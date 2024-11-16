@@ -15,11 +15,6 @@ import {
 	CompactPage,
 	DividedPage,
 	CategoryPage,
-	BeautyPage,
-	InspirationPage,
-	TravelOnePage,
-	TravelTwoPage,
-	ColumnPage,
 	ColumnThreePage,
 	ColumnFourPage,
 	ColumnFivePage,
@@ -39,6 +34,7 @@ import {
 	ShopAccountPage,
 	CartPage,
 	CheckoutPage,
+	CategoryListPage,
 } from "./Page";
 import {
 	BeautyThreeComponent,
@@ -70,13 +66,6 @@ const App = () => {
 				<Route path="compact" element={<CompactPage />} />
 				<Route path="divided" element={<DividedPage />} />
 				<Route path="category" element={<CategoryPage />} />
-				<Route path="beauty" element={<BeautyPage />} />
-				<Route path="beauty-two" element={<BeautyTwoComponent />} />
-				<Route path="inspiration-two" element={<InspirationTwoComponent />} />
-				<Route path="beauty-three" element={<BeautyThreeComponent />} />
-				<Route path="inspiration" element={<InspirationPage />} />
-				<Route path="travel" element={<TravelOnePage />} />
-				<Route path="travel-two" element={<TravelTwoPage />} />
 				<Route path="column-two" element={<ColumnTwoPage />} />
 				<Route path="column-three" element={<ColumnThreePage />} />
 				<Route path="column-four" element={<ColumnFourPage />} />
@@ -97,6 +86,7 @@ const App = () => {
 				<Route path="shop-account" element={<ShopAccountPage />} />
 				<Route path="shop-cart" element={<CartPage />} />
 				<Route path="shop-checkout" element={<CheckoutPage />} />
+				<Route path="category-list" element={<CategoryListPage />} />
 			</Routes>
 
 			<Routes>

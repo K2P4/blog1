@@ -398,15 +398,13 @@ const FashionNavComponent = () => {
 							</h1>
 						</div>
 
-						<HoverCard
+						<div
 							ref={(el) => (menuRef.current[6] = el)}
 							onMouseEnter={() => handleSection(6, false, false, false)}>
-							<HoverCardTrigger className="       transition-transform   ">
-								<h1 className="  font-serif select-none  text-[13px]    text-gray-700    tracking-[3px]  ">
-									LANDING
-								</h1>
-							</HoverCardTrigger>
-						</HoverCard>
+							<h1 className="  font-serif select-none  text-[13px]    text-gray-700    tracking-[3px]  ">
+								LANDING
+							</h1>
+						</div>
 					</div>
 				</div>
 

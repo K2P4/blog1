@@ -1,21 +1,52 @@
 /** @format */
 
-import React from "react";
+import React, { useState } from "react";
 import {
 	ContainerComponent,
 	FooterComponent,
 	NavigationHomeSectionComponent,
 } from "../components";
+import * as yup from "yup";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import InstagramComponent from "../components/Instagram.component";
 import { useNavigate } from "react-router-dom";
+import { useCreateMutation } from "../service/endpoints/Contact";
+import { Loader2 } from "lucide-react";
+import { Formik, Form, ErrorMessage } from "formik";
 
 const ContactPage = () => {
 	const nav = useNavigate();
+	const [CreateFun, { data, isLoading }] = useCreateMutation();
+	const [animate, setAnimate] = useState(false);
+
+	const initailValue = {
+		message: "",
+		email: "",
+		name: "",
+	};
 
 	const navRoute = (path) => {
 		nav(path);
+	};
+
+	const validationSchema = yup.object({
+		email: yup
+			.string()
+			.required("email is required")
+			.email("invalid email format"),
+		name: yup
+			.string()
+			.required("name is required")
+			.min(4, "name should be 4 at least"),
+		message: yup.string().required("message is required"),
+	});
+
+	const handleSubmit = async (value) => {
+		CreateFun(value);
+		setTimeout(() => {
+			setAnimate(true);
+		}, 3000);
 	};
 	return (
 		<div className=" ">
@@ -43,39 +74,92 @@ const ContactPage = () => {
 				<div className="flex gap-10 mb-20 items-start">
 					<div className="w-[70%]">
 						{/* Reply Session */}
-						<div className="w-full relative">
-							<p className="h-[65px] z-50  -top-10 left-[50%] w-[1px] absolute  duration-500   bg-[#fde7e7] "></p>
-							<div className="bg-[#f8f2f6] w-full  mt-32  p-9">
-								<h1 className=" text-3xl text-gray-800 tracking-wide text-center mx-auto ">
-									Contact Us!
-								</h1>
-								<p className="text-[#727272]   mb-7  mt-3   text-center  text-md    tracking-wider ">
-									We provide production services for all types of advertising
-								</p>
+						<Formik
+							validateOnChange={false}
+							validateOnBlur={false}
+							validationSchema={validationSchema}
+							initialValues={initailValue}
+							onSubmit={handleSubmit}>
+							{({ isSubmitting, handleChange, handleBlur, values }) => (
+								<Form className="w-full relative">
+									<p className="h-[65px] z-50  -top-10 left-[50%] w-[1px] absolute  duration-500   bg-[#fde7e7] "></p>
+									<div className="bg-[#f8f2f6] w-full  mt-32  p-9">
+										<h1 className=" text-3xl text-gray-800 tracking-wide text-center mx-auto ">
+											Contact Us!
+										</h1>
+										<p className="text-[#727272]   mb-7  mt-3   text-center  text-md    tracking-wider ">
+											We provide production services for all types of
+											advertising
+										</p>
 
-								<div className=" space-y-4 flex flex-col">
-									<Input
-										className="h-[190px]  tracking-wide placeholder:text-[15px] text-gray-500 focus:ring-0 focus:outline-none focus:border-0 focus:placeholder:text-black placeholder:text-gray-500 pb-36 ps-4"
-										placeholder="Write a mesage "
-									/>
+										<div className=" space-y-4 flex flex-col">
+											<Input
+												onChange={handleChange}
+												onBlur={handleBlur}
+												value={values.message}
+												name={"message"}
+												type={"message"}
+												className="h-[190px]  tracking-wide placeholder:text-[15px] text-gray-500 focus:ring-0 focus:outline-none focus:border-0 focus:placeholder:text-black placeholder:text-gray-500 pb-36 ps-4"
+												placeholder="Write a message "
+											/>
 
-									<div className="flex items-center gap-2">
-										<Input
-											className="  py-4 tracking-wide placeholder:text-[15px] text-gray-500 focus:ring-0 focus:outline-none focus:border-0 focus:placeholder:text-black placeholder:text-gray-500 "
-											placeholder="Your Name "
-										/>
-										<Input
-											className="  py-4 tracking-wide placeholder:text-[15px] text-gray-500 focus:ring-0 focus:outline-none focus:border-0 focus:placeholder:text-black placeholder:text-gray-500 "
-											placeholder="Your Email "
-										/>
+											<ErrorMessage
+												component={"p"}
+												name="message"
+												className="text-red-500 text-xs font-medium"
+											/>
+
+											<div className="flex items-center gap-2">
+												<Input
+													onChange={handleChange}
+													onBlur={handleBlur}
+													value={values.name}
+													name={"name"}
+													type={"name"}
+													className="  py-4 tracking-wide placeholder:text-[15px] text-gray-500 focus:ring-0 focus:outline-none focus:border-0 focus:placeholder:text-black placeholder:text-gray-500 "
+													placeholder="Your Name "
+												/>
+												<ErrorMessage
+													component={"p"}
+													name="name"
+													className="text-red-500 text-xs font-medium"
+												/>
+												<Input
+													onChange={handleChange}
+													onBlur={handleBlur}
+													value={values.email}
+													name={"email"}
+													type={"email"}
+													className="  py-4 tracking-wide placeholder:text-[15px] text-gray-500 focus:ring-0 focus:outline-none focus:border-0 focus:placeholder:text-black placeholder:text-gray-500 "
+													placeholder="Your Email "
+												/>
+												<ErrorMessage
+													component={"p"}
+													name="email"
+													className="text-red-500 text-xs font-medium"
+												/>
+											</div>
+										</div>
 									</div>
 
-									<Button className="font-serif w-[25%]   mb-5  rounded-none text-sm  px-5 hover:bg-stone-800 duration-300  text-center   py-3 bg-black tracking-[3px] font-normal">
-										CONTACT
+									<Button
+										type="submit"
+										className="font-serif w-[25%] mt-4  mb-5  rounded-none text-sm  px-5 hover:bg-stone-800 duration-300  text-center   py-3 bg-black tracking-[3px] font-normal">
+										{isLoading ? (
+											<Loader2 className=" mr-2 text-white h-5 w-5 animate-spin" />
+										) : (
+											"CONTACT"
+										)}
 									</Button>
-								</div>
-							</div>
-						</div>
+								</Form>
+							)}
+						</Formik>
+
+						{animate && (
+							<p className="text-lg tracking-wide text-gray-900 text-center border border-green-300 p-3 mx-auto">
+								Thank you for your message.It has been sent.
+							</p>
+						)}
 					</div>
 
 					<div className=" w-[25%]  mt-32">

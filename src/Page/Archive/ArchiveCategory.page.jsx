@@ -22,7 +22,7 @@ const ArchiveCategoryPage = () => {
 	return (
 		<div>
 			<NavigationHomeSectionComponent />
-			<NavigateRouteComponent Route1={"HOME DECOR"} path={"/archive-category"} />
+			<NavigateRouteComponent Route1={"BEAUTY"} path={"/archive-category"} />
 
 			<ContainerComponent>
 				<div className="flex  w-full items-start my-32 gap-8  ">

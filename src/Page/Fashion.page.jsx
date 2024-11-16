@@ -1,6 +1,6 @@
 /** @format */
 
-import React from "react";
+import React, { useState } from "react";
 import FashionNavComponent from "../components/FashionNav.component";
 import {
 	ContainerComponent,
@@ -9,20 +9,28 @@ import {
 	SlideFashionComponent,
 } from "../components";
 import { FaTelegramPlane } from "react-icons/fa";
-import { motion } from "framer-motion";
-import { FaTwitter } from "react-icons/fa";
-import { FiShare } from "react-icons/fi";
-
-import { FaPinterestP } from "react-icons/fa";
-import { FaLinkedinIn, FaFacebookF } from "react-icons/fa";
-import { FaInstagram } from "react-icons/fa6";
 import { useGetFashionItemQuery } from "../service/endpoints/BlogEndpints";
 import InstagramComponent from "../components/Instagram.component";
+import { useCreateMutation } from "../service/endpoints/Contact";
 
 const FashionPage = () => {
 	const { data, isLoading } = useGetFashionItemQuery();
-
+	const [inputValue, setInputValue] = useState("");
+	const [CreateFun] = useCreateMutation();
+	const [animate, setAnimate] = useState(false);
 	const FashionItem = data?.map((item) => item);
+
+	const handleSubmit = async (event) => {
+		event.preventDefault();
+		const value = {
+			email: inputValue,
+		};
+		CreateFun(value);
+
+		setTimeout(() => {
+			setAnimate(true);
+		}, 5000);
+	};
 
 	return (
 		<div className="  ">
@@ -33,7 +41,7 @@ const FashionPage = () => {
 
 				<div className="  ">
 					{/* Subcribe*/}
-					<div className="relative  my-20">
+					<form onSubmit={handleSubmit} className="relative  my-20">
 						<p className="h-[65px] z-50  -top-12  left-[50%]  w-[1px] absolute  duration-500   bg-[#fde7e7] "></p>
 						<div className="bg-[#fcf6f6] w-full py-7 px-6">
 							<h1 className=" text-center text-3xl   text-gray-800  font-medium tracking-wider  ">
@@ -47,14 +55,20 @@ const FashionPage = () => {
 
 							<div className="bg-white py-3 px-6  mb-5  mx-auto w-[70%] flex items-center justify-between">
 								<input
-									type="text"
+									type="email"
+									onChange={(e) => setInputValue(e.target.value)}
 									placeholder="Subscribe..."
 									className=" focus:border-0 p-0 text-[#8f8f8f] bg-transparent focus:outline-none focus:ring-0   w-full border-0"
 								/>
 								<FaTelegramPlane className="text-[#8f8f8f] hover:text-white duration-500 h-5 w-5" />
 							</div>
 						</div>
-					</div>
+						{animate && (
+							<p className="text-xl tracking-wider text-gray-900 text-center border border-green-300 p-3 mx-auto">
+								Thank you for your message.It has been sent.
+							</p>
+						)}
+					</form>
 
 					{/* Content Group One*/}
 					{data && (

@@ -95,17 +95,11 @@ const NavigationHomeSectionComponent = () => {
 				setIsFixed(false);
 			}
 		};
-		const handleMouse = (e) => {
-			if (!searchRef?.current?.contains(e.target)) {
-				setToggleSearch(false);
-			}
-		};
 
 		window.addEventListener("scroll", handleScroll);
-		window.addEventListener("mousedown", handleMouse);
+
 		return () => {
 			window.removeEventListener("scroll", handleScroll);
-			window.addEventListener("mousedown", handleMouse);
 		};
 	}, []);
 
@@ -227,7 +221,7 @@ const NavigationHomeSectionComponent = () => {
 								{toggleBlog && (
 									<div
 										onMouseLeave={() => setBlog(false)}
-										className=" w-[5000px]  cursor-pointer  z-50   duration-500  -left-[700px]  top-14  border border-slate-200 bg-white  px-40 py-10 text-slate-950 absolute   h-[475px] animate__animated     animate__fadeIn  ">
+										className=" w-[5000px]  cursor-pointer  z-50   duration-500  -left-[595px]  top-14  border border-slate-200 bg-white  px-40 py-10 text-slate-950 absolute   h-[475px] animate__animated     animate__fadeIn  ">
 										<div className=" flex items-start ">
 											<div className="  flex flex-col w-[6%] items-start space-y-6 ">
 												<h1 className=" tracking-[3px] font-medium text-gray-700 text-sm font-serif">
@@ -618,11 +612,7 @@ const NavigationHomeSectionComponent = () => {
 					<div className="flex items-center gap-28  w-full justify-center  py-14 ">
 						{/* search bar  */}
 						<div className="w-[25%] mx-auto">
-							<SearchComponent
-								
-								fullWidth="w-[300px]"
-								fontSize="text-[16px]"
-							/>
+							<SearchComponent fullWidth="w-[300px]" fontSize="text-[16px]" />
 						</div>
 
 						<img

@@ -9,8 +9,15 @@ import { FaInstagram } from "react-icons/fa6";
 import DetailPostComponent from "./DetailPost.component";
 import TagsComponent from "./Tags.component";
 import ArchiveComponent from "./Archive.component";
+import { useNavigate } from "react-router-dom";
 
 const Section2Component = ({ condition }) => {
+	const nav = useNavigate();
+
+	const transferData = (categoryData) => {
+		nav("/category-list", { state: { categoryData: categoryData } });
+		window.location.reload();
+	};
 	return (
 		<div className="w-[25%] relative   mx-auto ">
 			<div className="flex items-center flex-col mx-auto gap-14">
@@ -45,25 +52,39 @@ const Section2Component = ({ condition }) => {
 					</h1>
 
 					<ul className="flex flex-col items-center align-middle space-y-4">
-						<li className="   text-[#cfac9f] cursor-pointer hover:text-[#f0b6a2] text-center text-[12px] tracking-[3px] font-serif ">
+						<li
+							onClick={() => transferData("BEAUTY")}
+							className="   text-[#cfac9f] cursor-pointer hover:text-[#f0b6a2] text-center text-[12px] tracking-[3px] font-serif ">
 							BEAUTY
 						</li>
-						<li className="   text-[#cfac9f] cursor-pointer hover:text-[#f0b6a2] text-center text-[12px] tracking-[3px] font-serif ">
+						<li
+							onClick={() => transferData("ENTERTAINMENT")}
+							className="   text-[#cfac9f] cursor-pointer hover:text-[#f0b6a2] text-center text-[12px] tracking-[3px] font-serif ">
 							ENTERTAINMENT
 						</li>
-						<li className="   text-[#cfac9f] cursor-pointer hover:text-[#f0b6a2] text-center text-[12px] tracking-[3px] font-serif ">
+						<li
+							onClick={() => transferData("HOME DECOR")}
+							className="   text-[#cfac9f] cursor-pointer hover:text-[#f0b6a2] text-center text-[12px] tracking-[3px] font-serif ">
 							HOME DECOR
 						</li>
-						<li className="   text-[#cfac9f] cursor-pointer hover:text-[#f0b6a2]text-center text-[12px] tracking-[3px] font-serif ">
+						<li
+							onClick={() => transferData("INSPIRATION")}
+							className="   text-[#cfac9f] cursor-pointer hover:text-[#f0b6a2]text-center text-[12px] tracking-[3px] font-serif ">
 							INSPIRATION
 						</li>
-						<li className="   text-[#cfac9f] cursor-pointer hover:text-[#f0b6a2]text-center text-[12px] tracking-[3px] font-serif ">
+						<li
+							onClick={() => transferData("INTERIOR")}
+							className="   text-[#cfac9f] cursor-pointer hover:text-[#f0b6a2]text-center text-[12px] tracking-[3px] font-serif ">
 							INTERIOR
 						</li>
-						<li className="   text-[#cfac9f] cursor-pointer hover:text-[#f0b6a2] text-center text-[12px] tracking-[3px] font-serif ">
+						<li
+							onClick={() => transferData("LIFESTYLE")}
+							className="   text-[#cfac9f] cursor-pointer hover:text-[#f0b6a2] text-center text-[12px] tracking-[3px] font-serif ">
 							LIFESTYLE
 						</li>
-						<li className="   text-[#cfac9f] cursor-pointer hover:text-[#f0b6a2] text-center text-[12px] tracking-[3px] font-serif ">
+						<li
+							onClick={() => transferData("TRAVEL")}
+							className="   text-[#cfac9f] cursor-pointer hover:text-[#f0b6a2] text-center text-[12px] tracking-[3px] font-serif ">
 							TRAVEL
 						</li>
 					</ul>

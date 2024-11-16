@@ -13,8 +13,8 @@ import { parsePath, useNavigate } from "react-router-dom";
 const CategoryPage = () => {
 	const nav = useNavigate();
 
-	const handleCategory = (path) => {
-		nav(path);
+	const handleCategory = (categoryData) => {
+		nav("/category-list", { state: { categoryData: categoryData } });
 	};
 	return (
 		<div>
@@ -22,10 +22,9 @@ const CategoryPage = () => {
 
 			<ContainerComponent>
 				<div className="flex items-center my-28 gap-10 justify-center">
-					<div
-						onClick={() => handleCategory("/beauty")}
-						className="relative w-[30%] h-[260px] overflow-hidden">
+					<div className="relative w-[30%] h-[260px] overflow-hidden">
 						<motion.img
+							onClick={() => handleCategory("BEAUTY")}
 							className="object-cover w-full"
 							src="https://zoya.qodeinteractive.com/wp-content/uploads/2021/04/category-img-1.jpg"
 							alt="Your image"
@@ -39,10 +38,9 @@ const CategoryPage = () => {
 						</Button>
 					</div>
 
-					<div
-						onClick={() => handleCategory("/inspiration")}
-						className="relative w-[30%] h-[260px] overflow-hidden">
+					<div className="relative w-[30%] h-[260px] overflow-hidden">
 						<motion.img
+							onClick={() => handleCategory("INSPIRATION")}
 							className="object-cover w-full"
 							src="https://zoya.qodeinteractive.com/wp-content/uploads/2021/04/category-img-2.jpg"
 							alt="Your image"
@@ -56,10 +54,9 @@ const CategoryPage = () => {
 						</Button>
 					</div>
 
-					<div
-						onClick={() => handleCategory("/travel")}
-						className="relative w-[30%] h-[260px] overflow-hidden">
+					<div className="relative w-[30%] h-[260px] overflow-hidden">
 						<motion.img
+							onClick={() => handleCategory("TRAVEL")}
 							className="object-cover w-full"
 							src="https://zoya.qodeinteractive.com/wp-content/uploads/2021/04/category-img-3.jpg"
 							alt="Your image"

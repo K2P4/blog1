@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/hover-card";
 import { motion } from "framer-motion";
 import ContainerComponent from "./Container.component";
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import SearchComponent from "./Search/Search.component";
 
 const NavComponent = () => {
@@ -68,17 +68,11 @@ const NavComponent = () => {
 				setIsFixed(false);
 			}
 		};
-		const handleMouse = (e) => {
-			if (!searchRef.current.contains(e.target)) {
-				setToggleSearch(false);
-			}
-		};
 
 		window.addEventListener("scroll", handleScroll);
-		window.addEventListener("mousedown", handleMouse);
+
 		return () => {
 			window.removeEventListener("scroll", handleScroll);
-			window.addEventListener("mousedown", handleMouse);
 		};
 	}, []);
 

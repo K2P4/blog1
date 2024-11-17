@@ -54,3 +54,5 @@ export { default as PaymentComponent } from "./Shop/Payment.component";
 export { default as RelatedComponent } from "./Shop/Related.component";
 export { default as SearchComponent } from "./Search/Search.component";
 export { default as ProductLoadingComponent } from "./Loading/ProductLoading.component";
+export { default as ReplySessionComponent } from "./Comment/ReplySession.component";
+export { default as UserCommentComponent } from "./Comment/UserComment.component";

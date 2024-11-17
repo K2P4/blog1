@@ -26,10 +26,6 @@ const ContactPage = () => {
 		name: "",
 	};
 
-	const navRoute = (path) => {
-		nav(path);
-	};
-
 	const validationSchema = yup.object({
 		email: yup
 			.string()
@@ -41,6 +37,12 @@ const ContactPage = () => {
 			.min(4, "name should be 4 at least"),
 		message: yup.string().required("message is required"),
 	});
+
+	const navRoute = (path) => {
+		nav(path);
+	};
+
+	
 
 	const handleSubmit = async (value) => {
 		CreateFun(value);

@@ -10,7 +10,6 @@ const NextPostComponent = ({ handleNext }) => {
 	const { id } = useParams();
 	const { data } = useGetDetailQuery(Number(id) + 1);
 
-	console.log(data);
 	return (
 		<>
 			{data?.name && (
